@@ -44,29 +44,38 @@ export const navData = [
    * Overview
    */
   {
-    subheader: 'Overview 6.0.0',
+    subheader: 'Employee',
     items: [
-      { title: 'One', path: paths.dashboard.root, icon: ICONS.dashboard },
-      { title: 'Two', path: paths.dashboard.two, icon: ICONS.ecommerce },
-      { title: 'Three', path: paths.dashboard.three, icon: ICONS.analytics },
+      { title: 'Personal Details', path: paths.dashboard.two, icon: ICONS.user },
+      { title: 'Leave', path: paths.dashboard.root, icon: ICONS.chat },
     ],
   },
-  /**
-   * Management
-   */
   {
-    subheader: 'Management',
+    subheader: 'Employer',
     items: [
       {
-        title: 'Group',
+        title: 'Employees',
         path: paths.dashboard.group.root,
         icon: ICONS.user,
         children: [
-          { title: 'Four', path: paths.dashboard.group.root },
-          { title: 'Five', path: paths.dashboard.group.five },
-          { title: 'Six', path: paths.dashboard.group.six },
+          { title: 'List Employee', path: paths.dashboard.group.root },
+          { title: 'Departments', path: paths.dashboard.group.six },
+          { title: 'Positions & Level', path: paths.dashboard.group.five },
         ],
       },
+      { title: 'Leave Types', path: paths.dashboard.three, icon: ICONS.folder },
+      {
+        title: 'Timesheet',
+        path: 'timesheet',
+        icon: ICONS.calendar,
+      },
+    ],
+  },
+  {
+    subheader: 'Administrator',
+    items: [
+      { title: 'Users', path: '/users', icon: ICONS.user },
+      { title: 'Roles & Permission', path: '/roles', icon: ICONS.lock },
     ],
   },
 ];
