@@ -32,7 +32,6 @@ export function SettingsDrawer({
   hideNavColor,
   hideContrast,
   hideNavLayout,
-  hideDirection,
   hideColorScheme,
 }) {
   const theme = useTheme();
@@ -93,17 +92,6 @@ export function SettingsDrawer({
     />
   );
 
-  const renderRTL = (
-    <BaseOption
-      label="Right to left"
-      icon="align-right"
-      selected={settings.direction === 'rtl'}
-      onClick={() =>
-        settings.onUpdateField('direction', settings.direction === 'ltr' ? 'rtl' : 'ltr')
-      }
-    />
-  );
-
   const renderCompact = (
     <BaseOption
       tooltip="Dashboard only and available at large resolutions > 1600px (xl)"
@@ -141,7 +129,7 @@ export function SettingsDrawer({
       }}
       options={{
         colors: ['integrate', 'apparent'],
-        layouts: ['vertical', 'horizontal', 'mini'],
+        layouts: ['vertical', 'mini'],
       }}
       hideNavColor={hideNavColor}
       hideNavLayout={hideNavLayout}
@@ -180,7 +168,6 @@ export function SettingsDrawer({
           <Box gap={2} display="grid" gridTemplateColumns="repeat(2, 1fr)">
             {!hideColorScheme && renderMode}
             {!hideContrast && renderContrast}
-            {!hideDirection && renderRTL}
             {!hideCompact && renderCompact}
           </Box>
           {!(hideNavLayout && hideNavColor) && renderNav}

@@ -4,15 +4,19 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
-import ButtonBase from '@mui/material/ButtonBase';
+import ButtonBase, { ButtonBaseProps } from '@mui/material/ButtonBase';
 
-import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { TWorkspaceType } from '../config-nav-workspace';
 
 // ----------------------------------------------------------------------
 
-export function WorkspacesPopover({ data = [], sx, ...other }) {
+type TWorkspacesPopoverProps = ButtonBaseProps & {
+  data: TWorkspaceType[];
+};
+
+export function WorkspacesPopover({ data = [], sx, ...other }: TWorkspacesPopoverProps) {
   const popover = usePopover();
 
   const mediaQuery = 'sm';
@@ -56,16 +60,6 @@ export function WorkspacesPopover({ data = [], sx, ...other }) {
           {workspace?.name}
         </Box>
 
-        <Label
-          color={workspace?.plan === 'Free' ? 'default' : 'info'}
-          sx={{
-            height: 22,
-            display: { xs: 'none', [mediaQuery]: 'inline-flex' },
-          }}
-        >
-          {workspace?.plan}
-        </Label>
-
         <Iconify width={16} icon="carbon:chevron-sort" sx={{ color: 'text.disabled' }} />
       </ButtonBase>
 
@@ -88,8 +82,6 @@ export function WorkspacesPopover({ data = [], sx, ...other }) {
               <Box component="span" sx={{ flexGrow: 1 }}>
                 {option.name}
               </Box>
-
-              <Label color={option.plan === 'Free' ? 'default' : 'info'}>{option.plan}</Label>
             </MenuItem>
           ))}
         </MenuList>

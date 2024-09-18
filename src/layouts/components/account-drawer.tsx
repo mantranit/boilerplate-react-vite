@@ -2,11 +2,9 @@ import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 import Drawer from '@mui/material/Drawer';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { useTheme } from '@mui/material/styles';
+import { useColorScheme, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
@@ -25,6 +23,8 @@ import { useMockedUser } from 'src/auth/hooks';
 
 import { AccountButton } from './account-button';
 import { SignOutButton } from './sign-out-button';
+import { BaseOption } from '../../components/settings/drawer/base-option';
+import { useSettingsContext } from '../../components/settings/context';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +34,10 @@ export function AccountDrawer({ data = [], sx, ...other }) {
   const router = useRouter();
 
   const pathname = usePathname();
+
+  const settings = useSettingsContext();
+
+  const { mode, setMode } = useColorScheme();
 
   const { user } = useMockedUser();
 
@@ -149,7 +153,31 @@ export function AccountDrawer({ data = [], sx, ...other }) {
         </Scrollbar>
 
         <Box sx={{ p: 2.5 }}>
-          <SignOutButton onClose={handleCloseDrawer} />
+          <Box gap={2} display="grid" gridTemplateColumns="repeat(2, 1fr)">
+            <BaseOption
+              label="Dark mode"
+              icon="moon"
+              selected={settings.colorScheme === 'dark'}
+              onClick={() => {
+                settings.onUpdateField('colorScheme', mode === 'light' ? 'dark' : 'light');
+                setMode(mode === 'light' ? 'dark' : 'light');
+              }}
+            />
+            <BaseOption
+              label="Contrast"
+              icon="contrast"
+              selected={settings.contrast === 'hight'}
+              onClick={() =>
+                settings.onUpdateField(
+                  'contrast',
+                  settings.contrast === 'default' ? 'hight' : 'default'
+                )
+              }
+            />
+          </Box>
+          <Box sx={{ pt: 2.5 }}>
+            <SignOutButton onClose={handleCloseDrawer} />
+          </Box>
         </Box>
       </Drawer>
     </>
