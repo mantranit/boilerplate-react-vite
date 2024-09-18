@@ -158,29 +158,31 @@ export function AccountDrawer({ data = [], sx, ...other }: TAccountDrawerProps) 
         </Scrollbar>
 
         <Box sx={{ p: 2.5 }}>
-          <Box gap={2} display="grid" gridTemplateColumns="repeat(2, 1fr)">
-            <BaseOption
-              label="Dark mode"
-              icon="moon"
-              selected={settings.colorScheme === 'dark'}
-              onClick={() => {
-                settings.onUpdateField('colorScheme', mode === 'light' ? 'dark' : 'light');
-                setMode(mode === 'light' ? 'dark' : 'light');
-              }}
-            />
-            <BaseOption
-              label="Contrast"
-              icon="contrast"
-              selected={settings.contrast === 'hight'}
-              onClick={() =>
-                settings.onUpdateField(
-                  'contrast',
-                  settings.contrast === 'default' ? 'hight' : 'default'
-                )
-              }
-            />
-          </Box>
-          <Box sx={{ pt: 2.5 }}>
+          <Stack spacing={6} sx={{ pb: 2.5 }}>
+            <Box gap={2} display="grid" gridTemplateColumns="repeat(2, 1fr)">
+              <BaseOption
+                label="Dark mode"
+                icon="moon"
+                selected={settings.colorScheme === 'dark'}
+                onClick={() => {
+                  settings.onUpdateField('colorScheme', mode === 'light' ? 'dark' : 'light');
+                  setMode(mode === 'light' ? 'dark' : 'light');
+                }}
+              />
+              <BaseOption
+                label="Contrast"
+                icon="contrast"
+                selected={settings.contrast === 'hight'}
+                onClick={() =>
+                  settings.onUpdateField(
+                    'contrast',
+                    settings.contrast === 'default' ? 'hight' : 'default'
+                  )
+                }
+              />
+            </Box>
+          </Stack>
+          <Box>
             <SignOutButton onClose={handleCloseDrawer} />
           </Box>
         </Box>

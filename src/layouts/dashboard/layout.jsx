@@ -19,7 +19,6 @@ import { LayoutSection } from '../core/layout-section';
 import { HeaderSection } from '../core/header-section';
 import { useNavColorVars } from './styles';
 import { AccountDrawer } from '../components/account-drawer';
-import { SettingsButton } from '../components/settings-button';
 import { WorkspacesPopover } from '../components/workspaces-popover';
 import { navData as dashboardNavData } from '../config-nav-dashboard';
 import { NotificationsDrawer } from '../components/notifications-drawer';
@@ -98,8 +97,6 @@ export function DashboardLayout({ sx, children, header, data }) {
                 <Searchbar data={navData} />
                 {/* -- Notifications popover -- */}
                 <NotificationsDrawer data={_notifications} />
-                {/* -- Settings button -- */}
-                <SettingsButton />
                 {/* -- Account drawer -- */}
                 <AccountDrawer data={_account} />
               </Box>

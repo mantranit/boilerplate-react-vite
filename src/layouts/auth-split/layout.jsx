@@ -13,7 +13,6 @@ import { Section } from './section';
 import { Main, Content } from './main';
 import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
-import { SettingsButton } from '../components/settings-button';
 
 // ----------------------------------------------------------------------
 
@@ -43,21 +42,7 @@ export function AuthSplitLayout({ sx, section, children, header }) {
                 <Logo />
               </>
             ),
-            rightArea: (
-              <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
-                {/* -- Help link -- */}
-                <Link
-                  href={paths.faqs}
-                  component={RouterLink}
-                  color="inherit"
-                  sx={{ typography: 'subtitle2' }}
-                >
-                  Need help?
-                </Link>
-                {/* -- Settings button -- */}
-                <SettingsButton />
-              </Box>
-            ),
+            rightArea: <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}></Box>,
           }}
         />
       }
@@ -78,33 +63,6 @@ export function AuthSplitLayout({ sx, section, children, header }) {
           imgUrl={section?.imgUrl}
           method={CONFIG.auth.method}
           subtitle={section?.subtitle}
-          methods={[
-            {
-              label: 'Jwt',
-              path: paths.auth.jwt.signIn,
-              icon: `${CONFIG.assetsDir}/assets/icons/platforms/ic-jwt.svg`,
-            },
-            {
-              label: 'Firebase',
-              path: paths.auth.firebase.signIn,
-              icon: `${CONFIG.assetsDir}/assets/icons/platforms/ic-firebase.svg`,
-            },
-            {
-              label: 'Amplify',
-              path: paths.auth.amplify.signIn,
-              icon: `${CONFIG.assetsDir}/assets/icons/platforms/ic-amplify.svg`,
-            },
-            {
-              label: 'Auth0',
-              path: paths.auth.auth0.signIn,
-              icon: `${CONFIG.assetsDir}/assets/icons/platforms/ic-auth0.svg`,
-            },
-            {
-              label: 'Supabase',
-              path: paths.auth.supabase.signIn,
-              icon: `${CONFIG.assetsDir}/assets/icons/platforms/ic-supabase.svg`,
-            },
-          ]}
         />
         <Content layoutQuery={layoutQuery}>{children}</Content>
       </Main>
