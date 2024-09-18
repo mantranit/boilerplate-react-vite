@@ -6,7 +6,7 @@ import { STORAGE_KEY } from '../config-settings';
 
 // ----------------------------------------------------------------------
 
-export const SettingsContext = createContext(undefined);
+export const SettingsContext = createContext('undefined');
 
 export const SettingsConsumer = SettingsContext.Consumer;
 

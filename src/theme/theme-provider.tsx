@@ -5,7 +5,6 @@ import { useSettingsContext } from 'src/components/settings';
 
 import { createTheme } from './create-theme';
 import { schemeConfig } from './scheme-config';
-import { RTL } from './with-settings/right-to-left';
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +20,7 @@ export function ThemeProvider({ children }) {
       modeStorageKey={schemeConfig.modeStorageKey}
     >
       <CssBaseline />
-      <RTL direction={settings.direction}>{children}</RTL>
+      {children}
     </CssVarsProvider>
   );
 }
