@@ -1,11 +1,12 @@
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box, { BoxProps } from '@mui/material/Box';
+import { Breakpoint, useTheme } from '@mui/material/styles';
 
 import { layoutClasses } from '../classes';
 
 // ----------------------------------------------------------------------
+export type TMainProps = BoxProps;
 
-export function Main({ children, sx, ...other }) {
+export function Main({ children, sx, ...other }: TMainProps) {
   return (
     <Box
       component="main"
@@ -24,8 +25,11 @@ export function Main({ children, sx, ...other }) {
 }
 
 // ----------------------------------------------------------------------
+export type TCompactContentProps = BoxProps & {
+  layoutQuery?: number | Breakpoint;
+};
 
-export function CompactContent({ sx, layoutQuery, children, ...other }) {
+export function CompactContent({ sx, layoutQuery, children, ...other }: TCompactContentProps) {
   const theme = useTheme();
 
   return (
@@ -40,7 +44,7 @@ export function CompactContent({ sx, layoutQuery, children, ...other }) {
         flexDirection: 'column',
         p: theme.spacing(3, 2, 10, 2),
         maxWidth: 'var(--layout-simple-content-compact-width)',
-        [theme.breakpoints.up(layoutQuery)]: {
+        [theme.breakpoints.up(layoutQuery as Breakpoint)]: {
           justifyContent: 'center',
           p: theme.spacing(10, 0, 10, 0),
         },

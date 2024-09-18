@@ -1,14 +1,15 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
-import Container from '@mui/material/Container';
+import Container, { ContainerProps } from '@mui/material/Container';
 
 import { layoutClasses } from 'src/layouts/classes';
 
 import { useSettingsContext } from 'src/components/settings';
 
 // ----------------------------------------------------------------------
+export type TMainProps = BoxProps;
 
-export function Main({ children, sx, ...other }) {
+export function Main({ children, sx, ...other }: TMainProps) {
   return (
     <Box
       component="main"
@@ -27,8 +28,17 @@ export function Main({ children, sx, ...other }) {
 }
 
 // ----------------------------------------------------------------------
+export type TDashboardContentProps = ContainerProps & {
+  disablePadding?: boolean;
+};
 
-export function DashboardContent({ sx, children, disablePadding, maxWidth = 'lg', ...other }) {
+export function DashboardContent({
+  sx,
+  children,
+  disablePadding,
+  maxWidth = 'lg',
+  ...other
+}: TDashboardContentProps) {
   const theme = useTheme();
 
   const settings = useSettingsContext();
