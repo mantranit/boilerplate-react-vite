@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 
 import { fileThumbnailClasses } from './classes';
@@ -6,6 +6,14 @@ import { fileData, fileThumb, fileFormat } from './utils';
 import { RemoveButton, DownloadButton } from './action-buttons';
 
 // ----------------------------------------------------------------------
+export type TFileThumbnailProps = BoxProps & {
+  file?: any;
+  tooltip?: any;
+  onRemove?: any;
+  imageView?: any;
+  slotProps?: any;
+  onDownload?: any;
+};
 
 export function FileThumbnail({
   sx,
@@ -17,7 +25,7 @@ export function FileThumbnail({
   onDownload,
   className,
   ...other
-}) {
+}: TFileThumbnailProps) {
   const previewUrl = typeof file === 'string' ? file : URL.createObjectURL(file);
 
   const { name, path } = fileData(file);

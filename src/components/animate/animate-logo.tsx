@@ -1,14 +1,17 @@
 import { m } from 'framer-motion';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 
 import { varAlpha } from 'src/theme/styles';
 
 import { Logo } from '../logo';
 
 // ----------------------------------------------------------------------
+export type TAnimateLogoProps = BoxProps & {
+  logo?: boolean;
+};
 
-export function AnimateLogo1({ logo, sx, ...other }) {
+export function AnimateLogo1({ logo, sx, ...other }: TAnimateLogoProps) {
   return (
     <Box
       sx={{
@@ -75,7 +78,7 @@ export function AnimateLogo1({ logo, sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function AnimateLogo2({ logo, sx, ...other }) {
+export function AnimateLogo2({ logo, sx, ...other }: TAnimateLogoProps) {
   return (
     <Box
       alignItems="center"
