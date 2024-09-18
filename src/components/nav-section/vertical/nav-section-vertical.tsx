@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-import Stack from '@mui/material/Stack';
+import Stack, { StackProps } from '@mui/material/Stack';
 import Collapse from '@mui/material/Collapse';
 import { useTheme } from '@mui/material/styles';
 
@@ -10,6 +10,14 @@ import { navSectionCssVars } from '../css-vars';
 import { NavUl, NavLi, Subheader } from '../styles';
 
 // ----------------------------------------------------------------------
+export type TNavSectionVerticalProps = StackProps & {
+  sx?: any;
+  data?: any;
+  render?: any;
+  slotProps?: any;
+  enabledRootRedirect?: any;
+  cssVars?: any;
+};
 
 export function NavSectionVertical({
   sx,
@@ -18,7 +26,7 @@ export function NavSectionVertical({
   slotProps,
   enabledRootRedirect,
   cssVars: overridesVars,
-}) {
+}: TNavSectionVerticalProps) {
   const theme = useTheme();
 
   const cssVars = {

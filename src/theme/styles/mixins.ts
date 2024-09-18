@@ -88,7 +88,13 @@ export function bgGradient({ color, imgUrl }) {
  * Usage:
  * ...bgBlur({ color: `varAlpha(theme.vars.palette.background.paperChannel, 0.8)`, imgUrl: '/assets/background/overlay.png', blur: 6 }),
  */
-export function bgBlur({ color, blur = 6, imgUrl }) {
+export type TbgBlurProps = {
+  color: any;
+  blur?: any;
+  imgUrl?: any;
+};
+
+export function bgBlur({ color, blur = 6, imgUrl }: TbgBlurProps) {
   if (imgUrl) {
     return {
       position: 'relative',

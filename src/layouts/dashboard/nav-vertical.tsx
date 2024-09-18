@@ -5,13 +5,31 @@ import { varAlpha, hideScrollY } from 'src/theme/styles';
 
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
-import { NavSectionMini, NavSectionVertical } from 'src/components/nav-section';
+import {
+  NavSectionMini,
+  NavSectionVertical,
+  TNavSectionVerticalProps,
+} from 'src/components/nav-section';
 
 import { NavToggleButton } from '../components/nav-toggle-button';
 
 // ----------------------------------------------------------------------
+export type TNavVerticalProps = TNavSectionVerticalProps & {
+  slots?: any;
+  isNavMini?: any;
+  layoutQuery?: any;
+  onToggleNav?: any;
+};
 
-export function NavVertical({ sx, data, slots, isNavMini, layoutQuery, onToggleNav, ...other }) {
+export function NavVertical({
+  sx,
+  data,
+  slots,
+  isNavMini,
+  layoutQuery,
+  onToggleNav,
+  ...other
+}: TNavVerticalProps) {
   const theme = useTheme();
 
   const renderNavVertical = (

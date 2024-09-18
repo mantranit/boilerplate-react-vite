@@ -3,10 +3,20 @@ import { useMemo, useState, useCallback, createContext } from 'react';
 import { useLocalStorage } from 'src/hooks/use-local-storage';
 
 import { STORAGE_KEY } from '../config-settings';
+import { defaultFont } from 'src/theme/core/typography';
 
 // ----------------------------------------------------------------------
 
-export const SettingsContext = createContext('undefined');
+export const SettingsContext = createContext<any>({
+  colorScheme: 'light',
+  direction: 'ltr',
+  contrast: 'default',
+  navLayout: 'vertical',
+  primaryColor: 'red',
+  navColor: 'integrate',
+  compactLayout: true,
+  fontFamily: defaultFont,
+});
 
 export const SettingsConsumer = SettingsContext.Consumer;
 

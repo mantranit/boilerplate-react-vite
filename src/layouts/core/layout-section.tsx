@@ -1,9 +1,16 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import GlobalStyles from '@mui/material/GlobalStyles';
 
 import { layoutClasses } from '../classes';
+import { ReactNode } from 'react';
 
 // ----------------------------------------------------------------------
+export type TLayoutSectionProps = BoxProps & {
+  cssVars?: any;
+  footerSection?: ReactNode;
+  headerSection?: ReactNode;
+  sidebarSection?: ReactNode;
+};
 
 export function LayoutSection({
   sx,
@@ -12,7 +19,7 @@ export function LayoutSection({
   footerSection,
   headerSection,
   sidebarSection,
-}) {
+}: TLayoutSectionProps) {
   const inputGlobalStyles = (
     <GlobalStyles
       styles={{

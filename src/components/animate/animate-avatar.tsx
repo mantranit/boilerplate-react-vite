@@ -1,11 +1,20 @@
 import { m } from 'framer-motion';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 
 // ----------------------------------------------------------------------
+export type TAnimateAvatarProps = BoxProps & {
+  slotProps?: any;
+};
 
-export function AnimateAvatar({ sx, slotProps, children, width = 40, ...other }) {
+export function AnimateAvatar({
+  sx,
+  slotProps,
+  children,
+  width = 40,
+  ...other
+}: TAnimateAvatarProps) {
   const borderWidth = slotProps?.overlay?.border ?? 2;
 
   const spacing = slotProps?.overlay?.spacing ?? 2;

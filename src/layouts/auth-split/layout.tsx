@@ -9,14 +9,21 @@ import { CONFIG } from 'src/config-global';
 
 import { Logo } from 'src/components/logo';
 
-import { Section } from './section';
+import { Section, TSectionProps } from './section';
 import { Main, Content } from './main';
-import { HeaderSection } from '../core/header-section';
+import { HeaderSection, THeaderSectionProps } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
+import { ReactNode } from 'react';
 
 // ----------------------------------------------------------------------
+type TAuthSplitLayoutProps = {
+  sx?: any;
+  section?: TSectionProps;
+  children?: ReactNode;
+  header?: THeaderSectionProps;
+};
 
-export function AuthSplitLayout({ sx, section, children, header }) {
+export function AuthSplitLayout({ sx, section, children, header }: TAuthSplitLayoutProps) {
   const layoutQuery = 'md';
 
   return (

@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
+import AppBar, { AppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import { styled, useTheme } from '@mui/material/styles';
+import { Breakpoint, styled, useTheme } from '@mui/material/styles';
 
 import { useScrollOffSetTop } from 'src/hooks/use-scroll-offset-top';
 
@@ -27,6 +27,13 @@ const StyledElevation = styled('span')(({ theme }) => ({
 }));
 
 // ----------------------------------------------------------------------
+export type THeaderSectionProps = AppBarProps & {
+  layoutQuery?: any;
+  slots?: any;
+  slotProps?: any;
+  disableOffset?: any;
+  disableElevation?: any;
+};
 
 export function HeaderSection({
   sx,
@@ -36,7 +43,7 @@ export function HeaderSection({
   disableElevation,
   layoutQuery = 'md',
   ...other
-}) {
+}: THeaderSectionProps) {
   const theme = useTheme();
 
   const { offsetTop } = useScrollOffSetTop();
@@ -52,7 +59,7 @@ export function HeaderSection({
       [theme.breakpoints.up('sm')]: {
         minHeight: 'auto',
       },
-      [theme.breakpoints.up(layoutQuery)]: {
+      [theme.breakpoints.up(layoutQuery as Breakpoint)]: {
         height: 'var(--layout-header-desktop-height)',
       },
     },

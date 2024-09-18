@@ -7,11 +7,16 @@ import { usePathname } from 'src/routes/hooks';
 
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
-import { NavSectionVertical } from 'src/components/nav-section';
+import { NavSectionVertical, TNavSectionVerticalProps } from 'src/components/nav-section';
 
 // ----------------------------------------------------------------------
+export type TNavMobileProps = TNavSectionVerticalProps & {
+  open?: any;
+  onClose?: any;
+  slots?: any;
+};
 
-export function NavMobile({ data, open, onClose, slots, sx, ...other }) {
+export function NavMobile({ data, open, onClose, slots, sx, ...other }: TNavMobileProps) {
   const pathname = usePathname();
 
   useEffect(() => {
@@ -40,7 +45,7 @@ export function NavMobile({ data, open, onClose, slots, sx, ...other }) {
         </Box>
       )}
 
-      <Scrollbar fillContent>
+      <Scrollbar fillContent={true}>
         <NavSectionVertical data={data} sx={{ px: 2, flex: '1 1 auto' }} {...other} />
       </Scrollbar>
 

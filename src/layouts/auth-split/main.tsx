@@ -1,11 +1,14 @@
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box, { BoxProps } from '@mui/material/Box';
+import { Breakpoint, useTheme } from '@mui/material/styles';
 
 import { layoutClasses } from 'src/layouts/classes';
 
 // ----------------------------------------------------------------------
+export type TMainProps = BoxProps & {
+  layoutQuery: number | Breakpoint;
+};
 
-export function Main({ sx, children, layoutQuery, ...other }) {
+export function Main({ sx, children, layoutQuery, ...other }: TMainProps) {
   const theme = useTheme();
 
   return (
@@ -29,8 +32,11 @@ export function Main({ sx, children, layoutQuery, ...other }) {
 }
 
 // ----------------------------------------------------------------------
+export type TContentProps = BoxProps & {
+  layoutQuery: number | Breakpoint;
+};
 
-export function Content({ sx, children, layoutQuery, ...other }) {
+export function Content({ sx, children, layoutQuery, ...other }: TContentProps) {
   const theme = useTheme();
 
   const renderContent = (

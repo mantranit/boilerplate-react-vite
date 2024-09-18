@@ -1,16 +1,28 @@
 import { forwardRef } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 
 import { StyledLabel } from './styles';
 import { labelClasses } from './classes';
 
 // ----------------------------------------------------------------------
+export type TLabelProps = BoxProps & {
+  [key: string]: any;
+};
 
 export const Label = forwardRef(
   (
-    { children, color = 'default', variant = 'soft', startIcon, endIcon, sx, className, ...other },
+    {
+      children,
+      color = 'default',
+      variant = 'soft',
+      startIcon,
+      endIcon,
+      sx,
+      className,
+      ...other
+    }: TLabelProps,
     ref
   ) => {
     const theme = useTheme();

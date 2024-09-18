@@ -1,4 +1,4 @@
-import Stack from '@mui/material/Stack';
+import Stack, { StackProps } from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
 
 import { NavList } from './nav-list';
@@ -7,6 +7,14 @@ import { navSectionClasses } from '../classes';
 import { navSectionCssVars } from '../css-vars';
 
 // ----------------------------------------------------------------------
+export type TNavSectionMiniProps = StackProps & {
+  sx?: any;
+  data?: any;
+  render?: any;
+  slotProps?: any;
+  enabledRootRedirect?: any;
+  cssVars?: any;
+};
 
 export function NavSectionMini({
   sx,
@@ -15,7 +23,7 @@ export function NavSectionMini({
   slotProps,
   enabledRootRedirect,
   cssVars: overridesVars,
-}) {
+}: TNavSectionMiniProps) {
   const theme = useTheme();
 
   const cssVars = {

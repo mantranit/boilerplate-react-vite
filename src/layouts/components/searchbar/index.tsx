@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import SvgIcon from '@mui/material/SvgIcon';
 import InputBase from '@mui/material/InputBase';
 import { useTheme } from '@mui/material/styles';
@@ -27,8 +27,11 @@ import { ResultItem } from './result-item';
 import { groupItems, applyFilter, getAllItems } from './utils';
 
 // ----------------------------------------------------------------------
+export type TSearchbarProps = BoxProps & {
+  data?: any;
+};
 
-export function Searchbar({ data: navItems = [], sx, ...other }) {
+export function Searchbar({ data: navItems = [], sx, ...other }: TSearchbarProps) {
   const theme = useTheme();
 
   const router = useRouter();

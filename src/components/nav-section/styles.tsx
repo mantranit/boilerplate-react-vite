@@ -1,5 +1,5 @@
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
+import Box, { BoxProps } from '@mui/material/Box';
+import Collapse, { CollapseProps } from '@mui/material/Collapse';
 import ListSubheader from '@mui/material/ListSubheader';
 
 import { stylesMode } from 'src/theme/styles';
@@ -117,8 +117,11 @@ export function Subheader({ sx, open, children, ...other }) {
 }
 
 // ----------------------------------------------------------------------
+export type TNavCollapseProps = CollapseProps & {
+  depth?: any;
+};
 
-export function NavCollapse({ sx, depth, children, ...other }) {
+export function NavCollapse({ sx, depth, children, ...other }: TNavCollapseProps) {
   return (
     <Collapse
       sx={{
@@ -151,8 +154,11 @@ export function NavCollapse({ sx, depth, children, ...other }) {
 }
 
 // ----------------------------------------------------------------------
+export type TNavLiProps = BoxProps & {
+  disabled?: boolean;
+};
 
-export function NavLi({ sx, children, disabled, ...other }) {
+export function NavLi({ sx, children, disabled, ...other }: TNavLiProps) {
   return (
     <Box
       component="li"

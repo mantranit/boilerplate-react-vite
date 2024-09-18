@@ -1,13 +1,16 @@
 import { forwardRef } from 'react';
 import { Icon, disableCache } from '@iconify/react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 
 import { iconifyClasses } from './classes';
 
 // ----------------------------------------------------------------------
+export type TIconifyProps = BoxProps & {
+  icon?: any;
+};
 
-export const Iconify = forwardRef(({ className, width = 20, sx, ...other }, ref) => (
+export const Iconify = forwardRef(({ className, width = 20, sx, ...other }: TIconifyProps, ref) => (
   <Box
     ssr
     ref={ref}

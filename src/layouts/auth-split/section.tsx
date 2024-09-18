@@ -1,7 +1,7 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Tooltip from '@mui/material/Tooltip';
-import { useTheme } from '@mui/material/styles';
+import { Breakpoint, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
@@ -10,6 +10,13 @@ import { CONFIG } from 'src/config-global';
 import { varAlpha, bgGradient } from 'src/theme/styles';
 
 // ----------------------------------------------------------------------
+export type TSectionProps = BoxProps & {
+  method?: string;
+  layoutQuery?: number | Breakpoint;
+  methods?: string;
+  imgUrl?: string;
+  subtitle?: string;
+};
 
 export function Section({
   sx,
@@ -20,7 +27,7 @@ export function Section({
   imgUrl = `${CONFIG.assetsDir}/assets/illustrations/illustration-dashboard.webp`,
   subtitle = 'More effectively with optimized workflows.',
   ...other
-}) {
+}: TSectionProps) {
   const theme = useTheme();
 
   return (

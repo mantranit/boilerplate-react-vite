@@ -13,6 +13,9 @@ import { navSectionClasses } from '../classes';
 import { stateClasses, sharedStyles } from '../styles';
 
 // ----------------------------------------------------------------------
+export type TNavItemProps = {
+  [key: string]: any;
+};
 
 export const NavItem = forwardRef(
   (
@@ -33,7 +36,7 @@ export const NavItem = forwardRef(
       externalLink,
       enabledRootRedirect,
       ...other
-    },
+    }: TNavItemProps,
     ref
   ) => {
     const navItem = useNavItem({

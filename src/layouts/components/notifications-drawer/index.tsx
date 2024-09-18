@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
@@ -31,8 +31,11 @@ const TABS = [
 ];
 
 // ----------------------------------------------------------------------
+export type TNotificationsDrawerProps = IconButtonProps & {
+  data?: any;
+};
 
-export function NotificationsDrawer({ data = [], sx, ...other }) {
+export function NotificationsDrawer({ data = [], sx, ...other }: TNotificationsDrawerProps) {
   const drawer = useBoolean();
 
   const [currentTab, setCurrentTab] = useState('all');

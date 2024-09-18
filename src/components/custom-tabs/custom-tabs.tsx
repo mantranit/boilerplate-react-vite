@@ -1,12 +1,15 @@
 import NoSsr from '@mui/material/NoSsr';
 import { tabClasses } from '@mui/material/Tab';
-import Tabs, { tabsClasses } from '@mui/material/Tabs';
+import Tabs, { tabsClasses, TabsProps } from '@mui/material/Tabs';
 
 import { stylesMode } from 'src/theme/styles';
 
 // ----------------------------------------------------------------------
+export type TCustomTabsProps = TabsProps & {
+  slotProps?: any;
+};
 
-export function CustomTabs({ children, slotProps, sx, ...other }) {
+export function CustomTabs({ children, slotProps, sx, ...other }: TCustomTabsProps) {
   return (
     <Tabs
       sx={{
