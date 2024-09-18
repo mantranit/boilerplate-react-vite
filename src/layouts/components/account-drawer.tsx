@@ -25,10 +25,15 @@ import { AccountButton } from './account-button';
 import { SignOutButton } from './sign-out-button';
 import { BaseOption } from '../../components/settings/drawer/base-option';
 import { useSettingsContext } from '../../components/settings/context';
+import { TAccountMenu } from '../config-nav-account';
+import { TAccountButtonProps } from './account-button';
 
 // ----------------------------------------------------------------------
+type TAccountDrawerProps = TAccountButtonProps & {
+  data: TAccountMenu[];
+};
 
-export function AccountDrawer({ data = [], sx, ...other }) {
+export function AccountDrawer({ data = [], sx, ...other }: TAccountDrawerProps) {
   const theme = useTheme();
 
   const router = useRouter();

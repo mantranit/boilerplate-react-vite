@@ -4,13 +4,18 @@ import NoSsr from '@mui/material/NoSsr';
 import Avatar from '@mui/material/Avatar';
 import SvgIcon from '@mui/material/SvgIcon';
 import { useTheme } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 
 import { varHover, AnimateAvatar } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export function AccountButton({ photoURL, displayName, sx, ...other }) {
+export type TAccountButtonProps = IconButtonProps & {
+  photoURL?: string;
+  displayName?: string;
+};
+
+export function AccountButton({ photoURL, displayName, sx, ...other }: TAccountButtonProps) {
   const theme = useTheme();
 
   const renderFallback = (
