@@ -1,11 +1,18 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
 import { varAlpha, stylesMode } from 'src/theme/styles';
 
 // ----------------------------------------------------------------------
+export type TStyledLabelProps = BoxProps & {
+  theme?: any;
+  ownerState?: any;
+};
 
-export const StyledLabel = styled(Box)(({ theme, ownerState: { color, variant } }) => {
+export const StyledLabel = styled(Box)(({
+  theme,
+  ownerState: { color, variant },
+}: TStyledLabelProps) => {
   const defaultColor = {
     ...(color === 'default' && {
       /**

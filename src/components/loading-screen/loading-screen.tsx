@@ -1,10 +1,13 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Portal from '@mui/material/Portal';
 import LinearProgress from '@mui/material/LinearProgress';
 
 // ----------------------------------------------------------------------
+export type TLoadingScreenProps = BoxProps & {
+  portal?: boolean;
+};
 
-export function LoadingScreen({ portal, sx, ...other }) {
+export function LoadingScreen({ portal, sx, ...other }: TLoadingScreenProps) {
   const content = (
     <Box
       sx={{

@@ -1,12 +1,15 @@
 import { forwardRef } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 
 import { iconifyClasses } from './classes';
 
 // ----------------------------------------------------------------------
+export type TFlagIconProps = BoxProps & {
+  code?: boolean;
+};
 
-export const FlagIcon = forwardRef(({ code, className, sx, ...other }, ref) => {
+export const FlagIcon = forwardRef(({ code, className, sx, ...other }: TFlagIconProps, ref) => {
   const baseStyles = {
     width: 26,
     height: 20,

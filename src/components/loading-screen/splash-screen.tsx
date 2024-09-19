@@ -1,11 +1,14 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Portal from '@mui/material/Portal';
 
 import { AnimateLogo1 } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
+export type TSplashScreenProps = BoxProps & {
+  portal?: boolean;
+};
 
-export function SplashScreen({ portal = true, sx, ...other }) {
+export function SplashScreen({ portal = true, sx, ...other }: TSplashScreenProps) {
   const content = (
     <Box sx={{ overflow: 'hidden' }}>
       <Box
