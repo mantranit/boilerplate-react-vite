@@ -5,7 +5,7 @@ import { FormProviderProps, FormProvider as RHFForm } from 'react-hook-form';
 export type TFormProps = {
   children: ReactNode;
   onSubmit: FormEventHandler<HTMLFormElement>;
-  methods: FormProviderProps;
+  methods: any;
 };
 
 export function Form({ children, onSubmit, methods }: TFormProps) {

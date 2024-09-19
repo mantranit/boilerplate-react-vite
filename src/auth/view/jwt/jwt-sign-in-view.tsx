@@ -41,7 +41,7 @@ export const SignInSchema = zod.object({
 export function JwtSignInView() {
   const router = useRouter();
 
-  const { checkUserSession } = useAuthContext();
+  const { checkUserSession }: any = useAuthContext();
 
   const [errorMsg, setErrorMsg] = useState('');
 
