@@ -1,11 +1,11 @@
 import { memo } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-function PlanFreeIcon({ sx, ...other }) {
+function PlanFreeIcon({ sx, ...other }: BoxProps) {
   const theme = useTheme();
 
   const PRIMARY_MAIN = theme.vars.palette.primary.main;

@@ -4,7 +4,10 @@ import { styled } from '@mui/material/styles';
 import { varAlpha, stylesMode } from 'src/theme/styles';
 
 // ----------------------------------------------------------------------
-export type TStyledLabelProps = BoxProps | any;
+export type TStyledLabelProps = BoxProps & {
+  theme: any;
+  ownerState: any;
+};
 
 export const StyledLabel = styled(Box)(({
   theme,

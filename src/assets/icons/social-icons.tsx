@@ -1,10 +1,10 @@
 import { useId, forwardRef } from 'react';
 
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 // ----------------------------------------------------------------------
 
-const baseStyles = (sx, width) => {
+const baseStyles = (sx: any, width: any) => {
   const color = sx?.color;
 
   return {
@@ -22,7 +22,7 @@ const baseStyles = (sx, width) => {
 
 // ----------------------------------------------------------------------
 
-export const LinkedinIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
+export const LinkedinIcon = forwardRef(({ width = 20, sx, ...other }: any, ref) => (
   <SvgIcon ref={ref} sx={{ ...baseStyles(sx, width) }} {...other}>
     <path
       fill="#0A66C2"
@@ -33,7 +33,7 @@ export const LinkedinIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
 
 // ----------------------------------------------------------------------
 
-export const FacebookIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
+export const FacebookIcon = forwardRef(({ width = 20, sx, ...other }: any, ref) => (
   <SvgIcon ref={ref} sx={{ ...baseStyles(sx, width) }} {...other}>
     <path
       fill="#1877F2"
@@ -44,7 +44,7 @@ export const FacebookIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
 
 // ----------------------------------------------------------------------
 
-export const GithubIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
+export const GithubIcon = forwardRef(({ width = 20, sx, ...other }: any, ref) => (
   <SvgIcon ref={ref} sx={{ ...baseStyles(sx, width) }} {...other}>
     <path
       fill="currentColor"
@@ -55,7 +55,7 @@ export const GithubIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
 
 // ----------------------------------------------------------------------
 
-export const TwitterIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
+export const TwitterIcon = forwardRef(({ width = 20, sx, ...other }: any, ref) => (
   <SvgIcon ref={ref} sx={{ ...baseStyles(sx, width) }} {...other}>
     <path
       fill="currentColor"
@@ -66,7 +66,7 @@ export const TwitterIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
 
 // ----------------------------------------------------------------------
 
-export const GoogleIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
+export const GoogleIcon = forwardRef(({ width = 20, sx, ...other }: any, ref) => (
   <SvgIcon ref={ref} sx={{ ...baseStyles(sx, width) }} {...other}>
     <path
       fill="#FFC107"
@@ -89,7 +89,7 @@ export const GoogleIcon = forwardRef(({ width = 20, sx, ...other }, ref) => (
 
 // ----------------------------------------------------------------------
 
-export const InstagramIcon = forwardRef(({ width = 20, sx, ...other }, ref) => {
+export const InstagramIcon = forwardRef(({ width = 20, sx, ...other }: any, ref) => {
   const gradientId = useId();
 
   return (
