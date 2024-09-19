@@ -10,6 +10,7 @@ export type TTheme = Theme & {
   vars?: any;
   customShadows?: any;
   typography?: any;
+  ownerState?: any;
 };
 
 export function createTheme(settings: any) {

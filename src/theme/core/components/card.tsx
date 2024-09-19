@@ -7,7 +7,7 @@ const MuiCard = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }: { theme: TTheme }) => ({
+    root: ({ theme, ownerState }: { theme: TTheme; ownerState: any }) => ({
       position: 'relative',
       boxShadow: theme.customShadows.card,
       borderRadius: theme.shape.borderRadius * 2,

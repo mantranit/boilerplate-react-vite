@@ -7,6 +7,7 @@ import { createTheme } from './create-theme';
 import { schemeConfig } from './scheme-config';
 import { ReactNode } from 'react';
 
+export type Mode = 'light' | 'dark' | 'system';
 // ----------------------------------------------------------------------
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -17,7 +18,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <CssVarsProvider
       theme={theme}
-      defaultMode={schemeConfig.defaultMode}
+      defaultMode={schemeConfig.defaultMode as Mode}
       modeStorageKey={schemeConfig.modeStorageKey}
     >
       <CssBaseline />

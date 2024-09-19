@@ -26,11 +26,7 @@ const PRIMARY_COLORS = {
 export function updateCoreWithSettings(theme: any, settings: any) {
   const { colorSchemes, customShadows } = theme;
 
-  const updatedPrimary = getPalette(
-    settings.primaryColor,
-    corePrimary,
-    PRIMARY_COLORS[settings.primaryColor]
-  );
+  const updatedPrimary = getPalette(settings.primaryColor, corePrimary, PRIMARY_COLORS.red);
 
   return {
     ...theme,
@@ -71,7 +67,7 @@ export function updateCoreWithSettings(theme: any, settings: any) {
 // ----------------------------------------------------------------------
 
 export function updateComponentsWithSettings(settings: any) {
-  const components = {};
+  const components: any = {};
 
   /** [2] */
   if (settings.contrast === 'hight') {
