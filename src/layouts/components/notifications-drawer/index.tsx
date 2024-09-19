@@ -1,5 +1,5 @@
 import { m } from 'framer-motion';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, SetStateAction } from 'react';
 
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -40,16 +40,20 @@ export function NotificationsDrawer({ data = [], sx, ...other }: TNotificationsD
 
   const [currentTab, setCurrentTab] = useState('all');
 
-  const handleChangeTab = useCallback((event, newValue) => {
+  const handleChangeTab = useCallback((event: any, newValue: SetStateAction<string>) => {
     setCurrentTab(newValue);
   }, []);
 
   const [notifications, setNotifications] = useState(data);
 
-  const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
+  const totalUnRead = notifications.filter(
+    (item: { isUnRead: boolean }) => item.isUnRead === true
+  ).length;
 
   const handleMarkAllAsRead = () => {
-    setNotifications(notifications.map((notification) => ({ ...notification, isUnRead: false })));
+    setNotifications(
+      notifications.map((notification: any) => ({ ...notification, isUnRead: false }))
+    );
   };
 
   const renderHead = (
@@ -104,7 +108,7 @@ export function NotificationsDrawer({ data = [], sx, ...other }: TNotificationsD
   const renderList = (
     <Scrollbar>
       <Box component="ul">
-        {notifications?.map((notification) => (
+        {notifications?.map((notification: any) => (
           <Box component="li" key={notification.id} sx={{ display: 'flex' }}>
             <NotificationItem notification={notification} />
           </Box>

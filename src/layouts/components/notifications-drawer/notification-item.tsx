@@ -16,7 +16,7 @@ import { FileThumbnail } from 'src/components/file-thumbnail';
 
 // ----------------------------------------------------------------------
 
-export function NotificationItem({ notification }) {
+export function NotificationItem({ notification }: any) {
   const renderAvatar = (
     <ListItemAvatar>
       {notification.avatarUrl ? (

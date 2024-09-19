@@ -5,11 +5,18 @@ import { Logo } from 'src/components/logo';
 
 import { Main, CompactContent } from './main';
 import { LayoutSection } from '../core/layout-section';
-import { HeaderSection } from '../core/header-section';
+import { HeaderSection, THeaderSectionProps } from '../core/header-section';
+import { ReactNode } from 'react';
 
 // ----------------------------------------------------------------------
+type TSimpleLayoutProps = {
+  sx?: any;
+  content?: any;
+  children?: ReactNode;
+  header?: THeaderSectionProps;
+};
 
-export function SimpleLayout({ sx, children, header, content }) {
+export function SimpleLayout({ sx, children, header, content }: TSimpleLayoutProps) {
   const layoutQuery = 'md';
 
   return (

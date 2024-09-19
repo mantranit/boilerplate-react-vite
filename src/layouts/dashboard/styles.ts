@@ -5,10 +5,11 @@ import { styled } from '@mui/material/styles';
 import { varAlpha, stylesMode } from 'src/theme/styles';
 
 import { bulletColor } from 'src/components/nav-section';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-export const StyledDivider = styled('span')(({ theme }) => ({
+export const StyledDivider = styled('span')(({ theme }: { theme: TTheme }) => ({
   width: 1,
   height: 10,
   flexShrink: 0,
@@ -35,7 +36,7 @@ export const StyledDivider = styled('span')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export function useNavColorVars(theme, settings) {
+export function useNavColorVars(theme: TTheme, settings: any) {
   const {
     vars: { palette },
   } = theme;

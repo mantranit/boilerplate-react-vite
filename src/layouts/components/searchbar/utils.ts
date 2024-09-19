@@ -2,10 +2,10 @@ import { flattenArray } from 'src/utils/helper';
 
 // ----------------------------------------------------------------------
 
-export function getAllItems({ data }) {
-  const reduceItems = data.map((list) => handleLoop(list.items, list.subheader)).flat();
+export function getAllItems({ data }: any) {
+  const reduceItems = data.map((list: any) => handleLoop(list.items, list.subheader)).flat();
 
-  const items = flattenArray(reduceItems).map((option) => {
+  const items = flattenArray(reduceItems).map((option: any) => {
     const group = splitPath(reduceItems, option.path);
 
     return {
@@ -20,10 +20,10 @@ export function getAllItems({ data }) {
 
 // ----------------------------------------------------------------------
 
-export function applyFilter({ inputData, query }) {
+export function applyFilter({ inputData, query }: any) {
   if (query) {
     inputData = inputData.filter(
-      (item) =>
+      (item: any) =>
         item.title.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
         item.path.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
@@ -34,8 +34,8 @@ export function applyFilter({ inputData, query }) {
 
 // ----------------------------------------------------------------------
 
-export function splitPath(array, key) {
-  let stack = array.map((item) => ({ path: [item.title], currItem: item }));
+export function splitPath(array: any, key: any) {
+  let stack = array.map((item: any) => ({ path: [item.title], currItem: item }));
 
   while (stack.length) {
     const { path, currItem } = stack.pop();
@@ -46,7 +46,7 @@ export function splitPath(array, key) {
 
     if (currItem.children?.length) {
       stack = stack.concat(
-        currItem.children.map((item) => ({
+        currItem.children.map((item: any) => ({
           path: path.concat(item.title),
           currItem: item,
         }))
@@ -58,16 +58,16 @@ export function splitPath(array, key) {
 
 // ----------------------------------------------------------------------
 
-export function handleLoop(array, subheader) {
-  return array?.map((list) => ({
+export function handleLoop(array: any, subheader: any) {
+  return array?.map((list: any) => ({
     subheader,
     ...list,
     ...(list.children && { children: handleLoop(list.children, subheader) }),
   }));
 }
 
-export function groupItems(array) {
-  const group = array.reduce((groups, item) => {
+export function groupItems(array: any) {
+  const group = array.reduce((groups: any, item: any) => {
     groups[item.group] = groups[item.group] || [];
 
     groups[item.group].push(item);

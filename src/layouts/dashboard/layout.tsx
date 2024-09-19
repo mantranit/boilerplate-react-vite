@@ -16,17 +16,24 @@ import { Searchbar } from '../components/searchbar';
 import { _workspaces } from '../config-nav-workspace';
 import { MenuButton } from '../components/menu-button';
 import { LayoutSection } from '../core/layout-section';
-import { HeaderSection } from '../core/header-section';
+import { HeaderSection, THeaderSectionProps } from '../core/header-section';
 import { useNavColorVars } from './styles';
 import { AccountDrawer } from '../components/account-drawer';
 import { WorkspacesPopover } from '../components/workspaces-popover';
 import { navData as dashboardNavData } from '../config-nav-dashboard';
 import { NotificationsDrawer } from '../components/notifications-drawer';
 import { TTheme } from 'src/theme/create-theme';
+import { ReactNode } from 'react';
 
 // ----------------------------------------------------------------------
+type TDashboardLayoutProps = {
+  sx?: any;
+  data?: any;
+  children?: ReactNode;
+  header?: THeaderSectionProps;
+};
 
-export function DashboardLayout({ sx, children, header, data }) {
+export function DashboardLayout({ sx, children, header, data }: TDashboardLayoutProps) {
   const theme = useTheme<TTheme>();
 
   const mobileNavOpen = useBoolean();

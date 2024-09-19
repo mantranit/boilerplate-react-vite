@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import Button from '@mui/material/Button';
+import Button, { ButtonProps } from '@mui/material/Button';
 
 import { useRouter } from 'src/routes/hooks';
 
@@ -8,8 +8,11 @@ import { useAuthContext } from 'src/auth/hooks';
 import { signOut } from 'src/auth/context/jwt/action';
 
 // ----------------------------------------------------------------------
+export type TSignOutButtonProps = ButtonProps & {
+  onClose?: Function;
+};
 
-export function SignOutButton({ onClose, ...other }) {
+export function SignOutButton({ onClose, ...other }: TSignOutButtonProps) {
   const router = useRouter();
 
   const { checkUserSession } = useAuthContext();
