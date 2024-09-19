@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 
 import { BackgroundShape } from './background-shape';
@@ -8,7 +8,11 @@ import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-function UploadIllustration({ hideBackground, sx, ...other }) {
+function UploadIllustration({
+  hideBackground,
+  sx,
+  ...other
+}: BoxProps & { hideBackground?: boolean }) {
   const theme = useTheme<TTheme>();
 
   const PRIMARY_MAIN = theme.vars.palette.primary.main;

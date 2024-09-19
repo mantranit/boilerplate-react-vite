@@ -9,7 +9,7 @@ import { varAlpha, stylesMode } from '../../styles';
  * Icons
  */
 /* https://icon-sets.iconify.design/solar/info-circle-bold/ */
-const AlertInfoIcon = (props) => (
+const AlertInfoIcon = (props: any) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -21,7 +21,7 @@ const AlertInfoIcon = (props) => (
 );
 
 /* https://icon-sets.iconify.design/solar/check-circle-bold/ */
-const AlertSuccessIcon = (props) => (
+const AlertSuccessIcon = (props: any) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -33,7 +33,7 @@ const AlertSuccessIcon = (props) => (
 );
 
 /* https:// icon-sets.iconify.design/solar/danger-triangle-bold/ */
-const AlertWarningIcon = (props) => (
+const AlertWarningIcon = (props: any) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -45,7 +45,7 @@ const AlertWarningIcon = (props) => (
 );
 
 /* https://icon-sets.iconify.design/solar/danger-bold/ */
-const AlertErrorIcon = (props) => (
+const AlertErrorIcon = (props: any) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -60,7 +60,7 @@ const AlertErrorIcon = (props) => (
 
 const COLORS = ['info', 'success', 'warning', 'error'];
 
-function styleColors(ownerState, styles) {
+function styleColors(ownerState: any, styles: any) {
   const outputStyle = COLORS.reduce((acc, color) => {
     if (ownerState.severity === color) {
       acc = styles(color);
@@ -115,9 +115,9 @@ const MuiAlert = {
     /**
      * @variant filled
      */
-    filled: ({ ownerState, theme }) => {
+    filled: ({ ownerState, theme }: any) => {
       const styled = {
-        colors: styleColors(ownerState, (color) => ({
+        colors: styleColors(ownerState, (color: any) => ({
           color: theme.vars.palette[color].contrastText,
         })),
       };
@@ -129,7 +129,7 @@ const MuiAlert = {
      */
     outlined: ({ ownerState, theme }: any) => {
       const styled = {
-        colors: styleColors(ownerState, (color) => ({
+        colors: styleColors(ownerState, (color: any) => ({
           backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.08),
           color: theme.vars.palette[color].dark,
           border: `solid 1px ${varAlpha(theme.vars.palette[color].mainChannel, 0.16)}`,
@@ -150,7 +150,7 @@ const MuiAlertTitle = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       marginBottom: theme.spacing(0.5),
       fontWeight: theme.typography.fontWeightSemiBold,
     }),

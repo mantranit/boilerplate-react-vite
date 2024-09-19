@@ -6,7 +6,7 @@ const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
 
 // ----------------------------------------------------------------------
 
-function styleColors(ownerState, styles) {
+function styleColors(ownerState: any, styles: any) {
   const outputStyle = COLORS.reduce((acc, color) => {
     if (ownerState.color === color) {
       acc = styles(color);

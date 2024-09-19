@@ -1,12 +1,12 @@
 import { memo } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-function CheckoutIllustration({ sx, ...other }) {
+function CheckoutIllustration({ sx, ...other }: BoxProps) {
   const theme = useTheme<TTheme>();
 
   const PRIMARY_LIGHT = theme.vars.palette.primary.light;

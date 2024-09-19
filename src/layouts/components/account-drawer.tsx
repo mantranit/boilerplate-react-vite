@@ -58,7 +58,7 @@ export function AccountDrawer({ data = [], sx, ...other }: TAccountDrawerProps) 
   }, []);
 
   const handleClickItem = useCallback(
-    (path) => {
+    (path: string) => {
       handleCloseDrawer();
       router.push(path);
     },

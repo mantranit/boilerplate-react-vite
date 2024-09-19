@@ -34,7 +34,7 @@ const MuiFormHelperText = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { root: ({ theme }) => ({ marginTop: theme.spacing(1) }) },
+  styleOverrides: { root: ({ theme }: any) => ({ marginTop: theme.spacing(1) }) },
 };
 
 // ----------------------------------------------------------------------
@@ -43,7 +43,7 @@ const MuiFormControlLabel = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { label: ({ theme }) => ({ ...theme.typography.body2 }) },
+  styleOverrides: { label: ({ theme }: any) => ({ ...theme.typography.body2 }) },
 };
 
 // ----------------------------------------------------------------------

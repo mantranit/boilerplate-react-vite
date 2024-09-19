@@ -1,12 +1,15 @@
 import SvgIcon from '@mui/material/SvgIcon';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 
 import { varAlpha } from 'src/theme/styles';
 import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
+export type TNavToggleButtonProps = IconButtonProps & {
+  isNavMini?: boolean;
+};
 
-export function NavToggleButton({ isNavMini, sx, ...other }) {
+export function NavToggleButton({ isNavMini, sx, ...other }: TNavToggleButtonProps) {
   return (
     <IconButton
       size="small"

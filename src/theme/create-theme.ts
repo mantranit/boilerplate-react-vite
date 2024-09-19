@@ -9,6 +9,7 @@ import { updateCoreWithSettings, updateComponentsWithSettings } from './with-set
 export type TTheme = Theme & {
   vars?: any;
   customShadows?: any;
+  typography?: any;
 };
 
 export function createTheme(settings: any) {
@@ -54,7 +55,7 @@ function shouldSkipGeneratingVar(keys: any, value: any) {
     // 'transitions',
   ];
 
-  const skipPaletteKeys = {
+  const skipPaletteKeys: any = {
     global: ['tonalOffset', 'dividerChannel', 'contrastThreshold'],
     grey: ['A100', 'A200', 'A400', 'A700'],
     text: ['icon'],
@@ -66,10 +67,10 @@ function shouldSkipGeneratingVar(keys: any, value: any) {
     const paletteType = keys[1];
     const skipKeys = skipPaletteKeys[paletteType] || skipPaletteKeys.global;
 
-    return keys.some((key) => skipKeys?.includes(key));
+    return keys.some((key: any) => skipKeys?.includes(key));
   }
 
-  return keys.some((key) => skipGlobalKeys?.includes(key));
+  return keys.some((key: any) => skipGlobalKeys?.includes(key));
 }
 
 /**

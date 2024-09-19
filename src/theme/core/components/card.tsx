@@ -31,7 +31,7 @@ const MuiCardHeader = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       padding: theme.spacing(3, 3, 0),
     }),
   },
@@ -43,7 +43,7 @@ const MuiCardContent = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { root: ({ theme }) => ({ padding: theme.spacing(3) }) },
+  styleOverrides: { root: ({ theme }: any) => ({ padding: theme.spacing(3) }) },
 };
 
 // ----------------------------------------------------------------------

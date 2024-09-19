@@ -1,10 +1,10 @@
 import { memo } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 
 // ----------------------------------------------------------------------
 
-function AvatarShape({ sx, ...other }) {
+function AvatarShape({ sx, ...other }: BoxProps) {
   return (
     <Box
       component="svg"

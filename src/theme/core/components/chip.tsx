@@ -9,7 +9,7 @@ import { varAlpha, stylesMode } from '../../styles';
  * Icons
  * https://icon-sets.iconify.design/solar/close-circle-bold
  */
-export const ChipDeleteIcon = (props) => (
+export const ChipDeleteIcon = (props: any) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -24,7 +24,7 @@ const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
 
 // ----------------------------------------------------------------------
 
-function styleColors(ownerState, styles) {
+function styleColors(ownerState: any, styles: any) {
   const outputStyle = COLORS.reduce((acc, color) => {
     if (!ownerState.disabled && ownerState.color === color) {
       acc = styles(color);

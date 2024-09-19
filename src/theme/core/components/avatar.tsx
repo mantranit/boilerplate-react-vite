@@ -5,7 +5,7 @@ import { TTheme } from 'src/theme/create-theme';
 
 const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
 
-const colorByName = (name) => {
+const colorByName = (name: string) => {
   const charAt = name.charAt(0).toLowerCase();
 
   if (['a', 'c', 'f'].includes(charAt)) return 'primary';
@@ -81,7 +81,7 @@ const MuiAvatarGroup = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ ownerState }) => ({
+    root: ({ ownerState }: any) => ({
       justifyContent: 'flex-end',
       ...(ownerState.variant === 'compact' && {
         width: 40,
@@ -97,7 +97,7 @@ const MuiAvatarGroup = {
         },
       }),
     }),
-    avatar: ({ theme }) => ({
+    avatar: ({ theme }: { theme: TTheme }) => ({
       fontSize: 16,
       fontWeight: theme.typography.fontWeightSemiBold,
       '&:first-of-type': {

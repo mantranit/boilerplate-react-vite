@@ -9,7 +9,7 @@ import { paper, varAlpha, menuItem } from '../../styles';
  * Icons
  * https://icon-sets.iconify.design/eva/arrow-ios-downward-fill/
  */
-const ArrowDownIcon = (props) => (
+const ArrowDownIcon = (props: any) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"

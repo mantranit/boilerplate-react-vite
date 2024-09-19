@@ -9,6 +9,7 @@ export type TScrollProgressProps = BoxProps & {
   variant?: string;
   progress: MotionValue<string> | MotionValue<number> | number;
   thickness?: number;
+  color?: string;
 };
 
 export function ScrollProgress({

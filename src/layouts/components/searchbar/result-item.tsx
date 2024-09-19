@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
+import ListItemButton, { ListItemButtonProps } from '@mui/material/ListItemButton';
 
 import { varAlpha } from 'src/theme/styles';
 
@@ -9,7 +9,7 @@ import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-export function ResultItem({ title, path, groupLabel, onClickItem }) {
+export function ResultItem({ title, path, groupLabel, onClickItem }: any) {
   return (
     <ListItemButton
       onClick={onClickItem}
@@ -32,7 +32,7 @@ export function ResultItem({ title, path, groupLabel, onClickItem }) {
       <ListItemText
         primaryTypographyProps={{ typography: 'subtitle2', sx: { textTransform: 'capitalize' } }}
         secondaryTypographyProps={{ typography: 'caption', noWrap: true }}
-        primary={title.map((part, index) => (
+        primary={title.map((part: any, index: number) => (
           <Box
             key={index}
             component="span"
@@ -41,7 +41,7 @@ export function ResultItem({ title, path, groupLabel, onClickItem }) {
             {part.text}
           </Box>
         ))}
-        secondary={path.map((part, index) => (
+        secondary={path.map((part: any, index: number) => (
           <Box
             key={index}
             component="span"

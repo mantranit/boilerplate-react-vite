@@ -13,7 +13,7 @@ import { TTheme } from 'src/theme/create-theme';
 // ----------------------------------------------------------------------
 export type TSectionProps = BoxProps & {
   method?: string;
-  layoutQuery?: number | Breakpoint;
+  layoutQuery: number | Breakpoint;
   methods?: string;
   imgUrl?: string;
   subtitle?: string;

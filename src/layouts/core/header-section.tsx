@@ -13,7 +13,7 @@ import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-const StyledElevation = styled('span')(({ theme }) => ({
+const StyledElevation = styled('span')(({ theme }: { theme: TTheme }) => ({
   left: 0,
   right: 0,
   bottom: 0,

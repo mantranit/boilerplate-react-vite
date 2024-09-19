@@ -20,43 +20,43 @@ const MuiDataGrid = {
   defaultProps: {
     slots: {
       /* Column */
-      columnSortedAscendingIcon: (props) => (
+      columnSortedAscendingIcon: (props: any) => (
         <DataGridArrowUpIcon sx={{ color: 'text.primary' }} {...props} />
       ),
-      columnSortedDescendingIcon: (props) => (
+      columnSortedDescendingIcon: (props: any) => (
         <DataGridArrowDownIcon sx={{ color: 'text.primary' }} {...props} />
       ),
-      columnUnsortedIcon: (props) => (
+      columnUnsortedIcon: (props: any) => (
         <DataGridArrowUpIcon
           fontSize={props.fontSize}
           className={props.className}
           sx={{ color: 'text.disabled' }}
         />
       ),
-      columnMenuIcon: (props) => <DataGridMoreIcon width={20} {...props} />,
-      columnMenuSortAscendingIcon: (props) => <DataGridArrowUpIcon {...props} />,
-      columnMenuSortDescendingIcon: (props) => <DataGridArrowDownIcon {...props} />,
-      columnMenuFilterIcon: (props) => <DataGridFilterIcon {...props} />,
-      columnMenuHideIcon: (props) => <DataGridEyeCloseIcon {...props} />,
-      columnMenuManageColumnsIcon: (props) => <DataGridEyeIcon {...props} />,
-      columnSelectorIcon: (props) => <DataGridEyeIcon {...props} />,
+      columnMenuIcon: (props: any) => <DataGridMoreIcon width={20} {...props} />,
+      columnMenuSortAscendingIcon: (props: any) => <DataGridArrowUpIcon {...props} />,
+      columnMenuSortDescendingIcon: (props: any) => <DataGridArrowDownIcon {...props} />,
+      columnMenuFilterIcon: (props: any) => <DataGridFilterIcon {...props} />,
+      columnMenuHideIcon: (props: any) => <DataGridEyeCloseIcon {...props} />,
+      columnMenuManageColumnsIcon: (props: any) => <DataGridEyeIcon {...props} />,
+      columnSelectorIcon: (props: any) => <DataGridEyeIcon {...props} />,
       /* Filter */
-      filterPanelDeleteIcon: (props) => <DataGridCloseIcon {...props} />,
-      openFilterButtonIcon: (props) => <DataGridFilterIcon {...props} />,
-      columnFilteredIcon: (props) => (
+      filterPanelDeleteIcon: (props: any) => <DataGridCloseIcon {...props} />,
+      openFilterButtonIcon: (props: any) => <DataGridFilterIcon {...props} />,
+      columnFilteredIcon: (props: any) => (
         <DataGridFilterIcon sx={{ width: 16, color: 'text.primary' }} {...props} />
       ),
       /* Density */
-      densityCompactIcon: (props) => <DataGridDensityCompactIcon {...props} />,
-      densityStandardIcon: (props) => <DataGridDensityStandardIcon {...props} />,
-      densityComfortableIcon: (props) => <DataGridDensityComfortableIcon {...props} />,
+      densityCompactIcon: (props: any) => <DataGridDensityCompactIcon {...props} />,
+      densityStandardIcon: (props: any) => <DataGridDensityStandardIcon {...props} />,
+      densityComfortableIcon: (props: any) => <DataGridDensityComfortableIcon {...props} />,
       /* Export */
-      exportIcon: (props) => <DataGridExportIcon {...props} />,
+      exportIcon: (props: any) => <DataGridExportIcon {...props} />,
       /*  Quick Filter */
-      quickFilterIcon: (props) => (
+      quickFilterIcon: (props: any) => (
         <DataGridSearchIcon sx={{ width: 24, height: 24, color: 'text.secondary' }} {...props} />
       ),
-      quickFilterClearIcon: (props) => <DataGridCloseIcon {...props} />,
+      quickFilterClearIcon: (props: any) => <DataGridCloseIcon {...props} />,
     },
     slotProps: {
       basePopper: { placement: 'bottom-end' },

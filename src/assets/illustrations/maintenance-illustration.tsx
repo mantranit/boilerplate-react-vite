@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 
 import { CONFIG } from 'src/config-global';
@@ -10,7 +10,11 @@ import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-function MaintenanceIllustration({ hideBackground, sx, ...other }) {
+function MaintenanceIllustration({
+  hideBackground,
+  sx,
+  ...other
+}: BoxProps & { hideBackground?: boolean }) {
   const theme = useTheme<TTheme>();
 
   const PRIMARY_LIGHT = theme.vars.palette.primary.light;
