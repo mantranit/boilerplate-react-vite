@@ -1,9 +1,14 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { ReactNode } from 'react';
 
 // ----------------------------------------------------------------------
+export type TFormHeadProps = BoxProps & {
+  icon?: ReactNode;
+  description?: ReactNode;
+};
 
-export function FormHead({ sx, icon, title, description, ...other }) {
+export function FormHead({ sx, icon, title, description, ...other }: TFormHeadProps) {
   return (
     <>
       {icon && (

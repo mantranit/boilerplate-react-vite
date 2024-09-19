@@ -1,9 +1,20 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Link from '@mui/material/Link';
 
 // ----------------------------------------------------------------------
+export type TFormResendCodeProps = BoxProps & {
+  value?: any;
+  disabled?: any;
+  onResendCode?: any;
+};
 
-export function FormResendCode({ value, disabled, onResendCode, sx, ...other }) {
+export function FormResendCode({
+  value,
+  disabled,
+  onResendCode,
+  sx,
+  ...other
+}: TFormResendCodeProps) {
   return (
     <Box
       sx={{

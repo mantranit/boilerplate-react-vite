@@ -1,9 +1,10 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Link from '@mui/material/Link';
 
 // ----------------------------------------------------------------------
+export type TSignUpTermsProps = BoxProps & {};
 
-export function SignUpTerms({ sx, ...other }) {
+export function SignUpTerms({ sx, ...other }: TSignUpTermsProps) {
   return (
     <Box
       component="span"
