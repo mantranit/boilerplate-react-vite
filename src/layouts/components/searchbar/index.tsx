@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, ChangeEvent, KeyboardEvent } from 'react';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 
@@ -45,7 +45,7 @@ export function Searchbar({ data: navItems = [], sx, ...other }: TSearchbarProps
     setSearchQuery('');
   }, [search]);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'k' && event.metaKey) {
       search.onToggle();
       setSearchQuery('');
@@ -55,7 +55,7 @@ export function Searchbar({ data: navItems = [], sx, ...other }: TSearchbarProps
   useEventListener('keydown', handleKeyDown);
 
   const handleClick = useCallback(
-    (path) => {
+    (path: string) => {
       if (isExternalLink(path)) {
         window.open(path);
       } else {
@@ -66,7 +66,7 @@ export function Searchbar({ data: navItems = [], sx, ...other }: TSearchbarProps
     [handleClose, router]
   );
 
-  const handleSearch = useCallback((event) => {
+  const handleSearch = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   }, []);
 

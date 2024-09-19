@@ -6,7 +6,12 @@ const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffec
 
 // ----------------------------------------------------------------------
 
-export function useEventListener(eventName, handler, element, options) {
+export function useEventListener(
+  eventName: string,
+  handler: Function,
+  element?: any,
+  options?: any
+) {
   // Create a ref that stores handler
   const savedHandler = useRef(handler);
 
@@ -22,7 +27,7 @@ export function useEventListener(eventName, handler, element, options) {
     }
 
     // Create event listener that calls handler function stored in ref
-    const eventListener = (event) => savedHandler.current(event);
+    const eventListener = (event: any) => savedHandler.current(event);
 
     targetElement.addEventListener(eventName, eventListener, options);
 

@@ -3,7 +3,7 @@ import { hasParams, removeParams, isExternalLink, removeLastSlash } from '../uti
 
 // ----------------------------------------------------------------------
 
-export function useActiveLink(itemPath, deep = true) {
+export function useActiveLink(itemPath: string, deep = true) {
   const pathname = removeLastSlash(usePathname());
 
   const pathHasParams = hasParams(itemPath);

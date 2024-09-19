@@ -42,6 +42,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/autosuggest-highlight": "^3.2.3",
     "@types/node": "^22.5.5",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18.3.6",
