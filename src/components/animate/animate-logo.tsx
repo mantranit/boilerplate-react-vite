@@ -5,6 +5,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 import { varAlpha } from 'src/theme/styles';
 
 import { Logo } from '../logo';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TAnimateLogoProps = BoxProps & {
@@ -106,12 +107,12 @@ export function AnimateLogo2({ logo, sx, ...other }: TAnimateLogoProps) {
           opacity: 0.16,
           borderRadius: '50%',
           position: 'absolute',
-          transition: (theme) =>
+          transition: (theme: TTheme) =>
             theme.transitions.create(['opacity'], {
               easing: theme.transitions.easing.easeInOut,
               duration: theme.transitions.duration.shorter,
             }),
-          background: (theme) =>
+          background: (theme: TTheme) =>
             `linear-gradient(135deg, ${varAlpha(theme.vars.palette.primary.mainChannel, 0)} 50%, ${theme.vars.palette.primary.main} 100%)`,
         }}
       />

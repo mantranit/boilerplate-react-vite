@@ -3,6 +3,7 @@ import { buttonClasses } from '@mui/material/Button';
 import { dialogActionsClasses } from '@mui/material/DialogActions';
 
 import { stylesMode } from '../../styles';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -163,7 +164,7 @@ const MuiPickersLayout = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: TTheme }) => ({
       [`& .${dialogActionsClasses.root}`]: {
         [`& .${buttonClasses.root}`]: {
           [`&:last-of-type`]: {
@@ -182,7 +183,7 @@ const MuiPickersPopper = {
    * DEFAULT PROPS
    *************************************** */
   styleOverrides: {
-    paper: ({ theme }) => ({
+    paper: ({ theme }: { theme: TTheme }) => ({
       boxShadow: theme.customShadows.dropdown,
       borderRadius: theme.shape.borderRadius * 1.5,
     }),

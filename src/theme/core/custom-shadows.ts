@@ -3,11 +3,11 @@ import { grey, info, error, common, primary, success, warning, secondary } from 
 
 // ----------------------------------------------------------------------
 
-export function createShadowColor(colorChannel) {
+export function createShadowColor(colorChannel: any) {
   return `0 8px 16px 0 ${varAlpha(colorChannel, 0.24)}`;
 }
 
-export function customShadows(colorScheme) {
+export function customShadows(colorScheme: string) {
   const colorChannel = colorScheme === 'light' ? grey['500Channel'] : common.blackChannel;
 
   return {

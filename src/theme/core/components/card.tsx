@@ -1,11 +1,13 @@
 // ----------------------------------------------------------------------
 
+import { TTheme } from 'src/theme/create-theme';
+
 const MuiCard = {
   /** **************************************
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: TTheme }) => ({
       position: 'relative',
       boxShadow: theme.customShadows.card,
       borderRadius: theme.shape.borderRadius * 2,

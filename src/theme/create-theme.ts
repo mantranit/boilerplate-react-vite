@@ -8,6 +8,7 @@ import { updateCoreWithSettings, updateComponentsWithSettings } from './with-set
 // ----------------------------------------------------------------------
 export type TTheme = Theme & {
   vars?: any;
+  customShadows?: any;
 };
 
 export function createTheme(settings: any) {

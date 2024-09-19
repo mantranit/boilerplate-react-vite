@@ -1,6 +1,7 @@
 import { sliderClasses } from '@mui/material/Slider';
 
 import { varAlpha, stylesMode } from '../../styles';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -24,8 +25,8 @@ const MuiSlider = {
      * @color inherit
      */
     {
-      props: ({ ownerState }) => ownerState.color === 'inherit',
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: any }) => ownerState.color === 'inherit',
+      style: ({ theme }: { theme: TTheme }) => ({
         [`& .${sliderClasses.markActive}`]: {
           [stylesMode.dark]: {
             backgroundColor: varAlpha(theme.vars.palette.grey['800Channel'], 0.48),
@@ -37,8 +38,8 @@ const MuiSlider = {
      * @state disabled
      */
     {
-      props: ({ ownerState }) => !!ownerState.disabled,
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: any }) => !!ownerState.disabled,
+      style: ({ theme }: { theme: TTheme }) => ({
         [`&.${sliderClasses.disabled}`]: {
           color: varAlpha(
             theme.vars.palette.grey['500Channel'],
@@ -53,7 +54,7 @@ const MuiSlider = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: TTheme }) => ({
       [`& .${sliderClasses.thumb}`]: {
         borderWidth: 1,
         borderStyle: 'solid',
@@ -74,26 +75,26 @@ const MuiSlider = {
         },
       },
     }),
-    rail: ({ theme }) => ({
+    rail: ({ theme }: { theme: TTheme }) => ({
       opacity: 0.12,
       height: SIZE.rail.medium,
       backgroundColor: theme.vars.palette.grey[500],
     }),
     track: { height: SIZE.rail.medium },
-    mark: ({ theme }) => ({
+    mark: ({ theme }: { theme: TTheme }) => ({
       width: 1,
       height: SIZE.mark.medium,
       backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.48),
       '&[data-index="0"]': { display: 'none' },
     }),
-    markActive: ({ theme }) => ({
+    markActive: ({ theme }: { theme: TTheme }) => ({
       backgroundColor: varAlpha(theme.vars.palette.common.whiteChannel, 0.64),
     }),
-    markLabel: ({ theme }) => ({
+    markLabel: ({ theme }: { theme: TTheme }) => ({
       fontSize: theme.typography.pxToRem(13),
       color: theme.vars.palette.text.disabled,
     }),
-    valueLabel: ({ theme }) => ({
+    valueLabel: ({ theme }: { theme: TTheme }) => ({
       borderRadius: 8,
       backgroundColor: theme.vars.palette.grey[800],
       [stylesMode.dark]: { backgroundColor: theme.vars.palette.grey[700] },

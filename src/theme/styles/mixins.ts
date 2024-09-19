@@ -7,6 +7,7 @@ import { CONFIG } from 'src/config-global';
 
 import { remToPx, varAlpha, mediaQueries } from './utils';
 import { Theme } from '@mui/material';
+import { TTheme } from '../create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -192,7 +193,7 @@ export function maxLine({ line, persistent }: TmaxLineProps) {
  * ...paper({ theme, color: varAlpha(theme.vars.palette.background.paperChannel, 0.9), dropdown: true }),
  */
 export type TpaperProps = {
-  theme?: any;
+  theme: TTheme;
   color?: any;
   dropdown?: any;
 };
@@ -222,7 +223,7 @@ export function paper({ theme, color, dropdown }: TpaperProps) {
  * Usage:
  * ...menuItem(theme)
  */
-export function menuItem(theme: any) {
+export function menuItem(theme: TTheme) {
   return {
     ...theme.typography.body2,
     padding: theme.spacing(0.75, 1),

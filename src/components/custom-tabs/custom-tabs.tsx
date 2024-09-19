@@ -1,6 +1,7 @@
 import NoSsr from '@mui/material/NoSsr';
 import { tabClasses } from '@mui/material/Tab';
 import Tabs, { tabsClasses, TabsProps } from '@mui/material/Tabs';
+import { TTheme } from 'src/theme/create-theme';
 
 import { stylesMode } from 'src/theme/styles';
 
@@ -41,7 +42,7 @@ export function CustomTabs({ children, slotProps, sx, ...other }: TCustomTabsPro
             borderRadius: 1,
             display: 'block',
             bgcolor: 'common.white',
-            boxShadow: (theme) => theme.customShadows.z1,
+            boxShadow: (theme: TTheme) => theme.customShadows.z1,
             [stylesMode.dark]: { bgcolor: 'grey.900' },
             ...slotProps?.indicator,
           },

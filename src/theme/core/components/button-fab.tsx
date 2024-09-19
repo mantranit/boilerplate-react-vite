@@ -1,6 +1,7 @@
 import { fabClasses } from '@mui/material/Fab';
 
 import { varAlpha, stylesMode } from '../../styles';
+import { TTheme } from 'src/theme/create-theme';
 
 const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
 
@@ -14,20 +15,20 @@ const SOFT_VARIANT = ['soft', 'softExtended'];
 
 const filledVariant = {
   colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+    props: ({ ownerState }: { ownerState: any }) =>
       !ownerState.disabled &&
       FILLED_VARIANT.includes(ownerState.variant) &&
       ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: { theme: TTheme }) => ({
       boxShadow: theme.customShadows[color],
       '&:hover': { boxShadow: 'none' },
     }),
   })),
   base: [
     {
-      props: ({ ownerState }) =>
+      props: ({ ownerState }: { ownerState: any }) =>
         FILLED_VARIANT.includes(ownerState.variant) && DEFAULT_COLORS.includes(ownerState.color),
-      style: ({ theme }) => ({
+      style: ({ theme }: { theme: TTheme }) => ({
         boxShadow: theme.customShadows.z8,
         /**
          * @color default
@@ -54,11 +55,11 @@ const filledVariant = {
 
 const outlinedVariant = {
   colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+    props: ({ ownerState }: { ownerState: any }) =>
       !ownerState.disabled &&
       OUTLINED_VARIANT.includes(ownerState.variant) &&
       ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: { theme: TTheme }) => ({
       color: theme.vars.palette[color].main,
       border: `solid 1px ${varAlpha(theme.vars.palette[color].mainChannel, 0.48)}`,
       '&:hover': { backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.08) },
@@ -66,8 +67,8 @@ const outlinedVariant = {
   })),
   base: [
     {
-      props: ({ ownerState }) => OUTLINED_VARIANT.includes(ownerState.variant),
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: any }) => OUTLINED_VARIANT.includes(ownerState.variant),
+      style: ({ theme }: { theme: TTheme }) => ({
         boxShadow: 'none',
         backgroundColor: 'transparent',
         color: theme.vars.palette.text.secondary,
@@ -89,11 +90,11 @@ const outlinedVariant = {
 
 const softVariant = {
   colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+    props: ({ ownerState }: { ownerState: any }) =>
       !ownerState.disabled &&
       SOFT_VARIANT.includes(ownerState.variant) &&
       ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: { theme: TTheme }) => ({
       boxShadow: 'none',
       color: theme.vars.palette[color].dark,
       backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.16),
@@ -106,9 +107,9 @@ const softVariant = {
   })),
   base: [
     {
-      props: ({ ownerState }) =>
+      props: ({ ownerState }: { ownerState: any }) =>
         SOFT_VARIANT.includes(ownerState.variant) && DEFAULT_COLORS.includes(ownerState.color),
-      style: ({ theme }) => ({
+      style: ({ theme }: { theme: TTheme }) => ({
         /**
          * @color default
          */
@@ -131,8 +132,8 @@ const softVariant = {
 
 const sizes = [
   {
-    props: ({ ownerState }) => EXTENDED_VARIANT.includes(ownerState.variant),
-    style: ({ theme }) => ({
+    props: ({ ownerState }: { ownerState: any }) => EXTENDED_VARIANT.includes(ownerState.variant),
+    style: ({ theme }: { theme: TTheme }) => ({
       height: 48,
       width: 'auto',
       minHeight: 48,
