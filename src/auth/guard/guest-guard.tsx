@@ -10,7 +10,7 @@ import { useAuthContext } from '../hooks';
 
 // ----------------------------------------------------------------------
 
-export function GuestGuard({ children }) {
+export function GuestGuard({ children }: { children: ReactNode }) {
   const router = useRouter();
 
   const searchParams = useSearchParams();

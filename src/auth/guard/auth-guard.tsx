@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, ReactNode } from 'react';
 
 import { paths } from 'src/routes/paths';
 import { useRouter, usePathname, useSearchParams } from 'src/routes/hooks';
@@ -11,7 +11,7 @@ import { useAuthContext } from '../hooks';
 
 // ----------------------------------------------------------------------
 
-export function AuthGuard({ children }) {
+export function AuthGuard({ children }: { children: ReactNode }) {
   const router = useRouter();
 
   const pathname = usePathname();
@@ -23,7 +23,7 @@ export function AuthGuard({ children }) {
   const [isChecking, setIsChecking] = useState(true);
 
   const createQueryString = useCallback(
-    (name, value) => {
+    (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set(name, value);
 

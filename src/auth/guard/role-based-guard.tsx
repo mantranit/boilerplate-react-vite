@@ -1,6 +1,6 @@
 import { m } from 'framer-motion';
 
-import Container from '@mui/material/Container';
+import Container, { ContainerProps } from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 import { ForbiddenIllustration } from 'src/assets/illustrations';
@@ -8,8 +8,19 @@ import { ForbiddenIllustration } from 'src/assets/illustrations';
 import { varBounce, MotionContainer } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
+export type TRoleBasedGuardProps = ContainerProps & {
+  hasContent?: any;
+  currentRole?: any;
+  acceptRoles?: any;
+};
 
-export function RoleBasedGuard({ sx, children, hasContent, currentRole, acceptRoles }) {
+export function RoleBasedGuard({
+  sx,
+  children,
+  hasContent,
+  currentRole,
+  acceptRoles,
+}: TRoleBasedGuardProps) {
   if (typeof acceptRoles !== 'undefined' && !acceptRoles.includes(currentRole)) {
     return hasContent ? (
       <Container component={MotionContainer} sx={{ textAlign: 'center', ...sx }}>
