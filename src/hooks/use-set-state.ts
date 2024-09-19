@@ -4,17 +4,17 @@ import { isEqual } from 'src/utils/helper';
 
 // ----------------------------------------------------------------------
 
-export function useSetState(initialState) {
+export function useSetState(initialState: unknown) {
   const [state, set] = useState(initialState);
 
   const canReset = !isEqual(state, initialState);
 
-  const setState = useCallback((updateState) => {
-    set((prevValue) => ({ ...prevValue, ...updateState }));
+  const setState = useCallback((updateState: any) => {
+    set((prevValue: any) => ({ ...prevValue, ...updateState }));
   }, []);
 
   const setField = useCallback(
-    (name, updateValue) => {
+    (name: any, updateValue: any) => {
       setState({
         [name]: updateValue,
       });

@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useScroll, useMotionValueEvent } from 'framer-motion';
 
-import Fab from '@mui/material/Fab';
+import Fab, { FabProps } from '@mui/material/Fab';
 import SvgIcon from '@mui/material/SvgIcon';
 
 // ----------------------------------------------------------------------
+export type TBackToTopProps = FabProps & {
+  value?: number;
+};
 
-export function BackToTop({ value = 90, sx, ...other }) {
+export function BackToTop({ value = 90, sx, ...other }: TBackToTopProps) {
   const { scrollYProgress } = useScroll();
 
   const [show, setShow] = useState(false);

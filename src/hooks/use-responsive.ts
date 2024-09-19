@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 
-import { useTheme } from '@mui/material/styles';
+import { Breakpoint, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 // ----------------------------------------------------------------------
 
-export function useResponsive(query, start, end) {
+export function useResponsive(query: string, start: Breakpoint, end?: Breakpoint) {
   const theme = useTheme();
 
   const getQuery = useMemo(() => {
@@ -15,7 +15,7 @@ export function useResponsive(query, start, end) {
       case 'down':
         return theme.breakpoints.down(start);
       case 'between':
-        return theme.breakpoints.between(start, end);
+        return theme.breakpoints.between(start, end!);
       case 'only':
         return theme.breakpoints.only(start);
       default:

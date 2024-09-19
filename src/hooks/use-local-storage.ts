@@ -5,8 +5,8 @@ import { localStorageGetItem } from 'src/utils/storage-available';
 
 // ----------------------------------------------------------------------
 
-export function useLocalStorage(key, initialState) {
-  const [state, set] = useState(initialState);
+export function useLocalStorage(key: string, initialState: any) {
+  const [state, set] = useState<any>(initialState);
 
   const multiValue = initialState && typeof initialState === 'object';
 
@@ -17,7 +17,7 @@ export function useLocalStorage(key, initialState) {
 
     if (restoredValue) {
       if (multiValue) {
-        set((prevValue) => ({ ...prevValue, ...restoredValue }));
+        set((prevValue: any) => ({ ...prevValue, ...restoredValue }));
       } else {
         set(restoredValue);
       }
@@ -25,9 +25,9 @@ export function useLocalStorage(key, initialState) {
   }, [key, multiValue]);
 
   const setState = useCallback(
-    (updateState) => {
+    (updateState: any) => {
       if (multiValue) {
-        set((prevValue) => {
+        set((prevValue: any) => {
           setStorage(key, { ...prevValue, ...updateState });
           return { ...prevValue, ...updateState };
         });
@@ -40,7 +40,7 @@ export function useLocalStorage(key, initialState) {
   );
 
   const setField = useCallback(
-    (name, updateValue) => {
+    (name: any, updateValue: any) => {
       if (multiValue) {
         setState({
           [name]: updateValue,
@@ -71,7 +71,7 @@ export function useLocalStorage(key, initialState) {
 
 // ----------------------------------------------------------------------
 
-export function getStorage(key) {
+export function getStorage(key: string) {
   try {
     const result = localStorageGetItem(key);
 

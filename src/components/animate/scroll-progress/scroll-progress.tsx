@@ -1,8 +1,14 @@
-import { m, useSpring } from 'framer-motion';
+import { m, MotionValue, useSpring } from 'framer-motion';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 
 // ----------------------------------------------------------------------
+export type TScrollProgressProps = BoxProps & {
+  size?: number;
+  variant?: string;
+  progress: MotionValue<string> | MotionValue<number> | number;
+  thickness?: number;
+};
 
 export function ScrollProgress({
   size,
@@ -12,7 +18,7 @@ export function ScrollProgress({
   color = 'primary',
   sx,
   ...other
-}) {
+}: TScrollProgressProps) {
   const scaleX = useSpring(progress, {
     stiffness: 100,
     damping: 30,

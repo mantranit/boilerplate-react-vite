@@ -1,8 +1,13 @@
 import { varTranExit, varTranEnter } from './transition';
 
 // ----------------------------------------------------------------------
-
-export const varFlip = (props) => {
+export type TvarFlipProps = {
+  durationIn: any;
+  durationOut: any;
+  easeIn: any;
+  easeOut: any;
+};
+export const varFlip = (props: TvarFlipProps) => {
   const durationIn = props?.durationIn;
   const durationOut = props?.durationOut;
   const easeIn = props?.easeIn;

@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { m, useInView, useAnimation } from 'framer-motion';
 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 
 import { varFade, varContainer } from './variants';
 
@@ -19,6 +19,15 @@ export const animateTextClasses = {
   dataIndex: '[data-columns="3"]',
 };
 
+export type TAnimateTextProps = TypographyProps & {
+  text: string;
+  variants: string;
+  once?: boolean;
+  amount?: number;
+  component: string;
+  repeatDelay?: number;
+};
+
 export function AnimateText({
   text,
   variants,
@@ -32,7 +41,7 @@ export function AnimateText({
   sx,
   className,
   ...other
-}) {
+}: TAnimateTextProps) {
   const ref = useRef(null);
 
   const controls = useAnimation();
@@ -42,7 +51,7 @@ export function AnimateText({
   const isInView = useInView(ref, { once, amount });
 
   useEffect(() => {
-    let timeout;
+    let timeout: string | number | NodeJS.Timeout | undefined;
 
     const show = () => {
       if (repeatDelay) {
@@ -110,7 +119,7 @@ export function AnimateText({
             className={animateTextClasses.line}
             sx={{ display: 'block' }}
           >
-            {line.split(' ').map((word, wordIndex) => {
+            {line.split(' ').map((word: string, wordIndex: any) => {
               const lastWordInline = line.split(' ')[line.split(' ').length - 1];
 
               return (

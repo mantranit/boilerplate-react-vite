@@ -1,20 +1,23 @@
 import { m } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 
 import { borderGradient } from 'src/theme/styles';
 
 // ----------------------------------------------------------------------
+export type TAnimateBorderProps = BoxProps & {
+  animate?: any;
+};
 
-export function AnimateBorder({ animate, sx }) {
-  const rootRef = useRef(null);
+export function AnimateBorder({ animate, sx }: TAnimateBorderProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
 
-  const animateRef = useRef(null);
+  const animateRef = useRef<HTMLDivElement>(null);
 
   const [aspectRatio, setAspectRatio] = useState(1);
 
-  const [animateStyle, setAnimateStyle] = useState(null);
+  const [animateStyle, setAnimateStyle] = useState<any>(null);
 
   const values = {
     disable: animate?.disable,
@@ -57,7 +60,7 @@ export function AnimateBorder({ animate, sx }) {
     }
   }, [values.disable, values.disableDoubleline]);
 
-  const background = (color) => {
+  const background = (color: any) => {
     const degs = [-55, 35, 125, 215, 305];
 
     const end = `transparent ${values.angle - (2 + values.length)}deg, ${color}  ${values.angle}deg, transparent ${values.angle + values.length}deg`;

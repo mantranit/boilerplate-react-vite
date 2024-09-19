@@ -1,9 +1,18 @@
 import { useRef, useEffect } from 'react';
 import { m, animate, useInView, useTransform, useMotionValue } from 'framer-motion';
 
-import Typography from '@mui/material/Typography';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
+export type TAnimateCountUpProps = TypographyProps & {
+  to?: any;
+  from?: any;
+  toFixed?: any;
+  once?: any;
+  duration?: any;
+  amount?: any;
+  unit?: any;
+};
 
 export function AnimateCountUp({
   to,
@@ -16,7 +25,7 @@ export function AnimateCountUp({
   unit: unitProp,
   component = 'p',
   ...other
-}) {
+}: TAnimateCountUpProps) {
   const ref = useRef(null);
 
   const shortNumber = shortenNumber(to);
@@ -62,7 +71,7 @@ function isFloat(n) {
   return typeof n === 'number' && !Number.isInteger(n);
 }
 
-function shortenNumber(num) {
+function shortenNumber(num: number) {
   if (num >= 1e9) {
     return { unit: 'b', value: num / 1e9 };
   }

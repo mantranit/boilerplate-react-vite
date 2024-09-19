@@ -1,12 +1,17 @@
 import { m } from 'framer-motion';
 import { forwardRef } from 'react';
 
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 
 import { varContainer } from './variants';
 
+export type TMotionContainerProps = BoxProps & {
+  animate?: string;
+  action?: boolean;
+};
+
 export const MotionContainer = forwardRef(
-  ({ animate, action = false, children, ...other }, ref) => {
+  ({ animate, action = false, children, ...other }: TMotionContainerProps, ref) => {
     const commonProps = {
       ref,
       component: m.div,

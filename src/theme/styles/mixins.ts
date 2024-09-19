@@ -6,6 +6,7 @@ import { autocompleteClasses } from '@mui/material/Autocomplete';
 import { CONFIG } from 'src/config-global';
 
 import { remToPx, varAlpha, mediaQueries } from './utils';
+import { Theme } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ export const hideScrollY = {
  * Usage:
  * ...textGradient(`to right, ${theme.vars.palette.text.primary}, ${alpha(theme.vars.palette.text.primary, 0.2)}`
  */
-export function textGradient(color) {
+export function textGradient(color: any) {
   return {
     background: `linear-gradient(${color})`,
     WebkitBackgroundClip: 'text',
@@ -47,7 +48,11 @@ export function textGradient(color) {
  * Usage:
  * ...borderGradient({ color: `to right, ${theme.vars.palette.text.primary}, ${alpha(theme.vars.palette.text.primary, 0.2)}`, padding: '4px' }),
  */
-export function borderGradient(props) {
+export type TborderGradientProps = {
+  color?: any;
+  padding: any;
+};
+export function borderGradient(props?: TborderGradientProps) {
   return {
     inset: 0,
     width: '100%',
@@ -72,7 +77,12 @@ export function borderGradient(props) {
  * Usage:
  * ...bgGradient({ color: `to right, ${theme.vars.palette.grey[900]} 25%, ${varAlpha(theme.vars.palette.primary.darkerChannel, 0.88)}`, imgUrl: '/assets/background/overlay.png' }),
  */
-export function bgGradient({ color, imgUrl }) {
+export type TbgGradientProps = {
+  color: any;
+  imgUrl?: any;
+};
+
+export function bgGradient({ color, imgUrl }: TbgGradientProps) {
   if (imgUrl) {
     return {
       background: `linear-gradient(${color}), url(${imgUrl})`,
@@ -124,18 +134,23 @@ export function bgBlur({ color, blur = 6, imgUrl }: TbgBlurProps) {
  * Usage:
  * ...maxLine({ line: 2, persistent: theme.typography.caption }),
  */
-function getFontSize(fontSize) {
+function getFontSize(fontSize: any) {
   return typeof fontSize === 'string' ? remToPx(fontSize) : fontSize;
 }
 
-function getLineHeight(lineHeight, fontSize) {
+function getLineHeight(lineHeight: any, fontSize: number) {
   if (typeof lineHeight === 'string') {
     return fontSize ? remToPx(lineHeight) / fontSize : 1;
   }
   return lineHeight;
 }
 
-export function maxLine({ line, persistent }) {
+export type TmaxLineProps = {
+  line: number;
+  persistent?: any;
+};
+
+export function maxLine({ line, persistent }: TmaxLineProps) {
   const baseStyles = {
     overflow: 'hidden',
     display: '-webkit-box',
@@ -176,7 +191,13 @@ export function maxLine({ line, persistent }) {
  * Usage:
  * ...paper({ theme, color: varAlpha(theme.vars.palette.background.paperChannel, 0.9), dropdown: true }),
  */
-export function paper({ theme, color, dropdown }) {
+export type TpaperProps = {
+  theme?: any;
+  color?: any;
+  dropdown?: any;
+};
+
+export function paper({ theme, color, dropdown }: TpaperProps) {
   return {
     ...bgBlur({
       color: color ?? varAlpha(theme.vars.palette.background.paperChannel, 0.9),
@@ -201,7 +222,7 @@ export function paper({ theme, color, dropdown }) {
  * Usage:
  * ...menuItem(theme)
  */
-export function menuItem(theme) {
+export function menuItem(theme: any) {
   return {
     ...theme.typography.body2,
     padding: theme.spacing(0.75, 1),
