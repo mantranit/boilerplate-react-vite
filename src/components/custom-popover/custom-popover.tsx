@@ -1,4 +1,4 @@
-import Popover from '@mui/material/Popover';
+import Popover, { PopoverProps } from '@mui/material/Popover';
 import { listClasses } from '@mui/material/List';
 import { menuItemClasses } from '@mui/material/MenuItem';
 
@@ -6,8 +6,19 @@ import { StyledArrow } from './styles';
 import { calculateAnchorOrigin } from './utils';
 
 // ----------------------------------------------------------------------
+export type TCustomPopoverProps = PopoverProps & {
+  anchorOrigin?: any;
+  transformOrigin?: any;
+};
 
-export function CustomPopover({ open, onClose, children, anchorEl, slotProps, ...other }) {
+export function CustomPopover({
+  open,
+  onClose,
+  children,
+  anchorEl,
+  slotProps,
+  ...other
+}: TCustomPopoverProps) {
   const arrowPlacement = slotProps?.arrow?.placement ?? 'top-right';
 
   const arrowSize = slotProps?.arrow?.size ?? 14;

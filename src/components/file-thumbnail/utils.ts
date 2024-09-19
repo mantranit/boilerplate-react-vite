@@ -15,11 +15,11 @@ const FORMAT_AUDIO = ['wav', 'aif', 'mp3', 'aac'];
 const FORMAT_IMG = ['jpg', 'jpeg', 'gif', 'bmp', 'png', 'svg', 'webp'];
 const FORMAT_VIDEO = ['m4v', 'avi', 'mpg', 'mp4', 'webm'];
 
-const iconUrl = (icon) => `${CONFIG.assetsDir}/assets/icons/files/${icon}.svg`;
+const iconUrl = (icon: string) => `${CONFIG.assetsDir}/assets/icons/files/${icon}.svg`;
 
 // ----------------------------------------------------------------------
 
-export function fileFormat(fileUrl) {
+export function fileFormat(fileUrl: string | any[]) {
   let format;
 
   const fileByUrl = fileTypeByUrl(fileUrl);
@@ -67,7 +67,7 @@ export function fileFormat(fileUrl) {
 
 // ----------------------------------------------------------------------
 
-export function fileThumb(fileUrl) {
+export function fileThumb(fileUrl: string | any[]) {
   let thumb;
 
   switch (fileFormat(fileUrl)) {
@@ -115,19 +115,27 @@ export function fileThumb(fileUrl) {
 
 // ----------------------------------------------------------------------
 
-export function fileTypeByUrl(fileUrl) {
+export function fileTypeByUrl(fileUrl: string | any[]) {
   return (fileUrl && fileUrl.split('.').pop()) || '';
 }
 
 // ----------------------------------------------------------------------
 
-export function fileNameByUrl(fileUrl) {
+export function fileNameByUrl(fileUrl: string) {
   return fileUrl.split('/').pop();
 }
 
 // ----------------------------------------------------------------------
 
-export function fileData(file) {
+export function fileData(file: {
+  name: any;
+  size: any;
+  path: any;
+  type: any;
+  preview: any;
+  lastModified: any;
+  lastModifiedDate: any;
+}) {
   // From url
   if (typeof file === 'string') {
     return {

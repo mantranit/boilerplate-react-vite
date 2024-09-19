@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, SetStateAction } from 'react';
 
 // ----------------------------------------------------------------------
 
 export function usePopover() {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const onOpen = useCallback((event) => {
+  const onOpen = useCallback((event: any) => {
     setAnchorEl(event.currentTarget);
   }, []);
 

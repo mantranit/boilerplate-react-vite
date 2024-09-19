@@ -1,14 +1,17 @@
 import { useTheme } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
-import IconButton from '@mui/material/IconButton';
+import ButtonBase, { ButtonBaseTypeMap, ExtendButtonBase } from '@mui/material/ButtonBase';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 
 import { bgBlur, varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../iconify';
 
 // ----------------------------------------------------------------------
+export type TDownloadButtonProps = ExtendButtonBase<ButtonBaseTypeMap<{}, 'button'>> & {
+  sx?: any;
+};
 
-export function DownloadButton({ sx, ...other }) {
+export function DownloadButton({ sx, ...other }: TDownloadButtonProps) {
   const theme = useTheme();
 
   return (
@@ -39,8 +42,9 @@ export function DownloadButton({ sx, ...other }) {
 }
 
 // ----------------------------------------------------------------------
+export type TRemoveButtonProps = IconButtonProps;
 
-export function RemoveButton({ sx, ...other }) {
+export function RemoveButton({ sx, ...other }: TRemoveButtonProps) {
   return (
     <IconButton
       size="small"

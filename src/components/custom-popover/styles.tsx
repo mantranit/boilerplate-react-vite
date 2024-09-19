@@ -4,10 +4,16 @@ import { CONFIG } from 'src/config-global';
 import { varAlpha, stylesMode } from 'src/theme/styles';
 
 // ----------------------------------------------------------------------
+export type TStyledArrowProps = {
+  placement?: any;
+  offset?: number;
+  size?: number;
+  theme?: any;
+};
 
 export const StyledArrow = styled('span', {
   shouldForwardProp: (prop) => prop !== 'size' && prop !== 'placement' && prop !== 'offset',
-})(({ placement, offset = 0, size = 0, theme }) => {
+})(({ placement, offset = 0, size = 0, theme }: TStyledArrowProps) => {
   const POSITION = -(size / 2) + 0.5;
 
   const alignmentStyles = {
@@ -19,7 +25,7 @@ export const StyledArrow = styled('span', {
     vCenter: { top: 0, bottom: 0, margin: 'auto' },
   };
 
-  const backgroundStyles = (color) => ({
+  const backgroundStyles = (color: string) => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: `${size * 3}px ${size * 3}px`,
     backgroundImage: `url(${CONFIG.assetsDir}/assets/${color}-blur.png)`,
