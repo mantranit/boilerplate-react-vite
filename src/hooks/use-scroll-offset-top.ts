@@ -4,14 +4,14 @@ import { useRef, useMemo, useState, useCallback } from 'react';
 // ----------------------------------------------------------------------
 
 export function useScrollOffSetTop(top = 0) {
-  const elementRef = useRef(null);
+  const elementRef = useRef<HTMLDivElement>(null);
 
   const { scrollY } = useScroll();
 
   const [offsetTop, setOffsetTop] = useState(false);
 
   const handleScrollChange = useCallback(
-    (val) => {
+    (val: number) => {
       const scrollHeight = Math.round(val);
 
       if (elementRef?.current) {

@@ -67,7 +67,7 @@ export function AnimateCountUp({
 
 // ----------------------------------------------------------------------
 
-function isFloat(n) {
+function isFloat(n: unknown) {
   return typeof n === 'number' && !Number.isInteger(n);
 }
 

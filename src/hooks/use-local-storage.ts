@@ -87,7 +87,7 @@ export function getStorage(key: string) {
 
 // ----------------------------------------------------------------------
 
-export function setStorage(key, value) {
+export function setStorage(key: string, value: any) {
   try {
     const serializedValue = JSON.stringify(value);
     window.localStorage.setItem(key, serializedValue);
@@ -98,7 +98,7 @@ export function setStorage(key, value) {
 
 // ----------------------------------------------------------------------
 
-export function removeStorage(key) {
+export function removeStorage(key: string) {
   try {
     window.localStorage.removeItem(key);
   } catch (error) {

@@ -13,9 +13,7 @@ import { navSectionClasses } from '../classes';
 import { stateClasses, sharedStyles } from '../styles';
 
 // ----------------------------------------------------------------------
-export type TNavItemProps = {
-  [key: string]: any;
-};
+export type TNavItemProps = any;
 
 export const NavItem = forwardRef(
   (
@@ -37,7 +35,7 @@ export const NavItem = forwardRef(
       enabledRootRedirect,
       ...other
     }: TNavItemProps,
-    ref
+    ref: any
   ) => {
     const navItem = useNavItem({
       path,
@@ -103,11 +101,18 @@ export const NavItem = forwardRef(
 );
 
 // ----------------------------------------------------------------------
+type TStyledNavItemProps = {
+  active?: any;
+  open?: any;
+  disabled?: any;
+  depth?: any;
+  theme?: any;
+};
 
 const StyledNavItem = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
     prop !== 'active' && prop !== 'open' && prop !== 'disabled' && prop !== 'depth',
-})(({ active, open, disabled, depth, theme }) => {
+})(({ active, open, disabled, depth, theme }: TStyledNavItemProps) => {
   const rootItem = depth === 1;
 
   const subItem = !rootItem;

@@ -6,7 +6,7 @@ import { iconifyClasses } from './classes';
 
 // ----------------------------------------------------------------------
 export type TFlagIconProps = BoxProps & {
-  code?: boolean;
+  code?: any;
 };
 
 export const FlagIcon = forwardRef(({ code, className, sx, ...other }: TFlagIconProps, ref) => {

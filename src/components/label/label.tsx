@@ -71,6 +71,6 @@ export const Label = forwardRef(
 
 // ----------------------------------------------------------------------
 
-function sentenceCase(string) {
+function sentenceCase(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }

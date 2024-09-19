@@ -19,7 +19,7 @@ const iconUrl = (icon: string) => `${CONFIG.assetsDir}/assets/icons/files/${icon
 
 // ----------------------------------------------------------------------
 
-export function fileFormat(fileUrl: string | any[]) {
+export function fileFormat(fileUrl: string) {
   let format;
 
   const fileByUrl = fileTypeByUrl(fileUrl);
@@ -67,7 +67,7 @@ export function fileFormat(fileUrl: string | any[]) {
 
 // ----------------------------------------------------------------------
 
-export function fileThumb(fileUrl: string | any[]) {
+export function fileThumb(fileUrl: string) {
   let thumb;
 
   switch (fileFormat(fileUrl)) {
@@ -115,7 +115,7 @@ export function fileThumb(fileUrl: string | any[]) {
 
 // ----------------------------------------------------------------------
 
-export function fileTypeByUrl(fileUrl: string | any[]) {
+export function fileTypeByUrl(fileUrl: string) {
   return (fileUrl && fileUrl.split('.').pop()) || '';
 }
 

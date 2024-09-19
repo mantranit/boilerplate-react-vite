@@ -9,6 +9,7 @@ import { calculateAnchorOrigin } from './utils';
 export type TCustomPopoverProps = PopoverProps & {
   anchorOrigin?: any;
   transformOrigin?: any;
+  slotProps?: any;
 };
 
 export function CustomPopover({

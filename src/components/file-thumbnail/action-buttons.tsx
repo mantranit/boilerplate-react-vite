@@ -7,11 +7,8 @@ import { bgBlur, varAlpha } from 'src/theme/styles';
 import { Iconify } from '../iconify';
 
 // ----------------------------------------------------------------------
-export type TDownloadButtonProps = ExtendButtonBase<ButtonBaseTypeMap<{}, 'button'>> & {
-  sx?: any;
-};
 
-export function DownloadButton({ sx, ...other }: TDownloadButtonProps) {
+export function DownloadButton({ sx, ...other }: any) {
   const theme = useTheme();
 
   return (

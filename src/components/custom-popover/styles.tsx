@@ -4,12 +4,7 @@ import { CONFIG } from 'src/config-global';
 import { varAlpha, stylesMode } from 'src/theme/styles';
 
 // ----------------------------------------------------------------------
-export type TStyledArrowProps = {
-  placement?: any;
-  offset?: number;
-  size?: number;
-  theme?: any;
-};
+export type TStyledArrowProps = any;
 
 export const StyledArrow = styled('span', {
   shouldForwardProp: (prop) => prop !== 'size' && prop !== 'placement' && prop !== 'offset',

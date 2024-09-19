@@ -84,7 +84,7 @@ export function Searchbar({ data: navItems = [], sx, ...other }: TSearchbarProps
       .sort((a, b) => -b.localeCompare(a))
       .map((group, index) => (
         <Box component="ul" key={`${group}-${index}`}>
-          {dataGroups[group].map((item) => {
+          {dataGroups[group].map((item: any) => {
             const { title, path } = item;
 
             const partsTitle = parse(title, match(title, searchQuery));
