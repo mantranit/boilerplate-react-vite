@@ -63,7 +63,33 @@ export function hexToRgbChannel(hex: any) {
 /**
  * Converts a hex color to RGB channels
  */
-export function createPaletteChannel(hexPalette: any) {
+export type ThexPalette = {
+  lighter?: string;
+  light?: string;
+  main?: string;
+  dark?: string;
+  darker?: string;
+  contrastText?: string;
+  black?: string;
+  white?: string;
+  primary?: string;
+  secondary?: string;
+  disabled?: string;
+  paper?: string;
+  default?: string;
+  neutral?: string;
+  '50'?: string;
+  '100'?: string;
+  '200'?: string;
+  '300'?: string;
+  '400'?: string;
+  '500'?: string;
+  '600'?: string;
+  '700'?: string;
+  '800'?: string;
+  '900'?: string;
+};
+export function createPaletteChannel(hexPalette: ThexPalette) {
   const channelPalette: any = {};
 
   Object.entries(hexPalette).forEach(([key, value]) => {
