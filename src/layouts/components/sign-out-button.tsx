@@ -15,7 +15,7 @@ export type TSignOutButtonProps = ButtonProps & {
 export function SignOutButton({ onClose, ...other }: TSignOutButtonProps) {
   const router = useRouter();
 
-  const { checkUserSession } = useAuthContext();
+  const { checkUserSession }: any = useAuthContext();
 
   const handleLogout = useCallback(async () => {
     try {
@@ -30,7 +30,14 @@ export function SignOutButton({ onClose, ...other }: TSignOutButtonProps) {
   }, [checkUserSession, onClose, router]);
 
   return (
-    <Button fullWidth variant="soft" size="large" color="error" onClick={handleLogout} {...other}>
+    <Button
+      fullWidth
+      variant="contained"
+      size="large"
+      color="error"
+      onClick={handleLogout}
+      {...other}
+    >
       Logout
     </Button>
   );

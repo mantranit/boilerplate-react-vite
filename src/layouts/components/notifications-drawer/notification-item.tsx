@@ -13,6 +13,7 @@ import { CONFIG } from 'src/config-global';
 
 import { Label } from 'src/components/label';
 import { FileThumbnail } from 'src/components/file-thumbnail';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -193,7 +194,7 @@ export function NotificationItem({ notification }: any) {
       sx={{
         p: 2.5,
         alignItems: 'flex-start',
-        borderBottom: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
+        borderBottom: (theme: TTheme) => `dashed 1px ${theme.vars.palette.divider}`,
       }}
     >
       {renderUnReadBadge}
@@ -214,7 +215,7 @@ export function NotificationItem({ notification }: any) {
 
 // ----------------------------------------------------------------------
 
-function reader(data) {
+function reader(data: any) {
   return (
     <Box
       dangerouslySetInnerHTML={{ __html: data }}
