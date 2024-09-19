@@ -23,7 +23,7 @@ const PRIMARY_COLORS = {
  * [2] settings @contrast
  */
 
-export function updateCoreWithSettings(theme, settings) {
+export function updateCoreWithSettings(theme: any, settings: any) {
   const { colorSchemes, customShadows } = theme;
 
   const updatedPrimary = getPalette(
@@ -70,14 +70,14 @@ export function updateCoreWithSettings(theme, settings) {
 
 // ----------------------------------------------------------------------
 
-export function updateComponentsWithSettings(settings) {
+export function updateComponentsWithSettings(settings: any) {
   const components = {};
 
   /** [2] */
   if (settings.contrast === 'hight') {
     const MuiCard = {
       styleOverrides: {
-        root: ({ theme, ownerState }) => {
+        root: ({ theme, ownerState }: any) => {
           let rootStyles = {};
           if (typeof coreComponents?.MuiCard?.styleOverrides?.root === 'function') {
             rootStyles =
@@ -103,12 +103,12 @@ export function updateComponentsWithSettings(settings) {
 
 // ----------------------------------------------------------------------
 
-function getPalette(name, initialPalette, updatedPalette) {
+function getPalette(name: string, initialPalette: any, updatedPalette: any) {
   /** [1] */
   return name === 'default' ? initialPalette : createPaletteChannel(updatedPalette);
 }
 
-function getBackgroundDefault(contrast) {
+function getBackgroundDefault(contrast: string) {
   /** [2] */
   return contrast === 'default' ? '#FFFFFF' : coreGreyPalette[200];
 }

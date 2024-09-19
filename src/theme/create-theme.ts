@@ -7,7 +7,7 @@ import { updateCoreWithSettings, updateComponentsWithSettings } from './with-set
 
 // ----------------------------------------------------------------------
 
-export function createTheme(settings) {
+export function createTheme(settings: any) {
   const initialTheme = {
     colorSchemes,
     shadows: shadows(settings.colorScheme),
@@ -38,7 +38,7 @@ export function createTheme(settings) {
 
 // ----------------------------------------------------------------------
 
-function shouldSkipGeneratingVar(keys, value) {
+function shouldSkipGeneratingVar(keys: any, value: any) {
   const skipGlobalKeys = [
     'mixins',
     'overlays',

@@ -5,10 +5,14 @@ import { useSettingsContext } from 'src/components/settings';
 
 import { createTheme } from './create-theme';
 import { schemeConfig } from './scheme-config';
+import { ReactNode } from 'react';
 
 // ----------------------------------------------------------------------
+export type TThemeProviderProps = {
+  children: ReactNode;
+};
 
-export function ThemeProvider({ children }) {
+export function ThemeProvider({ children }: TThemeProviderProps) {
   const settings = useSettingsContext();
 
   const theme = createTheme(settings);
