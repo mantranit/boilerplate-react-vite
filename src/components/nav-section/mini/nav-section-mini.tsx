@@ -5,6 +5,7 @@ import { NavList } from './nav-list';
 import { NavUl, NavLi } from '../styles';
 import { navSectionClasses } from '../classes';
 import { navSectionCssVars } from '../css-vars';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TNavSectionMiniProps = StackProps & {
@@ -24,7 +25,7 @@ export function NavSectionMini({
   enabledRootRedirect,
   cssVars: overridesVars,
 }: TNavSectionMiniProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const cssVars = {
     ...navSectionCssVars.mini(theme),

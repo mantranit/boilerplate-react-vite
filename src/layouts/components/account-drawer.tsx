@@ -27,6 +27,7 @@ import { BaseOption } from '../../components/settings/drawer/base-option';
 import { useSettingsContext } from '../../components/settings/context';
 import { TAccountMenu } from '../config-nav-account';
 import { TAccountButtonProps } from './account-button';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 type TAccountDrawerProps = TAccountButtonProps & {
@@ -34,7 +35,7 @@ type TAccountDrawerProps = TAccountButtonProps & {
 };
 
 export function AccountDrawer({ data = [], sx, ...other }: TAccountDrawerProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const router = useRouter();
 

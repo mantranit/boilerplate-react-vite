@@ -22,11 +22,12 @@ import { AccountDrawer } from '../components/account-drawer';
 import { WorkspacesPopover } from '../components/workspaces-popover';
 import { navData as dashboardNavData } from '../config-nav-dashboard';
 import { NotificationsDrawer } from '../components/notifications-drawer';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
 export function DashboardLayout({ sx, children, header, data }) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const mobileNavOpen = useBoolean();
 

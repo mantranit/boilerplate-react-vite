@@ -13,11 +13,12 @@ import { paper } from 'src/theme/styles';
 import { NavItem } from './nav-item';
 import { NavUl, NavLi } from '../styles';
 import { navSectionClasses } from '../classes';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
 export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRedirect }) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const pathname = usePathname();
 

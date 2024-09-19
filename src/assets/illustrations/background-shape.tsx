@@ -1,11 +1,12 @@
 import { useId } from 'react';
 
 import { useTheme } from '@mui/material/styles';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
 export function BackgroundShape() {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const gradientId = useId();
 

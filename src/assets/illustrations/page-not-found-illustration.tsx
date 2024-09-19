@@ -6,11 +6,12 @@ import { useTheme } from '@mui/material/styles';
 import { CONFIG } from 'src/config-global';
 
 import { BackgroundShape } from './background-shape';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
 function PageNotFoundIllustration({ hideBackground, sx, ...other }) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const PRIMARY_LIGHT = theme.vars.palette.primary.light;
 

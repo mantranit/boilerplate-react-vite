@@ -2,6 +2,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 import { Breakpoint, useTheme } from '@mui/material/styles';
 
 import { layoutClasses } from 'src/layouts/classes';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TMainProps = BoxProps & {
@@ -9,7 +10,7 @@ export type TMainProps = BoxProps & {
 };
 
 export function Main({ sx, children, layoutQuery, ...other }: TMainProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   return (
     <Box
@@ -37,7 +38,7 @@ export type TContentProps = BoxProps & {
 };
 
 export function Content({ sx, children, layoutQuery, ...other }: TContentProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const renderContent = (
     <Box

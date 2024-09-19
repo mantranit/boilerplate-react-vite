@@ -2,6 +2,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 import { Breakpoint, useTheme } from '@mui/material/styles';
 
 import { layoutClasses } from '../classes';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TMainProps = BoxProps;
@@ -30,7 +31,7 @@ export type TCompactContentProps = BoxProps & {
 };
 
 export function CompactContent({ sx, layoutQuery, children, ...other }: TCompactContentProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   return (
     <Box

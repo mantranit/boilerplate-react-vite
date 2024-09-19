@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { StyledLabel } from './styles';
 import { labelClasses } from './classes';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TLabelProps = BoxProps & {
@@ -25,7 +26,7 @@ export const Label = forwardRef(
     }: TLabelProps,
     ref
   ) => {
-    const theme = useTheme();
+    const theme = useTheme<TTheme>();
 
     const iconStyles = {
       width: 16,

@@ -8,6 +8,7 @@ import { RouterLink } from 'src/routes/components';
 
 import { CONFIG } from 'src/config-global';
 import { varAlpha, bgGradient } from 'src/theme/styles';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TSectionProps = BoxProps & {
@@ -28,7 +29,7 @@ export function Section({
   subtitle = 'More effectively with optimized workflows.',
   ...other
 }: TSectionProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   return (
     <Box

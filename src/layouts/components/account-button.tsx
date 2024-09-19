@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 
 import { varHover, AnimateAvatar } from 'src/components/animate';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ export type TAccountButtonProps = IconButtonProps & {
 };
 
 export function AccountButton({ photoURL, displayName, sx, ...other }: TAccountButtonProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const renderFallback = (
     <Avatar

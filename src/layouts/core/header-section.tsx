@@ -9,6 +9,7 @@ import { useScrollOffSetTop } from 'src/hooks/use-scroll-offset-top';
 import { bgBlur, varAlpha } from 'src/theme/styles';
 
 import { layoutClasses } from '../classes';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +45,7 @@ export function HeaderSection({
   layoutQuery = 'md',
   ...other
 }: THeaderSectionProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const { offsetTop } = useScrollOffSetTop();
 

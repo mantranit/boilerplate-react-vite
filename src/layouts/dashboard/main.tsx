@@ -5,6 +5,7 @@ import Container, { ContainerProps } from '@mui/material/Container';
 import { layoutClasses } from 'src/layouts/classes';
 
 import { useSettingsContext } from 'src/components/settings';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TMainProps = BoxProps;
@@ -39,7 +40,7 @@ export function DashboardContent({
   maxWidth = 'lg',
   ...other
 }: TDashboardContentProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const settings = useSettingsContext();
 

@@ -5,11 +5,12 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { bgBlur, varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../iconify';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
 export function DownloadButton({ sx, ...other }: any) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   return (
     <ButtonBase

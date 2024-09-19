@@ -12,6 +12,7 @@ import {
 } from 'src/components/nav-section';
 
 import { NavToggleButton } from '../components/nav-toggle-button';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TNavVerticalProps = TNavSectionVerticalProps & {
@@ -30,7 +31,7 @@ export function NavVertical({
   onToggleNav,
   ...other
 }: TNavVerticalProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const renderNavVertical = (
     <>

@@ -2,11 +2,12 @@ import { useMemo } from 'react';
 
 import { Breakpoint, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
 export function useResponsive(query: string, start: Breakpoint, end?: Breakpoint) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const getQuery = useMemo(() => {
     switch (query) {
@@ -31,7 +32,7 @@ export function useResponsive(query: string, start: Breakpoint, end?: Breakpoint
 // ----------------------------------------------------------------------
 
 export function useWidth() {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const keys = useMemo(() => [...theme.breakpoints.keys].reverse(), [theme]);
 

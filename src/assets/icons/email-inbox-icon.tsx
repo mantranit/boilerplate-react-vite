@@ -2,11 +2,12 @@ import { memo } from 'react';
 
 import Box, { BoxProps } from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
 function EmailInboxIcon({ sx, ...other }: BoxProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const PRIMARY_MAIN = theme.vars.palette.primary.main;
 

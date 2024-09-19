@@ -25,6 +25,7 @@ import { SearchNotFound } from 'src/components/search-not-found';
 
 import { ResultItem } from './result-item';
 import { groupItems, applyFilter, getAllItems } from './utils';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TSearchbarProps = BoxProps & {
@@ -32,7 +33,7 @@ export type TSearchbarProps = BoxProps & {
 };
 
 export function Searchbar({ data: navItems = [], sx, ...other }: TSearchbarProps) {
-  const theme = useTheme();
+  const theme = useTheme<TTheme>();
 
   const router = useRouter();
 

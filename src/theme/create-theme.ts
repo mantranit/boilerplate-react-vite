@@ -1,4 +1,4 @@
-import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
+import { experimental_extendTheme as extendTheme, Theme } from '@mui/material/styles';
 
 import { setFont } from './styles/utils';
 import { overridesTheme } from './overrides-theme';
@@ -6,6 +6,9 @@ import { shadows, typography, components, colorSchemes, customShadows } from './
 import { updateCoreWithSettings, updateComponentsWithSettings } from './with-settings/update-theme';
 
 // ----------------------------------------------------------------------
+export type TTheme = Theme & {
+  vars?: any;
+};
 
 export function createTheme(settings: any) {
   const initialTheme = {

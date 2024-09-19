@@ -8,11 +8,8 @@ import { schemeConfig } from './scheme-config';
 import { ReactNode } from 'react';
 
 // ----------------------------------------------------------------------
-export type TThemeProviderProps = {
-  children: ReactNode;
-};
 
-export function ThemeProvider({ children }: TThemeProviderProps) {
+export function ThemeProvider({ children }: { children: ReactNode }) {
   const settings = useSettingsContext();
 
   const theme = createTheme(settings);
