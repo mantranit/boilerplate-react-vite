@@ -52,8 +52,10 @@ export function RemoveButton({ sx, ...other }: TRemoveButtonProps) {
         right: 4,
         position: 'absolute',
         color: 'common.white',
-        bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
-        '&:hover': { bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.72) },
+        bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
+        '&:hover': {
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.72),
+        },
         ...sx,
       }}
       {...other}

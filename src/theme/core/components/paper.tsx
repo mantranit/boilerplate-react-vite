@@ -13,7 +13,7 @@ const MuiPaper = {
    *************************************** */
   styleOverrides: {
     root: { backgroundImage: 'none' },
-    outlined: ({ theme }) => ({
+    outlined: ({ theme }: any) => ({
       borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
     }),
   },

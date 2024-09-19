@@ -5,6 +5,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { varAlpha } from 'src/theme/styles';
 
 import { Label } from 'src/components/label';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -16,11 +17,11 @@ export function ResultItem({ title, path, groupLabel, onClickItem }) {
         borderWidth: 1,
         borderStyle: 'dashed',
         borderColor: 'transparent',
-        borderBottomColor: (theme) => theme.vars.palette.divider,
+        borderBottomColor: (theme: TTheme) => theme.vars.palette.divider,
         '&:hover': {
           borderRadius: 1,
-          borderColor: (theme) => theme.vars.palette.primary.main,
-          backgroundColor: (theme) =>
+          borderColor: (theme: TTheme) => theme.vars.palette.primary.main,
+          backgroundColor: (theme: TTheme) =>
             varAlpha(
               theme.vars.palette.primary.mainChannel,
               theme.vars.palette.action.hoverOpacity

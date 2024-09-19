@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 
 import { varAlpha } from 'src/theme/styles';
 import { DashboardContent } from 'src/layouts/dashboard';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -17,8 +18,8 @@ export function BlankView({ title = 'Blank' }) {
           width: 1,
           height: 320,
           borderRadius: 2,
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.04),
-          border: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.04),
+          border: (theme: TTheme) => `dashed 1px ${theme.vars.palette.divider}`,
         }}
       />
     </DashboardContent>

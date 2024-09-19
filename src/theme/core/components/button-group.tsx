@@ -4,7 +4,7 @@ import { varAlpha, stylesMode } from '../../styles';
 
 const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
 
-function styleColors(ownerState, styles) {
+function styleColors(ownerState: any, styles: any) {
   const outputStyle = COLORS.reduce((acc, color) => {
     if (!ownerState.disabled && ownerState.color === color) {
       acc = styles(color);
@@ -19,9 +19,9 @@ const buttonClasses = `& .${buttonGroupClasses.firstButton}, & .${buttonGroupCla
 
 const softVariant = {
   colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+    props: ({ ownerState }: any) =>
       !ownerState.disabled && ownerState.variant === 'soft' && ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: any) => ({
       [buttonClasses]: {
         borderColor: varAlpha(theme.vars.palette[color].darkChannel, 0.24),
         [stylesMode.dark]: { borderColor: varAlpha(theme.vars.palette[color].lightChannel, 0.24) },
@@ -38,8 +38,8 @@ const softVariant = {
   })),
   base: [
     {
-      props: ({ ownerState }) => ownerState.variant === 'soft',
-      style: ({ theme }) => ({
+      props: ({ ownerState }: any) => ownerState.variant === 'soft',
+      style: ({ theme }: any) => ({
         [buttonClasses]: {
           borderRight: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.32)}`,
           [`&.${buttonGroupClasses.disabled}`]: {
@@ -85,9 +85,9 @@ const MuiButtonGroup = {
     /**
      * @variant contained
      */
-    contained: ({ theme, ownerState }) => {
+    contained: ({ theme, ownerState }: any) => {
       const styled = {
-        colors: styleColors(ownerState, (color) => ({
+        colors: styleColors(ownerState, (color: any) => ({
           [buttonClasses]: { borderColor: varAlpha(theme.vars.palette[color].darkChannel, 0.48) },
         })),
         inheritColor: {
@@ -111,9 +111,9 @@ const MuiButtonGroup = {
     /**
      * @variant text
      */
-    text: ({ theme, ownerState }) => {
+    text: ({ theme, ownerState }: any) => {
       const styled = {
-        colors: styleColors(ownerState, (color) => ({
+        colors: styleColors(ownerState, (color: any) => ({
           [buttonClasses]: { borderColor: varAlpha(theme.vars.palette[color].mainChannel, 0.48) },
         })),
         inheritColor: {

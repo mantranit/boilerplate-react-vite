@@ -9,13 +9,13 @@ const MuiTooltip = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    tooltip: ({ theme }) => ({
+    tooltip: ({ theme }: any) => ({
       backgroundColor: theme.vars.palette.grey[800],
       [stylesMode.dark]: {
         backgroundColor: theme.vars.palette.grey[700],
       },
     }),
-    arrow: ({ theme }) => ({
+    arrow: ({ theme }: any) => ({
       color: theme.vars.palette.grey[800],
       [stylesMode.dark]: {
         color: theme.vars.palette.grey[700],

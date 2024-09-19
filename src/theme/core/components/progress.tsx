@@ -22,9 +22,9 @@ const MuiLinearProgress = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme, ownerState }) => {
+    root: ({ theme, ownerState }: any) => {
       const styled = {
-        colors: styleColors(ownerState, (color) => ({
+        colors: styleColors(ownerState, (color: any) => ({
           backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.24),
         })),
         inheritColor: {

@@ -1,6 +1,7 @@
 import { m, MotionValue, useSpring } from 'framer-motion';
 
 import Box, { BoxProps } from '@mui/material/Box';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TScrollProgressProps = BoxProps & {
@@ -38,9 +39,9 @@ export function ScrollProgress({
         width: progressSize,
         height: progressSize,
         transform: 'rotate(-90deg)',
-        color: (theme) => theme.vars.palette.text.primary,
+        color: (theme: TTheme) => theme.vars.palette.text.primary,
         ...(color !== 'inherit' && {
-          color: (theme) => theme.vars.palette[color].main,
+          color: (theme: TTheme) => theme.vars.palette[color].main,
         }),
         circle: {
           fill: 'none',
@@ -83,7 +84,7 @@ export function ScrollProgress({
         transformOrigin: '0%',
         bgcolor: 'text.primary',
         ...(color !== 'inherit' && {
-          background: (theme) =>
+          background: (theme: TTheme) =>
             `linear-gradient(135deg, ${theme.vars.palette[color].light}, ${theme.vars.palette[color].main})`,
         }),
         ...sx,

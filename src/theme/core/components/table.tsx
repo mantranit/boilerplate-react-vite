@@ -10,7 +10,7 @@ const MuiTableContainer = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       position: 'relative',
       scrollbarWidth: 'thin',
       scrollbarColor: `${varAlpha(
@@ -28,7 +28,7 @@ const MuiTable = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       '--palette-TableCell-border': theme.vars.palette.divider,
     }),
   },
@@ -41,7 +41,7 @@ const MuiTableRow = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       [`&.${tableRowClasses.selected}`]: {
         backgroundColor: varAlpha(theme.vars.palette.primary.darkChannel, 0.04),
         '&:hover': {
@@ -63,17 +63,17 @@ const MuiTableCell = {
    *************************************** */
   styleOverrides: {
     root: { borderBottomStyle: 'dashed' },
-    head: ({ theme }) => ({
+    head: ({ theme }: any) => ({
       fontSize: 14,
       color: theme.vars.palette.text.secondary,
       fontWeight: theme.typography.fontWeightSemiBold,
       backgroundColor: theme.vars.palette.background.neutral,
     }),
-    stickyHeader: ({ theme }) => ({
+    stickyHeader: ({ theme }: any) => ({
       backgroundColor: theme.vars.palette.background.paper,
       backgroundImage: `linear-gradient(to bottom, ${theme.vars.palette.background.neutral}, ${theme.vars.palette.background.neutral})`,
     }),
-    paddingCheckbox: ({ theme }) => ({ paddingLeft: theme.spacing(1) }),
+    paddingCheckbox: ({ theme }: any) => ({ paddingLeft: theme.spacing(1) }),
   },
 };
 
@@ -96,7 +96,7 @@ const MuiTablePagination = {
     root: { width: '100%' },
     toolbar: { height: 64 },
     actions: { marginRight: 8 },
-    select: ({ theme }) => ({
+    select: ({ theme }: any) => ({
       paddingLeft: 8,
       display: 'flex',
       alignItems: 'center',

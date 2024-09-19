@@ -4,7 +4,7 @@ const MuiStepConnector = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { line: ({ theme }) => ({ borderColor: theme.vars.palette.divider }) },
+  styleOverrides: { line: ({ theme }: any) => ({ borderColor: theme.vars.palette.divider }) },
 };
 
 // ----------------------------------------------------------------------

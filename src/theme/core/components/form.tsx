@@ -7,7 +7,7 @@ const MuiFormLabel = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       ...theme.typography.body2,
       color: theme.vars.palette.text.disabled,
       [`&.${inputLabelClasses.shrink}`]: {

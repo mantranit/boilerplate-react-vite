@@ -1,6 +1,7 @@
 import { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
 import { varAlpha } from '../../styles';
+import { TTheme } from 'src/theme/create-theme';
 
 const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
 
@@ -20,16 +21,16 @@ const colorByName = (name) => {
 
 const avatarColors = {
   colors: COLORS.map((color) => ({
-    props: ({ ownerState }) => ownerState.color === color,
-    style: ({ theme }) => ({
+    props: ({ ownerState }: any) => ownerState.color === color,
+    style: ({ theme }: { theme: TTheme }) => ({
       color: theme.vars.palette[color].contrastText,
       backgroundColor: theme.vars.palette[color].main,
     }),
   })),
   defaultColor: [
     {
-      props: ({ ownerState }) => ownerState.color === 'default',
-      style: ({ theme }) => ({
+      props: ({ ownerState }: any) => ownerState.color === 'default',
+      style: ({ theme }: { theme: TTheme }) => ({
         color: theme.vars.palette.text.secondary,
         backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.24),
       }),
@@ -47,8 +48,8 @@ const MuiAvatar = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    rounded: ({ theme }) => ({ borderRadius: theme.shape.borderRadius * 1.5 }),
-    colorDefault: ({ ownerState, theme }) => {
+    rounded: ({ theme }: { theme: TTheme }) => ({ borderRadius: theme.shape.borderRadius * 1.5 }),
+    colorDefault: ({ ownerState, theme }: { theme: TTheme; ownerState: any }) => {
       const color = colorByName(`${ownerState.alt}`);
 
       return {

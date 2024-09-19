@@ -8,9 +8,9 @@ const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
 
 const softVariant = {
   colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+    props: ({ ownerState }: any) =>
       !ownerState.disabled && ownerState.variant === 'soft' && ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: any) => ({
       [`& .${paginationItemClasses.root}`]: {
         [`&.${paginationItemClasses.selected}`]: {
           fontWeight: theme.typography.fontWeightSemiBold,
@@ -24,8 +24,9 @@ const softVariant = {
   })),
   standardColor: [
     {
-      props: ({ ownerState }) => ownerState.variant === 'soft' && ownerState.color === 'standard',
-      style: ({ theme }) => ({
+      props: ({ ownerState }: any) =>
+        ownerState.variant === 'soft' && ownerState.color === 'standard',
+      style: ({ theme }: any) => ({
         [`& .${paginationItemClasses.root}`]: {
           [`&.${paginationItemClasses.selected}`]: {
             fontWeight: theme.typography.fontWeightSemiBold,
@@ -58,7 +59,7 @@ const MuiPagination = {
     /**
      * @variant text
      */
-    text: ({ ownerState, theme }) => ({
+    text: ({ ownerState, theme }: any) => ({
       [`& .${paginationItemClasses.root}`]: {
         [`&.${paginationItemClasses.selected}`]: {
           fontWeight: theme.typography.fontWeightSemiBold,
@@ -77,7 +78,7 @@ const MuiPagination = {
     /**
      * @variant outlined
      */
-    outlined: ({ ownerState, theme }) => ({
+    outlined: ({ ownerState, theme }: any) => ({
       [`& .${paginationItemClasses.root}`]: {
         borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.24),
         [`&.${paginationItemClasses.selected}`]: {

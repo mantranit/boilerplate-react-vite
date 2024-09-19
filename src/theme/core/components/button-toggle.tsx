@@ -24,9 +24,9 @@ const MuiToggleButton = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme, ownerState }) => {
+    root: ({ theme, ownerState }: any) => {
       const styled = {
-        colors: styleColors(ownerState, (color) => ({
+        colors: styleColors(ownerState, (color: any) => ({
           '&:hover': {
             borderColor: varAlpha(theme.vars.palette[color].mainChannel, 0.48),
             backgroundColor: varAlpha(
@@ -64,7 +64,7 @@ const MuiToggleButtonGroup = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       gap: 4,
       padding: 4,
       border: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)}`,

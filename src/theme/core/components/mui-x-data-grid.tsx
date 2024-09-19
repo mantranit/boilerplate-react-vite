@@ -73,7 +73,7 @@ const MuiDataGrid = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => {
+    root: ({ theme }: any) => {
       const styles = {
         pinnedCell: {
           common: {
@@ -127,7 +127,7 @@ const MuiDataGrid = {
     /**
      * Column
      */
-    columnHeader: ({ theme }) => ({
+    columnHeader: ({ theme }: any) => ({
       fontSize: 14,
       color: theme.vars.palette.text.secondary,
       '&--sorted': { color: theme.vars.palette.text.primary },
@@ -136,7 +136,7 @@ const MuiDataGrid = {
     /**
      * Row, Cell
      */
-    cell: ({ theme }) => ({
+    cell: ({ theme }: any) => ({
       borderTopStyle: 'dashed',
       '&--editing': {
         boxShadow: 'none',
@@ -157,7 +157,7 @@ const MuiDataGrid = {
     /**
      * Toolbar
      */
-    toolbarContainer: ({ theme }) => ({
+    toolbarContainer: ({ theme }: any) => ({
       gap: theme.spacing(2),
       padding: theme.spacing(2),
       [`& .${textFieldClasses.root}`]: {
@@ -173,11 +173,11 @@ const MuiDataGrid = {
     /**
      * Paper
      */
-    paper: ({ theme }) => ({
+    paper: ({ theme }: any) => ({
       ...paper({ theme, dropdown: true }),
       padding: 0,
     }),
-    menu: ({ theme }) => ({
+    menu: ({ theme }: any) => ({
       [`& .${paperClasses.root}`]: {
         ...paper({ theme, dropdown: true }),
         minWidth: 140,
@@ -193,13 +193,13 @@ const MuiDataGrid = {
     /**
      * Icons
      */
-    menuIcon: ({ theme }) => ({
+    menuIcon: ({ theme }: any) => ({
       [`& .${iconButtonClasses.root}`]: {
         margin: theme.spacing(0, 1),
         padding: theme.spacing(0.25),
       },
     }),
-    iconButtonContainer: ({ theme }) => ({
+    iconButtonContainer: ({ theme }: any) => ({
       [`& .${iconButtonClasses.root}`]: {
         padding: theme.spacing(0.25),
         marginLeft: theme.spacing(1),
@@ -210,7 +210,7 @@ const MuiDataGrid = {
      */
     footerContainer: { minHeight: 'auto', borderTopStyle: 'dashed' },
     selectedRowCount: { display: 'none', whiteSpace: 'nowrap' },
-    overlay: ({ theme }) => ({
+    overlay: ({ theme }: any) => ({
       [`& .${circularProgressClasses.root}`]: {
         color: theme.vars.palette.text.primary,
       },
@@ -218,19 +218,19 @@ const MuiDataGrid = {
     /**
      * Column panel
      */
-    columnsManagementHeader: ({ theme }) => ({
+    columnsManagementHeader: ({ theme }: any) => ({
       padding: theme.spacing(2.5, 2, 0, 2),
       [`& .${inputBaseClasses.input}`]: {
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
       },
     }),
-    columnsManagement: ({ theme }) => ({
+    columnsManagement: ({ theme }: any) => ({
       gap: theme.spacing(0.5),
       padding: theme.spacing(2, 1.5),
       [`& .${formControlLabelClasses.root}`]: { gap: 4, marginLeft: 0 },
     }),
-    columnsManagementFooter: ({ theme }) => ({
+    columnsManagementFooter: ({ theme }: any) => ({
       borderTopStyle: 'dashed',
       padding: theme.spacing(1.5),
       [`& .${formControlLabelClasses.root}`]: { gap: 4, marginLeft: 0 },
@@ -238,7 +238,7 @@ const MuiDataGrid = {
     /**
      * Filter panel
      */
-    filterForm: ({ theme }) => ({
+    filterForm: ({ theme }: any) => ({
       alignItems: 'center',
       gap: theme.spacing(1.5),
       padding: theme.spacing(2),
@@ -247,7 +247,7 @@ const MuiDataGrid = {
         transform: 'translate(14px, -9px) scale(0.75)',
       },
     }),
-    filterFormDeleteIcon: ({ theme }) => ({
+    filterFormDeleteIcon: ({ theme }: any) => ({
       [`& .${iconButtonClasses.root}`]: {
         padding: theme.spacing(0.25),
         backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),

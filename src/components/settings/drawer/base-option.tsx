@@ -9,6 +9,7 @@ import { varAlpha } from 'src/theme/styles';
 import { Iconify } from 'src/components/iconify';
 
 import { SvgColor } from '../../svg-color';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 export type TBaseOptionProps = ButtonBaseProps & {
@@ -29,12 +30,13 @@ export function BaseOption({ icon, label, tooltip, selected, ...other }: TBaseOp
         cursor: 'pointer',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        border: (theme) => `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
+        border: (theme: TTheme) =>
+          `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
         '&:hover': {
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
         },
         ...(selected && {
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
         }),
       }}
       {...other}

@@ -30,7 +30,7 @@ const MuiAutocomplete = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       [`& span.${autocompleteClasses.tag}`]: {
         ...theme.typography.subtitle2,
         height: 24,
@@ -43,8 +43,8 @@ const MuiAutocomplete = {
         backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
       },
     }),
-    paper: ({ theme }) => ({ ...paper({ theme, dropdown: true }) }),
-    listbox: ({ theme }) => ({
+    paper: ({ theme }: any) => ({ ...paper({ theme, dropdown: true }) }),
+    listbox: ({ theme }: any) => ({
       padding: 0,
       [`& .${autocompleteClasses.option}`]: { ...menuItem(theme) },
     }),

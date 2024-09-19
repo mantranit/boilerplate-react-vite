@@ -94,9 +94,9 @@ const MuiAlert = {
     /**
      * @variant standard
      */
-    standard: ({ ownerState, theme }) => {
+    standard: ({ ownerState, theme }: any) => {
       const styled = {
-        colors: styleColors(ownerState, (color) => ({
+        colors: styleColors(ownerState, (color: any) => ({
           color: theme.vars.palette[color].darker,
           backgroundColor: theme.vars.palette[color].lighter,
           [stylesMode.dark]: {
@@ -127,7 +127,7 @@ const MuiAlert = {
     /**
      * @variant outlined
      */
-    outlined: ({ ownerState, theme }) => {
+    outlined: ({ ownerState, theme }: any) => {
       const styled = {
         colors: styleColors(ownerState, (color) => ({
           backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.08),

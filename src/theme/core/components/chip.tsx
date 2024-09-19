@@ -37,9 +37,9 @@ function styleColors(ownerState, styles) {
 
 const softVariant = {
   colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+    props: ({ ownerState }: any) =>
       !ownerState.disabled && ownerState.variant === 'soft' && ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: any) => ({
       color: theme.vars.palette[color].dark,
       backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.16),
       '&:hover': { backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.32) },
@@ -48,8 +48,9 @@ const softVariant = {
   })),
   inheritColor: [
     {
-      props: ({ ownerState }) => ownerState.variant === 'soft' && ownerState.color === 'default',
-      style: ({ theme }) => ({
+      props: ({ ownerState }: any) =>
+        ownerState.variant === 'soft' && ownerState.color === 'default',
+      style: ({ theme }: any) => ({
         backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
         '&:hover': { backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.32) },
       }),
@@ -79,9 +80,9 @@ const MuiChip = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ ownerState, theme }) => {
+    root: ({ ownerState, theme }: any) => {
       const styled = {
-        colors: styleColors(ownerState, (color) => ({
+        colors: styleColors(ownerState, (color: any) => ({
           [`& .${chipClasses.avatar}`]: {
             color: theme.vars.palette[color].lighter,
             backgroundColor: theme.vars.palette[color].dark,
@@ -108,19 +109,19 @@ const MuiChip = {
 
       return { ...styled.colors, ...styled.disabled };
     },
-    label: ({ theme }) => ({ fontWeight: theme.typography.fontWeightMedium }),
+    label: ({ theme }: any) => ({ fontWeight: theme.typography.fontWeightMedium }),
     icon: { color: 'currentColor' },
     deleteIcon: {
       opacity: 0.48,
       color: 'currentColor',
       '&:hover': { opacity: 1, color: 'currentColor' },
     },
-    sizeMedium: ({ theme }) => ({ borderRadius: theme.shape.borderRadius * 1.25 }),
-    sizeSmall: ({ theme }) => ({ borderRadius: theme.shape.borderRadius }),
+    sizeMedium: ({ theme }: any) => ({ borderRadius: theme.shape.borderRadius * 1.25 }),
+    sizeSmall: ({ theme }: any) => ({ borderRadius: theme.shape.borderRadius }),
     /**
      * @variant filled
      */
-    filled: ({ ownerState, theme }) => {
+    filled: ({ ownerState, theme }: any) => {
       const styled = {
         defaultColor: {
           ...(!ownerState.disabled &&
@@ -141,7 +142,7 @@ const MuiChip = {
     /**
      * @variant outlined
      */
-    outlined: ({ ownerState, theme }) => {
+    outlined: ({ ownerState, theme }: any) => {
       const styled = {
         defaultColor: {
           ...(!ownerState.disabled &&

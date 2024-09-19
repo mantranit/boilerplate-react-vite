@@ -1,6 +1,7 @@
 import { accordionClasses } from '@mui/material/Accordion';
 import { typographyClasses } from '@mui/material/Typography';
 import { accordionSummaryClasses } from '@mui/material/AccordionSummary';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +10,7 @@ const MuiAccordion = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: TTheme }) => ({
       backgroundColor: 'transparent',
       [`&.${accordionClasses.expanded}`]: {
         boxShadow: theme.customShadows.z8,
@@ -28,7 +29,7 @@ const MuiAccordionSummary = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: TTheme }) => ({
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(1),
       [`&.${accordionSummaryClasses.disabled}`]: {

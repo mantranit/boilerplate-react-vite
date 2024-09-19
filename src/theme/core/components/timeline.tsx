@@ -11,7 +11,7 @@ const MuiTimelineConnector = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { root: ({ theme }) => ({ backgroundColor: theme.vars.palette.divider }) },
+  styleOverrides: { root: ({ theme }: any) => ({ backgroundColor: theme.vars.palette.divider }) },
 };
 
 // ----------------------------------------------------------------------

@@ -40,7 +40,7 @@ const MuiTab = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: any) => ({
       opacity: 1,
       minWidth: 48,
       minHeight: 48,

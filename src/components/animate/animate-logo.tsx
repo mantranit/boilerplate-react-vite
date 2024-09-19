@@ -53,7 +53,8 @@ export function AnimateLogo1({ logo, sx, ...other }: TAnimateLogoProps) {
           position: 'absolute',
           width: 'calc(100% - 20px)',
           height: 'calc(100% - 20px)',
-          border: (theme) => `solid 3px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
+          border: (theme: TTheme) =>
+            `solid 3px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
         }}
       />
 
@@ -70,7 +71,8 @@ export function AnimateLogo1({ logo, sx, ...other }: TAnimateLogoProps) {
           width: 1,
           height: 1,
           position: 'absolute',
-          border: (theme) => `solid 8px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
+          border: (theme: TTheme) =>
+            `solid 8px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
         }}
       />
     </Box>
