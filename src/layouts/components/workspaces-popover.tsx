@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, SetStateAction } from 'react';
 
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -24,7 +24,7 @@ export function WorkspacesPopover({ data = [], sx, ...other }: TWorkspacesPopove
   const [workspace, setWorkspace] = useState(data[0]);
 
   const handleChangeWorkspace = useCallback(
-    (newValue) => {
+    (newValue: SetStateAction<TWorkspaceType>) => {
       setWorkspace(newValue);
       popover.onClose();
     },

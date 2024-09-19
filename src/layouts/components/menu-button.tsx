@@ -1,9 +1,10 @@
 import SvgIcon from '@mui/material/SvgIcon';
-import IconButton from '@mui/material/IconButton';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 
 // ----------------------------------------------------------------------
+export type TMenuButtonProps = IconButtonProps;
 
-export function MenuButton({ sx, ...other }) {
+export function MenuButton({ sx, ...other }: TMenuButtonProps) {
   return (
     <IconButton sx={sx} {...other}>
       <SvgIcon>
