@@ -128,8 +128,7 @@ export function UserListView() {
     <>
       <DashboardContent>
         <CustomBreadcrumbs
-          heading="List"
-          links={[{ name: 'User', href: paths.user.root }, { name: 'List' }]}
+          heading="Users"
           action={
             <Button
               component={RouterLink}

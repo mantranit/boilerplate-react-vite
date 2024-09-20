@@ -1,23 +1,17 @@
 import Box, { BoxProps } from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import Breadcrumbs, { BreadcrumbsProps } from '@mui/material/Breadcrumbs';
-
-import { BreadcrumbsLink } from './breadcrumb-link';
 
 // ----------------------------------------------------------------------
-export type TCustomBreadcrumbsProps = BoxProps &
-  BreadcrumbsProps & {
-    links?: any;
-    action?: any;
-    heading?: any;
-    moreLink?: any;
-    activeLast?: any;
-    slotProps?: any;
-  };
+export type TCustomBreadcrumbsProps = BoxProps & {
+  action?: any;
+  heading?: any;
+  moreLink?: any;
+  activeLast?: any;
+  slotProps?: any;
+};
 
 export function CustomBreadcrumbs({
-  links,
   action,
   heading,
   moreLink,
@@ -26,25 +20,10 @@ export function CustomBreadcrumbs({
   sx,
   ...other
 }: TCustomBreadcrumbsProps) {
-  const lastLink = links[links.length - 1].name;
-
   const renderHeading = (
     <Typography variant="h4" sx={{ mb: 2, ...slotProps?.heading }}>
       {heading}
     </Typography>
-  );
-
-  const renderLinks = (
-    <Breadcrumbs separator={<Separator />} sx={slotProps?.breadcrumbs} {...other}>
-      {links.map((link: { name: any }, index: any) => (
-        <BreadcrumbsLink
-          key={link.name ?? index}
-          link={link}
-          activeLast={activeLast}
-          disabled={link.name === lastLink}
-        />
-      ))}
-    </Breadcrumbs>
   );
 
   const renderAction = <Box sx={{ flexShrink: 0, ...slotProps?.action }}> {action} </Box>;
@@ -64,11 +43,7 @@ export function CustomBreadcrumbs({
   return (
     <Box gap={2} display="flex" flexDirection="column" sx={sx} {...other}>
       <Box display="flex" alignItems="center">
-        <Box sx={{ flexGrow: 1 }}>
-          {heading && renderHeading}
-
-          {!!links.length && renderLinks}
-        </Box>
+        <Box sx={{ flexGrow: 1 }}>{heading && renderHeading}</Box>
 
         {action && renderAction}
       </Box>
