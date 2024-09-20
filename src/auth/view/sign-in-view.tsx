@@ -4,17 +4,12 @@ import { useForm } from 'react-hook-form';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-
-import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
 
 import { useAuthContext } from '../hooks';
@@ -30,8 +25,6 @@ export function SignInView() {
   const { checkUserSession }: any = useAuthContext();
 
   const [errorMsg, setErrorMsg] = useState('');
-
-  const password = useBoolean();
 
   const methods = useForm({
     defaultValues: {
@@ -72,6 +65,7 @@ export function SignInView() {
         }}
         name="email"
         label="Email address"
+        InputLabelProps={{ shrink: true }}
       />
 
       <Field.Password
@@ -83,6 +77,7 @@ export function SignInView() {
         }}
         name="password"
         label="Password"
+        InputLabelProps={{ shrink: true }}
       />
 
       <LoadingButton
