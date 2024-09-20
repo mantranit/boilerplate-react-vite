@@ -14,7 +14,6 @@ import { TTheme } from 'src/theme/create-theme';
 export type TSectionProps = BoxProps & {
   method?: string;
   layoutQuery: any;
-  methods?: string;
   imgUrl?: string;
   subtitle?: string;
 };
@@ -23,7 +22,6 @@ export function Section({
   sx,
   method,
   layoutQuery,
-  methods,
   title = 'Manage the job',
   imgUrl = `${CONFIG.assetsDir}/assets/illustrations/illustration-dashboard.webp`,
   subtitle = 'More effectively with optimized workflows.',

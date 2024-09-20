@@ -64,7 +64,6 @@ export function AuthSplitLayout({ sx, section, children, header }: TAuthSplitLay
           title={section?.title}
           layoutQuery={layoutQuery}
           imgUrl={section?.imgUrl}
-          method={CONFIG.auth.method}
           subtitle={section?.subtitle}
         />
         <Content layoutQuery={layoutQuery}>{children}</Content>

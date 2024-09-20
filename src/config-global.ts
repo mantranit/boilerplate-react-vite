@@ -9,12 +9,8 @@ export const CONFIG = {
   appVersion: packageJson.version,
   serverUrl: import.meta.env.VITE_SERVER_URL ?? '',
   assetsDir: import.meta.env.VITE_ASSETS_DIR ?? '',
-  /**
-   * Auth
-   * @method jwt | amplify | firebase | supabase | auth0
-   */
+  comingSoon: import.meta.env.VITE_COMING_SOON ?? '',
   auth: {
-    method: 'jwt',
     skip: false,
     redirectPath: paths.dashboard.root,
   },

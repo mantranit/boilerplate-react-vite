@@ -6,13 +6,28 @@ import { authRoutes } from './auth';
 import { mainRoutes } from './main';
 import { dashboardRoutes } from './dashboard';
 
+import { lazy, Suspense } from 'react';
+import { SplashScreen } from 'src/components/loading-screen';
+import { SimpleLayout } from 'src/layouts/simple';
+import dayjs from 'dayjs';
+
+const ComingSoonPage = lazy(() => import('src/pages/coming-soon'));
+
 // ----------------------------------------------------------------------
 
 export function Router() {
   return useRoutes([
     {
       path: '/',
-      element: <Navigate to={CONFIG.auth.redirectPath} replace />,
+      element: dayjs(CONFIG.comingSoon).isValid() ? (
+        <Suspense fallback={<SplashScreen />}>
+          <SimpleLayout content={{ compact: true }}>
+            <ComingSoonPage />
+          </SimpleLayout>
+        </Suspense>
+      ) : (
+        <Navigate to={CONFIG.auth.redirectPath} replace />
+      ),
     },
 
     // Auth
