@@ -132,7 +132,7 @@ export const _userList = [...Array(20)].map((_, index) => ({
   role: _mock.role(index),
   email: _mock.email(index),
   address: '908 Jack Locks',
-  name: _mock.fullName(index),
+  displayName: _mock.fullName(index),
   isVerified: _mock.boolean(index),
   company: _mock.companyNames(index),
   country: _mock.countryNames(index),
