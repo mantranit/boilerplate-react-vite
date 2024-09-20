@@ -32,7 +32,7 @@ export const Logo = forwardRef(
       <Box
         alt="Single logo"
         component="img"
-        src={`${CONFIG.assetsDir}/logo/logo-single.svg`}
+        src={`${CONFIG.assetsDir}/logo/logo-single.png`}
         width="100%"
         height="100%"
       />
@@ -42,7 +42,7 @@ export const Logo = forwardRef(
       <Box
         alt="Full logo"
         component="img"
-        src={`${CONFIG.assetsDir}/logo/logo-full.svg`}
+        src={`${CONFIG.assetsDir}/logo/logo-full.png`}
         width="100%"
         height="100%"
       />

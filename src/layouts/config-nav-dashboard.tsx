@@ -68,7 +68,7 @@ export const navData = [
       { title: 'Leave Types', path: paths.dashboard.three, icon: ICONS.folder },
       {
         title: 'Timesheet',
-        path: 'timesheet',
+        path: '/timesheet',
         icon: ICONS.calendar,
       },
     ],
