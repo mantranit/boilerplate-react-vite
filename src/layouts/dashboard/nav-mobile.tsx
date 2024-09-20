@@ -41,7 +41,7 @@ export function NavMobile({ data, open, onClose, slots, sx, ...other }: TNavMobi
     >
       {slots?.topArea ?? (
         <Box sx={{ pl: 3.5, pt: 2.5, pb: 1 }}>
-          <Logo />
+          <Logo isSingle={false} width="auto" />
         </Box>
       )}
 
