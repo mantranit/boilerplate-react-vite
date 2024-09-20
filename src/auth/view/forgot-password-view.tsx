@@ -19,7 +19,7 @@ import { emailRegExp } from 'src/utils';
 
 // ----------------------------------------------------------------------
 
-export function JwtForgotPasswordView() {
+export function ForgotPasswordView() {
   const { checkUserSession }: any = useAuthContext();
 
   const router = useRouter();
@@ -66,7 +66,6 @@ export function JwtForgotPasswordView() {
         }}
         name="email"
         label="Email address"
-        InputLabelProps={{ shrink: true }}
       />
 
       <LoadingButton
@@ -84,8 +83,8 @@ export function JwtForgotPasswordView() {
       <Box sx={{ textAlign: 'center' }}>
         <Link
           component={RouterLink}
-          href={paths.auth.jwt.signIn}
-          to={paths.auth.jwt.signIn}
+          href={paths.auth.signIn}
+          to={paths.auth.signIn}
           variant="body2"
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}

@@ -20,11 +20,11 @@ import { Form, Field } from 'src/components/hook-form';
 import { useAuthContext } from '../hooks';
 import { FormHead } from '../components/form-head';
 import { signInWithPassword } from '../context';
-import { emailRegExp, passwordRegExp } from 'src/utils';
+import { emailRegExp } from 'src/utils';
 
 // ----------------------------------------------------------------------
 
-export function JwtSignInView() {
+export function SignInView() {
   const router = useRouter();
 
   const { checkUserSession }: any = useAuthContext();
@@ -72,34 +72,17 @@ export function JwtSignInView() {
         }}
         name="email"
         label="Email address"
-        InputLabelProps={{ shrink: true }}
       />
 
-      <Field.Text
+      <Field.Password
         rules={{
           required: {
             value: true,
             message: 'Password is required.',
           },
-          // pattern: {
-          //   value: passwordRegExp,
-          //   message: 'Please enter an valid password.',
-          // },
         }}
         name="password"
         label="Password"
-        placeholder="6+ characters"
-        type={password.value ? 'text' : 'password'}
-        InputLabelProps={{ shrink: true }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
       />
 
       <LoadingButton
@@ -117,8 +100,8 @@ export function JwtSignInView() {
       <Box sx={{ textAlign: 'center' }}>
         <Link
           component={RouterLink}
-          href={paths.auth.jwt.forgotPassword}
-          to={paths.auth.jwt.forgotPassword}
+          href={paths.auth.forgotPassword}
+          to={paths.auth.forgotPassword}
           variant="body2"
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}

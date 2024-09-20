@@ -41,7 +41,7 @@ export function AuthGuard({ children }: { children: ReactNode }) {
       const { method } = CONFIG.auth;
 
       const signInPath = {
-        jwt: paths.auth.jwt.signIn,
+        jwt: paths.auth.signIn,
       }[method];
 
       const href = `${signInPath}?${createQueryString('returnTo', pathname)}`;

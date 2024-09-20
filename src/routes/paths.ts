@@ -11,11 +11,9 @@ export const paths = {
   faqs: '/faqs',
   // AUTH
   auth: {
-    jwt: {
-      signIn: `${ROOTS.AUTH}/sign-in`,
-      forgotPassword: `${ROOTS.AUTH}/forgot-password`,
-      newPassword: `${ROOTS.AUTH}/new-password`,
-    },
+    signIn: `${ROOTS.AUTH}/sign-in`,
+    forgotPassword: `${ROOTS.AUTH}/forgot-password`,
+    newPassword: `${ROOTS.AUTH}/new-password`,
   },
   // DASHBOARD
   dashboard: {

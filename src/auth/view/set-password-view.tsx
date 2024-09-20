@@ -15,11 +15,11 @@ import { Form, Field } from 'src/components/hook-form';
 import { signUp } from '../context';
 import { useAuthContext } from '../hooks';
 import { FormHead } from '../components/form-head';
-import { emailRegExp } from 'src/utils';
+import { passwordRegExp } from 'src/utils';
 
 // ----------------------------------------------------------------------
 
-export function JwtNewPasswordView() {
+export function SetPasswordView() {
   const { checkUserSession }: any = useAuthContext();
 
   const router = useRouter();
@@ -54,20 +54,34 @@ export function JwtNewPasswordView() {
 
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
-      <Field.Text
+      <Field.Password
         rules={{
           required: {
             value: true,
-            message: 'Email address is required.',
+            message: 'New password is required.',
           },
           pattern: {
-            value: emailRegExp,
-            message: 'Please enter an valid email address.',
+            value: passwordRegExp,
+            message: 'Please enter an valid password.',
           },
         }}
-        name="email"
-        label="Email address"
-        InputLabelProps={{ shrink: true }}
+        name="newPassword"
+        label="New password"
+      />
+
+      <Field.Password
+        rules={{
+          required: {
+            value: true,
+            message: 'Confirm password is required.',
+          },
+          pattern: {
+            value: passwordRegExp,
+            message: 'Please enter an valid password.',
+          },
+        }}
+        name="confirmPassword"
+        label="Confirm password"
       />
 
       <LoadingButton
@@ -85,8 +99,8 @@ export function JwtNewPasswordView() {
       <Box sx={{ textAlign: 'center' }}>
         <Link
           component={RouterLink}
-          href={paths.auth.jwt.signIn}
-          to={paths.auth.jwt.signIn}
+          href={paths.auth.signIn}
+          to={paths.auth.signIn}
           variant="body2"
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}

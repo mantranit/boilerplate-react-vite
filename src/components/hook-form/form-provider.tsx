@@ -1,5 +1,5 @@
 import { FormEventHandler, ReactNode } from 'react';
-import { FormProviderProps, FormProvider as RHFForm } from 'react-hook-form';
+import { FormProvider as RHFForm } from 'react-hook-form';
 
 // ----------------------------------------------------------------------
 export type TFormProps = {

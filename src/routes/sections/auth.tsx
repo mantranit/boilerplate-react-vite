@@ -12,10 +12,10 @@ import { GuestGuard } from 'src/auth/guard';
 /** **************************************
  * Jwt
  *************************************** */
-const Jwt = {
-  SignInPage: lazy(() => import('src/pages/auth/jwt/sign-in')),
-  ForgotPasswordPage: lazy(() => import('src/pages/auth/jwt/sign-up')),
-  NewPasswordPage: lazy(() => import('src/pages/auth/jwt/sign-up')),
+const Auth = {
+  SignInPage: lazy(() => import('src/pages/auth/sign-in')),
+  ForgotPasswordPage: lazy(() => import('src/pages/auth/forgot-password')),
+  NewPasswordPage: lazy(() => import('src/pages/auth/set-password')),
 };
 
 // ----------------------------------------------------------------------
@@ -34,7 +34,7 @@ export const authRoutes = [
         element: (
           <GuestGuard>
             <AuthSplitLayout section={{ title: 'Hi, Welcome back' }}>
-              <Jwt.SignInPage />
+              <Auth.SignInPage />
             </AuthSplitLayout>
           </GuestGuard>
         ),
@@ -44,17 +44,17 @@ export const authRoutes = [
         element: (
           <GuestGuard>
             <AuthSplitLayout>
-              <Jwt.ForgotPasswordPage />
+              <Auth.ForgotPasswordPage />
             </AuthSplitLayout>
           </GuestGuard>
         ),
       },
       {
-        path: 'new-password',
+        path: 'set-password/:token',
         element: (
           <GuestGuard>
             <AuthSplitLayout>
-              <Jwt.NewPasswordPage />
+              <Auth.NewPasswordPage />
             </AuthSplitLayout>
           </GuestGuard>
         ),
