@@ -4,9 +4,9 @@ import { useSetState } from 'src/hooks/use-set-state';
 
 import axios, { endpoints } from 'src/utils/axios';
 
+import { AuthContext } from './auth-context';
 import { STORAGE_KEY } from './constant';
-import { AuthContext } from '../auth-context';
-import { setSession, isValidToken } from './utils';
+import { isValidToken, setSession } from './utils';
 
 // ----------------------------------------------------------------------
 export type TAuthProviderProps = {

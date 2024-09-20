@@ -4,38 +4,32 @@ import { useForm } from 'react-hook-form';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-
-import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
 
-import { useAuthContext } from '../../hooks';
-import { FormHead } from '../../components/form-head';
-import { signInWithPassword } from '../../context/jwt';
+import { signUp } from '../context';
+import { useAuthContext } from '../hooks';
+import { FormHead } from '../components/form-head';
+import { emailRegExp } from 'src/utils';
 
 // ----------------------------------------------------------------------
 
-export function JwtSignInView() {
-  const router = useRouter();
-
+export function JwtNewPasswordView() {
   const { checkUserSession }: any = useAuthContext();
+
+  const router = useRouter();
 
   const [errorMsg, setErrorMsg] = useState('');
 
-  const password = useBoolean();
-
   const methods = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      newPassword: '',
+      confirmPassword: '',
     },
   });
 
@@ -46,7 +40,9 @@ export function JwtSignInView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await signInWithPassword({ email: data.email, password: data.password });
+      await signUp({
+        newPassword: data.newPassword,
+      });
       await checkUserSession?.();
 
       router.refresh();
@@ -59,32 +55,19 @@ export function JwtSignInView() {
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
       <Field.Text
-        rule={{
-          required: true,
+        rules={{
+          required: {
+            value: true,
+            message: 'Email address is required.',
+          },
+          pattern: {
+            value: emailRegExp,
+            message: 'Please enter an valid email address.',
+          },
         }}
         name="email"
         label="Email address"
         InputLabelProps={{ shrink: true }}
-      />
-
-      <Field.Text
-        rule={{
-          required: true,
-        }}
-        name="password"
-        label="Password"
-        placeholder="6+ characters"
-        type={password.value ? 'text' : 'password'}
-        InputLabelProps={{ shrink: true }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
       />
 
       <LoadingButton
@@ -94,20 +77,21 @@ export function JwtSignInView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        loadingIndicator="Sign in..."
+        loadingIndicator="Set password..."
       >
-        Sign in
+        Set password
       </LoadingButton>
+
       <Box sx={{ textAlign: 'center' }}>
         <Link
           component={RouterLink}
-          href={paths.auth.jwt.forgotPassword}
-          to={paths.auth.jwt.forgotPassword}
+          href={paths.auth.jwt.signIn}
+          to={paths.auth.jwt.signIn}
           variant="body2"
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}
         >
-          Forgot password?
+          Go back to Sign in
         </Link>
       </Box>
     </Box>
@@ -116,8 +100,8 @@ export function JwtSignInView() {
   return (
     <>
       <FormHead
-        title="Sign in"
-        description="Log in by entering your email address and password."
+        title="New password"
+        description="Your new password must have at least 8 characters and least one lowercase letter, uppercase letter, number and symbol."
         sx={{ textAlign: { xs: 'center', md: 'left' } }}
       />
 

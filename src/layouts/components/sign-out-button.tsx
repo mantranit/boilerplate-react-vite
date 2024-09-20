@@ -5,7 +5,7 @@ import Button, { ButtonProps } from '@mui/material/Button';
 import { useRouter } from 'src/routes/hooks';
 
 import { useAuthContext } from 'src/auth/hooks';
-import { signOut } from 'src/auth/context/jwt/action';
+import { signOut } from 'src/auth/context/action';
 
 // ----------------------------------------------------------------------
 export type TSignOutButtonProps = ButtonProps & {
