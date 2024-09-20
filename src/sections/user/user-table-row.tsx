@@ -19,7 +19,7 @@ import { UserCreateEditForm } from './user-create-edit-form';
 
 // ----------------------------------------------------------------------
 
-export function UserTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }: any) {
+export function UserTableRow({ row, selected, onSelectRow, onDeleteRow }: any) {
   const confirm = useBoolean();
 
   const quickEdit = useBoolean();

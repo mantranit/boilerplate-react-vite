@@ -10,9 +10,6 @@ import Tooltip from '@mui/material/Tooltip';
 import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
-
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useSetState } from 'src/hooks/use-set-state';
 
@@ -60,8 +57,6 @@ const TABLE_HEAD = [
 export function UserListView() {
   const table = useTable();
 
-  const router = useRouter();
-
   const confirm = useBoolean();
 
   const create = useBoolean();
@@ -108,13 +103,6 @@ export function UserListView() {
       totalRowsFiltered: dataFiltered.length,
     });
   }, [dataFiltered.length, dataInPage.length, table, tableData]);
-
-  const handleEditRow = useCallback(
-    (id: any) => {
-      router.push(paths.user.edit(id));
-    },
-    [router]
-  );
 
   const handleFilterStatus = useCallback(
     (event: any, newValue: any) => {
@@ -246,7 +234,6 @@ export function UserListView() {
                         selected={table.selected.includes(row.id)}
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
-                        onEditRow={() => handleEditRow(row.id)}
                       />
                     ))}
 

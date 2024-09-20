@@ -1,36 +1,25 @@
 // ----------------------------------------------------------------------
 
-const ROOTS = {
-  AUTH: '/auth',
-  DASHBOARD: '/dashboard',
-};
-
-// ----------------------------------------------------------------------
-
 export const paths = {
-  // AUTH
   auth: {
-    signIn: `${ROOTS.AUTH}/sign-in`,
-    forgotPassword: `${ROOTS.AUTH}/forgot-password`,
-    newPassword: `${ROOTS.AUTH}/new-password`,
+    signIn: '/auth/sign-in',
+    forgotPassword: '/auth/forgot-password',
+    newPassword: '/auth/new-password',
   },
   user: {
     root: '/users',
-    new: '/users/new',
-    edit: (id: any) => `/users/${id}`,
   },
   role: {
     root: '/roles',
   },
-  // DASHBOARD
   dashboard: {
-    root: ROOTS.DASHBOARD,
-    two: `${ROOTS.DASHBOARD}/two`,
-    three: `${ROOTS.DASHBOARD}/three`,
+    root: '/',
+    two: '/two',
+    three: '/three',
     group: {
-      root: `${ROOTS.DASHBOARD}/group`,
-      five: `${ROOTS.DASHBOARD}/group/five`,
-      six: `${ROOTS.DASHBOARD}/group/six`,
+      root: '/group',
+      five: '/group/five',
+      six: '/group/six',
     },
   },
 };
