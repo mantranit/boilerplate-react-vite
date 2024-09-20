@@ -5,8 +5,8 @@ import { _mock } from './_mock';
 export const USER_STATUS_OPTIONS = [
   { value: 'active', label: 'Active' },
   { value: 'pending', label: 'Pending' },
-  { value: 'banned', label: 'Banned' },
-  { value: 'rejected', label: 'Rejected' },
+  { value: 'disabled', label: 'Disabled' },
+  { value: 'trash', label: 'Trash' },
 ];
 
 export const _userAbout = {
@@ -139,5 +139,5 @@ export const _userList = [...Array(20)].map((_, index) => ({
   avatarUrl: _mock.image.avatar(index),
   phoneNumber: _mock.phoneNumber(index),
   status:
-    (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
+    (index % 2 && 'pending') || (index % 3 && 'disabled') || (index % 4 && 'trash') || 'active',
 }));

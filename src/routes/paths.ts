@@ -8,12 +8,19 @@ const ROOTS = {
 // ----------------------------------------------------------------------
 
 export const paths = {
-  faqs: '/faqs',
   // AUTH
   auth: {
     signIn: `${ROOTS.AUTH}/sign-in`,
     forgotPassword: `${ROOTS.AUTH}/forgot-password`,
     newPassword: `${ROOTS.AUTH}/new-password`,
+  },
+  user: {
+    root: '/users',
+    new: '/users/new',
+    edit: (id: any) => `/users/${id}`,
+  },
+  role: {
+    root: '/roles',
   },
   // DASHBOARD
   dashboard: {

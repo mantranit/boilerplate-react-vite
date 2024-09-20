@@ -76,8 +76,8 @@ export const navData = [
   {
     subheader: 'Administrator',
     items: [
-      { title: 'Users', path: '/users', icon: ICONS.user },
-      { title: 'Roles & Permission', path: '/roles', icon: ICONS.lock },
+      { title: 'Users', path: paths.user.root, icon: ICONS.user },
+      { title: 'Roles & Permission', path: paths.role.root, icon: ICONS.lock },
     ],
   },
 ];

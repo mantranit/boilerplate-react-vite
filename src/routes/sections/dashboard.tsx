@@ -19,6 +19,10 @@ const PageSix = lazy(() => import('src/pages/dashboard/six'));
 
 // ----------------------------------------------------------------------
 
+const UserListPage = lazy(() => import('src/pages/user/list'));
+
+// ----------------------------------------------------------------------
+
 const layoutContent = (
   <DashboardLayout>
     <Suspense fallback={<LoadingScreen />}>
@@ -29,7 +33,7 @@ const layoutContent = (
 
 export const dashboardRoutes = [
   {
-    path: 'dashboard',
+    // path: 'dashboard',
     element: CONFIG.auth.skip ? <>{layoutContent}</> : <AuthGuard>{layoutContent}</AuthGuard>,
     children: [
       { element: <IndexPage />, index: true },
@@ -43,6 +47,7 @@ export const dashboardRoutes = [
           { path: 'six', element: <PageSix /> },
         ],
       },
+      { path: 'users', element: <UserListPage /> },
     ],
   },
 ];
