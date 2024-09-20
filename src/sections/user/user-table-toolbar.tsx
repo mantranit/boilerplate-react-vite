@@ -45,9 +45,9 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
         spacing={2}
         alignItems={{ xs: 'flex-end', md: 'center' }}
         direction={{ xs: 'column', md: 'row' }}
-        sx={{ p: 2.5, pr: { xs: 2.5, md: 1 } }}
+        sx={{ p: 2.5 }}
       >
-        <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 260 } }}>
+        <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 230 } }}>
           <InputLabel htmlFor="user-filter-role-select-label">Role</InputLabel>
           <Select
             multiple
@@ -71,7 +71,7 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
           </Select>
         </FormControl>
 
-        <Stack direction="row" alignItems="center" spacing={2} flexGrow={1} sx={{ width: 1 }}>
+        <Stack direction="row" alignItems="center" spacing={2} sx={{ width: 1 }}>
           <TextField
             fullWidth
             value={filters.state.name}
@@ -85,10 +85,6 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
               ),
             }}
           />
-
-          <IconButton onClick={popover.onOpen}>
-            <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
         </Stack>
       </Stack>
 
