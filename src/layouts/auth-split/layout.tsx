@@ -42,7 +42,7 @@ export function AuthSplitLayout({ sx, section, children, header }: TAuthSplitLay
             leftArea: (
               <>
                 {/* -- Logo -- */}
-                <Logo />
+                <Logo isSingle={false} width="auto" />
               </>
             ),
             rightArea: <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}></Box>,

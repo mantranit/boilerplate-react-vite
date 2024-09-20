@@ -35,7 +35,7 @@ export function SimpleLayout({ sx, children, header, content }: TSimpleLayoutPro
                 This is an info Alert.
               </Alert>
             ),
-            leftArea: <Logo />,
+            leftArea: <Logo isSingle={false} width="auto" />,
             rightArea: <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}></Box>,
           }}
         />
