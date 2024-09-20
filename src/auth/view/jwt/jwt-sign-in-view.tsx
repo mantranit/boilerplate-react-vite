@@ -1,7 +1,5 @@
-import { z as zod } from 'zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -25,19 +23,6 @@ import { signInWithPassword } from '../../context/jwt';
 
 // ----------------------------------------------------------------------
 
-export const SignInSchema = zod.object({
-  email: zod
-    .string()
-    .min(1, { message: 'Email is required!' })
-    .email({ message: 'Email must be a valid email address!' }),
-  password: zod
-    .string()
-    .min(1, { message: 'Password is required!' })
-    .min(6, { message: 'Password must be at least 6 characters!' }),
-});
-
-// ----------------------------------------------------------------------
-
 export function JwtSignInView() {
   const router = useRouter();
 
@@ -47,14 +32,11 @@ export function JwtSignInView() {
 
   const password = useBoolean();
 
-  const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: '@demo1',
-  };
-
   const methods = useForm({
-    resolver: zodResolver(SignInSchema),
-    defaultValues,
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
   const {
@@ -76,41 +58,38 @@ export function JwtSignInView() {
 
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
-      <Field.Text name="email" label="Email address" InputLabelProps={{ shrink: true }} />
+      <Field.Text
+        rule={{
+          required: true,
+        }}
+        name="email"
+        label="Email address"
+        InputLabelProps={{ shrink: true }}
+      />
 
-      <Box gap={1.5} display="flex" flexDirection="column">
-        <Link
-          component={RouterLink}
-          href="#"
-          to="#"
-          variant="body2"
-          color="inherit"
-          sx={{ alignSelf: 'flex-end' }}
-        >
-          Forgot password?
-        </Link>
-
-        <Field.Text
-          name="password"
-          label="Password"
-          placeholder="6+ characters"
-          type={password.value ? 'text' : 'password'}
-          InputLabelProps={{ shrink: true }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Box>
+      <Field.Text
+        rule={{
+          required: true,
+        }}
+        name="password"
+        label="Password"
+        placeholder="6+ characters"
+        type={password.value ? 'text' : 'password'}
+        InputLabelProps={{ shrink: true }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={password.onToggle} edge="end">
+                <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
 
       <LoadingButton
         fullWidth
-        color="inherit"
+        color="error"
         size="large"
         type="submit"
         variant="contained"
@@ -119,34 +98,28 @@ export function JwtSignInView() {
       >
         Sign in
       </LoadingButton>
+      <Box sx={{ textAlign: 'center' }}>
+        <Link
+          component={RouterLink}
+          href={paths.auth.jwt.forgotPassword}
+          to={paths.auth.jwt.forgotPassword}
+          variant="body2"
+          color="inherit"
+          sx={{ alignSelf: 'flex-end' }}
+        >
+          Forgot password?
+        </Link>
+      </Box>
     </Box>
   );
 
   return (
     <>
       <FormHead
-        title="Sign in to your account"
-        description={
-          <>
-            {`Don’t have an account? `}
-            <Link
-              component={RouterLink}
-              to={paths.auth.jwt.signUp}
-              href={paths.auth.jwt.signUp}
-              variant="subtitle2"
-            >
-              Get started
-            </Link>
-          </>
-        }
+        title="Sign in"
+        description="Log in by entering your email address and password."
         sx={{ textAlign: { xs: 'center', md: 'left' } }}
       />
-
-      <Alert severity="info" sx={{ mb: 3 }}>
-        Use <strong>{defaultValues.email}</strong>
-        {' with password '}
-        <strong>{defaultValues.password}</strong>
-      </Alert>
 
       {!!errorMsg && (
         <Alert severity="error" sx={{ mb: 3 }}>

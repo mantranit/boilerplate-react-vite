@@ -1,17 +1,19 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, ValidationRule } from 'react-hook-form';
 
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 
 // ----------------------------------------------------------------------
 export type TRHFTextFieldProps = TextFieldProps & {
   name: string;
+  rules?: any;
 };
 
-export function RHFTextField({ name, helperText, type, ...other }: TRHFTextFieldProps) {
+export function RHFTextField({ rules, name, helperText, type, ...other }: TRHFTextFieldProps) {
   const { control } = useFormContext();
 
   return (
     <Controller
+      rules={rules}
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (

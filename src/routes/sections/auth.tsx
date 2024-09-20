@@ -14,33 +14,8 @@ import { GuestGuard } from 'src/auth/guard';
  *************************************** */
 const Jwt = {
   SignInPage: lazy(() => import('src/pages/auth/jwt/sign-in')),
-  SignUpPage: lazy(() => import('src/pages/auth/jwt/sign-up')),
-};
-
-const authJwt = {
-  path: 'jwt',
-  children: [
-    {
-      path: 'sign-in',
-      element: (
-        <GuestGuard>
-          <AuthSplitLayout section={{ title: 'Hi, Welcome back' }}>
-            <Jwt.SignInPage />
-          </AuthSplitLayout>
-        </GuestGuard>
-      ),
-    },
-    {
-      path: 'sign-up',
-      element: (
-        <GuestGuard>
-          <AuthSplitLayout>
-            <Jwt.SignUpPage />
-          </AuthSplitLayout>
-        </GuestGuard>
-      ),
-    },
-  ],
+  ForgotPasswordPage: lazy(() => import('src/pages/auth/jwt/sign-up')),
+  NewPasswordPage: lazy(() => import('src/pages/auth/jwt/sign-up')),
 };
 
 // ----------------------------------------------------------------------
@@ -53,6 +28,37 @@ export const authRoutes = [
         <Outlet />
       </Suspense>
     ),
-    children: [authJwt],
+    children: [
+      {
+        path: 'sign-in',
+        element: (
+          <GuestGuard>
+            <AuthSplitLayout section={{ title: 'Hi, Welcome back' }}>
+              <Jwt.SignInPage />
+            </AuthSplitLayout>
+          </GuestGuard>
+        ),
+      },
+      {
+        path: 'forgot-password',
+        element: (
+          <GuestGuard>
+            <AuthSplitLayout>
+              <Jwt.ForgotPasswordPage />
+            </AuthSplitLayout>
+          </GuestGuard>
+        ),
+      },
+      {
+        path: 'new-password',
+        element: (
+          <GuestGuard>
+            <AuthSplitLayout>
+              <Jwt.NewPasswordPage />
+            </AuthSplitLayout>
+          </GuestGuard>
+        ),
+      },
+    ],
   },
 ];
