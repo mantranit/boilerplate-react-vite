@@ -2,13 +2,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
 
 import { Form, Field } from 'src/components/hook-form';
 
@@ -16,6 +14,7 @@ import { signUp } from '../context';
 import { useAuthContext } from '../hooks';
 import { FormHead } from '../components/form-head';
 import { emailRegExp } from 'src/utils';
+import { FormReturnLink } from '../components/form-return-link';
 
 // ----------------------------------------------------------------------
 
@@ -79,27 +78,14 @@ export function ForgotPasswordView() {
       >
         Reset password
       </LoadingButton>
-
-      <Box sx={{ textAlign: 'center' }}>
-        <Link
-          component={RouterLink}
-          href={paths.auth.signIn}
-          to={paths.auth.signIn}
-          variant="body2"
-          color="inherit"
-          sx={{ alignSelf: 'flex-end' }}
-        >
-          Go back to Sign in
-        </Link>
-      </Box>
     </Box>
   );
 
   return (
     <>
       <FormHead
-        title="Forgot password?"
-        description="Enter you email and we'll send you a link to reset your password."
+        title="Forgot your password?"
+        description="Please enter the email address associated with your account and we'll email you a link to reset your password."
         sx={{ textAlign: { xs: 'center', md: 'left' } }}
       />
 
@@ -112,6 +98,8 @@ export function ForgotPasswordView() {
       <Form methods={methods} onSubmit={onSubmit}>
         {renderForm}
       </Form>
+
+      <FormReturnLink href={paths.auth.signIn} />
     </>
   );
 }

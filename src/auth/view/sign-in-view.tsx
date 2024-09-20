@@ -16,6 +16,7 @@ import { useAuthContext } from '../hooks';
 import { FormHead } from '../components/form-head';
 import { signInWithPassword } from '../context';
 import { emailRegExp } from 'src/utils';
+import { FormReturnLink } from '../components/form-return-link';
 
 // ----------------------------------------------------------------------
 
@@ -91,27 +92,14 @@ export function SignInView() {
       >
         Sign in
       </LoadingButton>
-
-      <Box sx={{ textAlign: 'center' }}>
-        <Link
-          component={RouterLink}
-          href={paths.auth.forgotPassword}
-          to={paths.auth.forgotPassword}
-          variant="body2"
-          color="inherit"
-          sx={{ alignSelf: 'flex-end' }}
-        >
-          Forgot password?
-        </Link>
-      </Box>
     </Box>
   );
 
   return (
     <>
       <FormHead
-        title="Sign in"
-        description="Log in by entering your email address and password."
+        title="Sign in to your account"
+        description="By entering your email address and password."
         sx={{ textAlign: { xs: 'center', md: 'left' } }}
       />
 
@@ -124,6 +112,8 @@ export function SignInView() {
       <Form methods={methods} onSubmit={onSubmit}>
         {renderForm}
       </Form>
+
+      <FormReturnLink icon={<></>} href={paths.auth.forgotPassword} label="Forgot password?" />
     </>
   );
 }
