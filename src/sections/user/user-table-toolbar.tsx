@@ -47,7 +47,7 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
         direction={{ xs: 'column', md: 'row' }}
         sx={{ p: 2.5, pr: { xs: 2.5, md: 1 } }}
       >
-        <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 200 } }}>
+        <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 260 } }}>
           <InputLabel htmlFor="user-filter-role-select-label">Role</InputLabel>
           <Select
             multiple

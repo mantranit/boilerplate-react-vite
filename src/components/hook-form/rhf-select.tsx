@@ -2,12 +2,12 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import Select from '@mui/material/Select';
+import Select, { SelectProps } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Checkbox from '@mui/material/Checkbox';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
+import FormControl, { FormControlProps } from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 
 // ----------------------------------------------------------------------
@@ -19,6 +19,7 @@ export type TRHFSelectProps = TextFieldProps & {
 };
 
 export function RHFSelect({
+  rules,
   name,
   native,
   children,
@@ -34,6 +35,7 @@ export function RHFSelect({
 
   return (
     <Controller
+      rules={rules}
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
@@ -60,8 +62,20 @@ export function RHFSelect({
 }
 
 // ----------------------------------------------------------------------
+export type TRHFMultiSelectProps = FormControlProps & {
+  rules?: any;
+  name?: any;
+  chip?: any;
+  label?: string;
+  options?: any;
+  checkbox?: any;
+  placeholder?: string;
+  slotProps?: any;
+  helperText?: any;
+};
 
 export function RHFMultiSelect({
+  rules,
   name,
   chip,
   label,
@@ -71,13 +85,14 @@ export function RHFMultiSelect({
   slotProps,
   helperText,
   ...other
-}: any) {
+}: TRHFMultiSelectProps) {
   const { control } = useFormContext();
 
   const labelId = `${name}-select-label`;
 
   return (
     <Controller
+      rules={rules}
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
