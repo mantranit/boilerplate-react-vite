@@ -48,7 +48,7 @@ export const navData = [
   {
     subheader: 'Employee',
     items: [
-      { title: 'Personal Details', path: paths.dashboard.two, icon: ICONS.user },
+      { title: 'Individual', path: paths.dashboard.two, icon: ICONS.user },
       { title: 'Leave', path: paths.dashboard.root, icon: ICONS.chat },
     ],
   },
@@ -60,7 +60,7 @@ export const navData = [
         path: paths.dashboard.group.root,
         icon: ICONS.user,
         children: [
-          { title: 'List Employee', path: paths.dashboard.group.root },
+          { title: 'List', path: paths.dashboard.group.root },
           { title: 'Departments', path: paths.dashboard.group.six },
           { title: 'Positions & Level', path: paths.dashboard.group.five },
         ],

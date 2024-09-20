@@ -14,7 +14,7 @@ export type TAccountMenu = {
 export const _account: TAccountMenu[] = [
   {
     label: 'Change password',
-    href: '#',
+    href: '/change-password',
     icon: <Iconify icon="solar:shield-keyhole-bold-duotone" />,
   },
 ];
