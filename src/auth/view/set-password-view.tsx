@@ -114,7 +114,7 @@ export function SetPasswordView() {
   return (
     <>
       <FormHead
-        title="New password"
+        title="Set password"
         description="Your new password must have at least 8 characters and least one lowercase letter, uppercase letter, number and symbol."
         sx={{ textAlign: { xs: 'center', md: 'left' } }}
       />
