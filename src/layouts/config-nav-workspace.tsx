@@ -14,4 +14,9 @@ export const _workspaces: TWorkspaceType[] = [
     name: 'WATA Software',
     logo: `${CONFIG.assetsDir}/assets/icons/workspaces/logo-2.webp`,
   },
+  {
+    id: 'AMAZ Care',
+    name: 'AMAZ Care',
+    logo: `${CONFIG.assetsDir}/assets/icons/workspaces/logo-3.webp`,
+  },
 ];
