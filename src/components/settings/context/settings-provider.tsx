@@ -2,21 +2,11 @@ import { useMemo, useState, useCallback, createContext, ReactNode } from 'react'
 
 import { useLocalStorage } from 'src/hooks/use-local-storage';
 
-import { STORAGE_KEY } from '../config-settings';
-import { defaultFont } from 'src/theme/core/typography';
+import { defaultSettings, STORAGE_KEY } from '../config-settings';
 
 // ----------------------------------------------------------------------
 
-export const SettingsContext = createContext<any>({
-  colorScheme: 'light',
-  direction: 'ltr',
-  contrast: 'default',
-  navLayout: 'vertical',
-  primaryColor: 'red',
-  navColor: 'integrate',
-  compactLayout: true,
-  fontFamily: defaultFont,
-});
+export const SettingsContext = createContext<any>(defaultSettings);
 
 export const SettingsConsumer = SettingsContext.Consumer;
 

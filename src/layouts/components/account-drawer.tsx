@@ -181,6 +181,13 @@ export function AccountDrawer({ data = [], sx, ...other }: TAccountDrawerProps) 
                   )
                 }
               />
+              <BaseOption
+                tooltip="Dashboard only and available at large resolutions > 1600px (xl)"
+                label="Compact"
+                icon="autofit-width"
+                selected={settings.compactLayout}
+                onClick={() => settings.onUpdateField('compactLayout', !settings.compactLayout)}
+              />
             </Box>
           </Stack>
           <Box>
