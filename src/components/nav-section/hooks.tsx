@@ -13,7 +13,7 @@ export function useNavItem({
   hasChild,
   externalLink,
   enabledRootRedirect,
-}) {
+}: any) {
   const rootItem = depth === 1;
 
   const subItem = !rootItem;

@@ -35,7 +35,7 @@ export function NavSectionMini({
   return (
     <Stack component="nav" className={navSectionClasses.mini.root} sx={{ ...cssVars, ...sx }}>
       <NavUl sx={{ flex: '1 1 auto', gap: 'var(--nav-item-gap)' }}>
-        {data.map((group) => (
+        {data.map((group: any) => (
           <Group
             key={group.subheader ?? group.items[0].title}
             render={render}
@@ -52,11 +52,11 @@ export function NavSectionMini({
 
 // ----------------------------------------------------------------------
 
-function Group({ items, render, slotProps, enabledRootRedirect, cssVars }) {
+function Group({ items, render, slotProps, enabledRootRedirect, cssVars }: any) {
   return (
     <NavLi>
       <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
-        {items.map((list) => (
+        {items.map((list: any) => (
           <NavList
             key={list.title}
             depth={1}

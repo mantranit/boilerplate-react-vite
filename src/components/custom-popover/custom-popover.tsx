@@ -2,7 +2,6 @@ import Popover, { PopoverProps } from '@mui/material/Popover';
 import { listClasses } from '@mui/material/List';
 import { menuItemClasses } from '@mui/material/MenuItem';
 
-import { StyledArrow } from './styles';
 import { calculateAnchorOrigin } from './utils';
 
 // ----------------------------------------------------------------------
@@ -21,10 +20,6 @@ export function CustomPopover({
   ...other
 }: TCustomPopoverProps) {
   const arrowPlacement = slotProps?.arrow?.placement ?? 'top-right';
-
-  const arrowSize = slotProps?.arrow?.size ?? 14;
-
-  const arrowOffset = slotProps?.arrow?.offset ?? 17;
 
   const { paperStyles, anchorOrigin, transformOrigin } = calculateAnchorOrigin(arrowPlacement);
 
@@ -50,15 +45,6 @@ export function CustomPopover({
       }}
       {...other}
     >
-      {!slotProps?.arrow?.hide && (
-        <StyledArrow
-          sx={slotProps?.arrow?.sx}
-          placement={arrowPlacement}
-          offset={arrowOffset}
-          size={arrowSize}
-        />
-      )}
-
       {children}
     </Popover>
   );

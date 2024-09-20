@@ -1,13 +1,13 @@
 // ----------------------------------------------------------------------
 
-export const hasParams = (url) => {
+export const hasParams = (url: string) => {
   const queryString = url.split('?')[1];
   return queryString ? new URLSearchParams(queryString).toString().length > 0 : false;
 };
 
 // ----------------------------------------------------------------------
 
-export function removeLastSlash(pathname) {
+export function removeLastSlash(pathname: string) {
   /**
    * Remove last slash
    * [1]
@@ -26,7 +26,7 @@ export function removeLastSlash(pathname) {
 
 // ----------------------------------------------------------------------
 
-export function removeParams(url) {
+export function removeParams(url: string) {
   try {
     const urlObj = new URL(url, window.location.origin);
 
@@ -38,6 +38,6 @@ export function removeParams(url) {
 
 // ----------------------------------------------------------------------
 
-export function isExternalLink(url) {
+export function isExternalLink(url: string) {
   return url.startsWith('http');
 }

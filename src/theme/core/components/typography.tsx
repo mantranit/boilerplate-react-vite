@@ -1,12 +1,14 @@
 // ----------------------------------------------------------------------
 
+import { TTheme } from 'src/theme/create-theme';
+
 const MuiTypography = {
   /** **************************************
    * STYLE
    *************************************** */
   styleOverrides: {
-    paragraph: ({ theme }) => ({ marginBottom: theme.spacing(2) }),
-    gutterBottom: ({ theme }) => ({ marginBottom: theme.spacing(1) }),
+    paragraph: ({ theme }: { theme: TTheme }) => ({ marginBottom: theme.spacing(2) }),
+    gutterBottom: ({ theme }: { theme: TTheme }) => ({ marginBottom: theme.spacing(1) }),
   },
 };
 

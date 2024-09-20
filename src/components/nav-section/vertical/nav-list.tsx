@@ -10,7 +10,7 @@ import { NavUl, NavLi, NavCollapse } from '../styles';
 
 // ----------------------------------------------------------------------
 
-export function NavList({ data, render, depth, slotProps, enabledRootRedirect }) {
+export function NavList({ data, render, depth, slotProps, enabledRootRedirect }: any) {
   const pathname = usePathname();
 
   const active = useActiveLink(data.path, !!data.children);
@@ -97,10 +97,10 @@ export function NavList({ data, render, depth, slotProps, enabledRootRedirect })
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ data, render, depth, slotProps, enabledRootRedirect }) {
+function NavSubList({ data, render, depth, slotProps, enabledRootRedirect }: any) {
   return (
     <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
-      {data.map((list) => (
+      {data.map((list: any) => (
         <NavList
           key={list.title}
           data={list}

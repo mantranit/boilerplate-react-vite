@@ -6,7 +6,7 @@ import { STORAGE_KEY } from './constant';
 
 // ----------------------------------------------------------------------
 
-export function jwtDecode(token) {
+export function jwtDecode(token: string) {
   try {
     if (!token) return null;
 
@@ -28,7 +28,7 @@ export function jwtDecode(token) {
 
 // ----------------------------------------------------------------------
 
-export function isValidToken(accessToken) {
+export function isValidToken(accessToken: string) {
   if (!accessToken) {
     return false;
   }
@@ -51,7 +51,7 @@ export function isValidToken(accessToken) {
 
 // ----------------------------------------------------------------------
 
-export function tokenExpired(exp) {
+export function tokenExpired(exp: number) {
   const currentTime = Date.now();
   const timeLeft = exp * 1000 - currentTime;
 
@@ -69,7 +69,7 @@ export function tokenExpired(exp) {
 
 // ----------------------------------------------------------------------
 
-export async function setSession(accessToken) {
+export async function setSession(accessToken: string | null) {
   try {
     if (accessToken) {
       sessionStorage.setItem(STORAGE_KEY, accessToken);

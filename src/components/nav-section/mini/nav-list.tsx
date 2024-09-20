@@ -17,7 +17,7 @@ import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRedirect }) {
+export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRedirect }: any) {
   const theme = useTheme<TTheme>();
 
   const pathname = usePathname();
@@ -135,10 +135,10 @@ export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRe
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ data, render, depth, slotProps, enabledRootRedirect, cssVars }) {
+function NavSubList({ data, render, depth, slotProps, enabledRootRedirect, cssVars }: any) {
   return (
     <NavUl sx={{ gap: 0.5 }}>
-      {data.map((list) => (
+      {data.map((list: any) => (
         <NavList
           key={list.title}
           data={list}

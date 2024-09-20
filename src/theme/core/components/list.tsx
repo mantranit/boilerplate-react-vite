@@ -1,11 +1,17 @@
 // ----------------------------------------------------------------------
 
+import { TTheme } from 'src/theme/create-theme';
+
 const MuiListItemIcon = {
   /** **************************************
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({ color: 'inherit', minWidth: 'auto', marginRight: theme.spacing(2) }),
+    root: ({ theme }: { theme: TTheme }) => ({
+      color: 'inherit',
+      minWidth: 'auto',
+      marginRight: theme.spacing(2),
+    }),
   },
 };
 
@@ -15,7 +21,9 @@ const MuiListItemAvatar = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { root: ({ theme }) => ({ minWidth: 'auto', marginRight: theme.spacing(2) }) },
+  styleOverrides: {
+    root: ({ theme }: { theme: TTheme }) => ({ minWidth: 'auto', marginRight: theme.spacing(2) }),
+  },
 };
 
 // ----------------------------------------------------------------------

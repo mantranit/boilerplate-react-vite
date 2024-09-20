@@ -4,7 +4,7 @@ import { isEqual } from 'src/utils/helper';
 
 // ----------------------------------------------------------------------
 
-export function useSetState(initialState: unknown) {
+export function useSetState(initialState: any) {
   const [state, set] = useState(initialState);
 
   const canReset = !isEqual(state, initialState);

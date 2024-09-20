@@ -36,7 +36,7 @@ export function useWidth() {
 
   const keys = useMemo(() => [...theme.breakpoints.keys].reverse(), [theme]);
 
-  const width = keys.reduce((output, key) => {
+  const width = keys.reduce((output: any, key: any) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const matches = useMediaQuery(theme.breakpoints.up(key));
 

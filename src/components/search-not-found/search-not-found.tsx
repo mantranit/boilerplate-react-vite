@@ -1,9 +1,12 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
+export type TSearchNotFoundProps = BoxProps & {
+  query?: any;
+};
 
-export function SearchNotFound({ query, sx, ...other }) {
+export function SearchNotFound({ query, sx, ...other }: TSearchNotFoundProps) {
   if (!query) {
     return (
       <Typography variant="body2" sx={sx}>

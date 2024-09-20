@@ -14,7 +14,7 @@ import { ReactNode } from 'react';
 // ----------------------------------------------------------------------
 type TAuthSplitLayoutProps = {
   sx?: any;
-  section?: TSectionProps;
+  section?: any;
   children?: ReactNode;
   header?: THeaderSectionProps;
 };

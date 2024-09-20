@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback, createContext } from 'react';
+import { useMemo, useState, useCallback, createContext, ReactNode } from 'react';
 
 import { useLocalStorage } from 'src/hooks/use-local-storage';
 
@@ -21,8 +21,12 @@ export const SettingsContext = createContext<any>({
 export const SettingsConsumer = SettingsContext.Consumer;
 
 // ----------------------------------------------------------------------
+export type TSettingsProviderProps = {
+  children: ReactNode;
+  settings: any;
+};
 
-export function SettingsProvider({ children, settings }) {
+export function SettingsProvider({ children, settings }: TSettingsProviderProps) {
   const values = useLocalStorage(STORAGE_KEY, settings);
 
   const [openDrawer, setOpenDrawer] = useState(false);

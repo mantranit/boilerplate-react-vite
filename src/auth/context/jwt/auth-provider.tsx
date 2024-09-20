@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useCallback } from 'react';
+import { useMemo, useEffect, useCallback, ReactNode } from 'react';
 
 import { useSetState } from 'src/hooks/use-set-state';
 
@@ -9,8 +9,11 @@ import { AuthContext } from '../auth-context';
 import { setSession, isValidToken } from './utils';
 
 // ----------------------------------------------------------------------
+export type TAuthProviderProps = {
+  children: ReactNode;
+};
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: TAuthProviderProps) {
   const { state, setState } = useSetState({
     user: null,
     loading: true,

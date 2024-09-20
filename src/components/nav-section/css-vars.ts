@@ -1,3 +1,4 @@
+import { TTheme } from 'src/theme/create-theme';
 import { varAlpha } from 'src/theme/styles';
 
 // ----------------------------------------------------------------------
@@ -7,7 +8,7 @@ export const bulletColor = {
   light: '#EDEFF2',
 };
 
-function colorVars(theme, variant) {
+function colorVars(theme: TTheme, variant: string) {
   const {
     vars: { palette },
   } = theme;
@@ -38,7 +39,7 @@ function colorVars(theme, variant) {
 
 // ----------------------------------------------------------------------
 
-function verticalVars(theme) {
+function verticalVars(theme: TTheme) {
   const { shape, spacing } = theme;
 
   return {
@@ -65,7 +66,7 @@ function verticalVars(theme) {
 
 // ----------------------------------------------------------------------
 
-function miniVars(theme) {
+function miniVars(theme: TTheme) {
   const { shape, spacing } = theme;
 
   return {
@@ -87,7 +88,7 @@ function miniVars(theme) {
 
 // ----------------------------------------------------------------------
 
-function horizontalVars(theme) {
+function horizontalVars(theme: TTheme) {
   const { shape, spacing } = theme;
 
   return {

@@ -6,7 +6,7 @@ import { STORAGE_KEY } from './constant';
 /** **************************************
  * Sign in
  *************************************** */
-export const signInWithPassword = async ({ email, password }) => {
+export const signInWithPassword = async ({ email, password }: any) => {
   try {
     const params = { email, password };
 
@@ -28,7 +28,7 @@ export const signInWithPassword = async ({ email, password }) => {
 /** **************************************
  * Sign up
  *************************************** */
-export const signUp = async ({ email, password, firstName, lastName }) => {
+export const signUp = async ({ email, password, firstName, lastName }: any) => {
   const params = {
     email,
     password,

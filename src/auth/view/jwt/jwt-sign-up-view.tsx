@@ -42,7 +42,7 @@ export const SignUpSchema = zod.object({
 // ----------------------------------------------------------------------
 
 export function JwtSignUpView() {
-  const { checkUserSession } = useAuthContext();
+  const { checkUserSession }: any = useAuthContext();
 
   const router = useRouter();
 
@@ -78,7 +78,7 @@ export function JwtSignUpView() {
       await checkUserSession?.();
 
       router.refresh();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }
@@ -131,7 +131,12 @@ export function JwtSignUpView() {
         description={
           <>
             {`Already have an account? `}
-            <Link component={RouterLink} href={paths.auth.jwt.signIn} variant="subtitle2">
+            <Link
+              component={RouterLink}
+              href={paths.auth.jwt.signIn}
+              to={paths.auth.jwt.signIn}
+              variant="subtitle2"
+            >
               Get started
             </Link>
           </>

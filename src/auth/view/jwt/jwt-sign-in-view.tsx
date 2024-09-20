@@ -68,7 +68,7 @@ export function JwtSignInView() {
       await checkUserSession?.();
 
       router.refresh();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }
@@ -82,6 +82,7 @@ export function JwtSignInView() {
         <Link
           component={RouterLink}
           href="#"
+          to="#"
           variant="body2"
           color="inherit"
           sx={{ alignSelf: 'flex-end' }}
@@ -128,7 +129,12 @@ export function JwtSignInView() {
         description={
           <>
             {`Don’t have an account? `}
-            <Link component={RouterLink} href={paths.auth.jwt.signUp} variant="subtitle2">
+            <Link
+              component={RouterLink}
+              to={paths.auth.jwt.signUp}
+              href={paths.auth.jwt.signUp}
+              variant="subtitle2"
+            >
               Get started
             </Link>
           </>

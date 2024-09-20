@@ -341,6 +341,6 @@ export const _coursesReminder = [...Array(4)].map((_, index) => ({
   id: _mock.id(index),
   title: _mock.courseNames(index),
   totalLesson: 12,
-  reminderAt: today(),
+  reminderAt: today(''),
   currentLesson: index + 7,
 }));

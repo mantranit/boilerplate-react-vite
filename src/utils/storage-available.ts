@@ -13,7 +13,7 @@ export function localStorageAvailable() {
 
 // ----------------------------------------------------------------------
 
-export function localStorageGetItem(key, defaultValue = '') {
+export function localStorageGetItem(key: string, defaultValue = '') {
   const storageAvailable = localStorageAvailable();
 
   let value;

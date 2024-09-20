@@ -15,7 +15,7 @@ export default axiosInstance;
 
 // ----------------------------------------------------------------------
 
-export const fetcher = async (args) => {
+export const fetcher = async (args: any) => {
   try {
     const [url, config] = Array.isArray(args) ? args : [args];
 

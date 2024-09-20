@@ -36,8 +36,8 @@ export const NavItem = forwardRef(
       externalLink,
       enabledRootRedirect,
       ...other
-    }: TNavItemProps,
-    ref
+    }: any,
+    ref: any
   ) => {
     const navItem = useNavItem({
       path,
@@ -115,7 +115,7 @@ export const NavItem = forwardRef(
 const StyledNavItem = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
     prop !== 'active' && prop !== 'open' && prop !== 'disabled' && prop !== 'depth',
-})(({ active, open, disabled, depth, theme }) => {
+})(({ active, open, disabled, depth, theme }: any) => {
   const rootItem = depth === 1;
 
   const subItem = !rootItem;

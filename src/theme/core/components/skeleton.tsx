@@ -1,3 +1,4 @@
+import { TTheme } from 'src/theme/create-theme';
 import { varAlpha } from '../../styles';
 
 // ----------------------------------------------------------------------
@@ -12,10 +13,10 @@ const MuiSkeleton = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: TTheme }) => ({
       backgroundColor: varAlpha(theme.vars.palette.grey['400Channel'], 0.12),
     }),
-    rounded: ({ theme }) => ({ borderRadius: theme.shape.borderRadius * 2 }),
+    rounded: ({ theme }: { theme: TTheme }) => ({ borderRadius: theme.shape.borderRadius * 2 }),
   },
 };
 

@@ -1,6 +1,6 @@
 import Box, { BoxProps } from '@mui/material/Box';
 import Collapse, { CollapseProps } from '@mui/material/Collapse';
-import ListSubheader from '@mui/material/ListSubheader';
+import ListSubheader, { ListSubheaderProps } from '@mui/material/ListSubheader';
 
 import { stylesMode } from 'src/theme/styles';
 
@@ -10,7 +10,7 @@ import { Iconify, iconifyClasses } from '../iconify';
 
 // ----------------------------------------------------------------------
 
-export function stateClasses({ open, active, disabled }) {
+export function stateClasses({ open, active, disabled }: any) {
   let classes = navSectionClasses.item.root;
 
   if (active) {
@@ -67,7 +67,12 @@ export const sharedStyles = {
 
 // ----------------------------------------------------------------------
 
-export function Subheader({ sx, open, children, ...other }) {
+export function Subheader({
+  sx,
+  open,
+  children,
+  ...other
+}: ListSubheaderProps & { open?: boolean }) {
   return (
     <ListSubheader
       disableSticky
@@ -178,7 +183,7 @@ export function NavLi({ sx, children, disabled, ...other }: TNavLiProps) {
 
 // ----------------------------------------------------------------------
 
-export function NavUl({ children, sx, ...other }) {
+export function NavUl({ children, sx, ...other }: BoxProps) {
   return (
     <Box
       component="ul"

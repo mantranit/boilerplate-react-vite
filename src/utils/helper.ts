@@ -5,10 +5,10 @@
 
 // ----------------------------------------------------------------------
 
-export function flattenArray(list, key = 'children') {
-  let children = [];
+export function flattenArray(list: any[], key = 'children'): any {
+  let children: string | any[] = [];
 
-  const flatten = list?.map((item) => {
+  const flatten = list?.map((item: { [x: string]: any }) => {
     if (item[key] && item[key].length) {
       children = [...children, ...item[key]];
     }
@@ -20,7 +20,7 @@ export function flattenArray(list, key = 'children') {
 
 // ----------------------------------------------------------------------
 
-export function flattenDeep(array) {
+export function flattenDeep(array: any[]) {
   const isArray = array && Array.isArray(array);
 
   if (isArray) {
@@ -31,8 +31,8 @@ export function flattenDeep(array) {
 
 // ----------------------------------------------------------------------
 
-export function orderBy(array, properties, orders) {
-  return array.slice().sort((a, b) => {
+export function orderBy(array: any[], properties: string | any[], orders: string[]) {
+  return array.slice().sort((a: { [x: string]: any }, b: { [x: string]: any }) => {
     for (let i = 0; i < properties.length; i += 1) {
       const property = properties[i];
       const order = orders && orders[i] === 'desc' ? -1 : 1;
@@ -49,8 +49,8 @@ export function orderBy(array, properties, orders) {
 
 // ----------------------------------------------------------------------
 
-export function keyBy(array, key) {
-  return (array || []).reduce((result, item) => {
+export function keyBy(array: any, key: string | number) {
+  return (array || []).reduce((result: any, item: { [x: string]: any }) => {
     const keyValue = key ? item[key] : item;
 
     return { ...result, [String(keyValue)]: item };
@@ -59,13 +59,13 @@ export function keyBy(array, key) {
 
 // ----------------------------------------------------------------------
 
-export function sumBy(array, iteratee) {
-  return array.reduce((sum, item) => sum + iteratee(item), 0);
+export function sumBy(array: any[], iteratee: (arg0: any) => any) {
+  return array.reduce((sum: any, item: any) => sum + iteratee(item), 0);
 }
 
 // ----------------------------------------------------------------------
 
-export function isEqual(a, b) {
+export function isEqual(a: any, b: any): any {
   if (a === null || a === undefined || b === null || b === undefined) {
     return a === b;
   }
@@ -102,11 +102,11 @@ export function isEqual(a, b) {
 
 // ----------------------------------------------------------------------
 
-function isObject(item) {
+function isObject(item: any) {
   return item && typeof item === 'object' && !Array.isArray(item);
 }
 
-export const merge = (target, ...sources) => {
+export const merge = (target: { [x: string]: any }, ...sources: any[]): any => {
   if (!sources.length) return target;
 
   const source = sources.shift();

@@ -3,7 +3,7 @@ import { grey, common } from './palette';
 
 // ----------------------------------------------------------------------
 
-export function shadows(colorScheme) {
+export function shadows(colorScheme: string) {
   const colorChannel = colorScheme === 'light' ? grey['500Channel'] : common.blackChannel;
 
   const color1 = varAlpha(colorChannel, 0.2);

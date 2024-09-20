@@ -21,7 +21,7 @@ export const animateTextClasses = {
 
 export type TAnimateTextProps = TypographyProps & {
   text: string;
-  variants: string;
+  variants: any;
   once?: boolean;
   amount?: number;
   component: string;

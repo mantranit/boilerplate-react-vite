@@ -34,7 +34,7 @@ export function View403() {
           <ForbiddenIllustration sx={{ my: { xs: 5, sm: 10 } }} />
         </m.div>
 
-        <Button component={RouterLink} href="/" size="large" variant="contained">
+        <Button component={RouterLink} href="/" to="/" size="large" variant="contained">
           Go to home
         </Button>
       </Container>

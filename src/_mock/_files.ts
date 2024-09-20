@@ -59,7 +59,7 @@ export const FILE_TYPE_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-const shared = (index) =>
+const shared = (index: number) =>
   (index === 0 && SHARED_PERSONS.slice(0, 5)) ||
   (index === 1 && SHARED_PERSONS.slice(5, 9)) ||
   (index === 2 && SHARED_PERSONS.slice(9, 11)) ||
@@ -80,7 +80,7 @@ export const _folders = FOLDERS.map((name, index) => ({
   isFavorited: _mock.boolean(index + 1),
 }));
 
-export const _files = _fileNames.map((name, index) => ({
+export const _files = _fileNames.map((name: string, index: number) => ({
   id: `${_mock.id(index)}_file`,
   name,
   url: URLS[index],
