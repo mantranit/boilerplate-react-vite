@@ -101,7 +101,7 @@ export function ContractListView({ currentEmployee, canEdit }: any) {
 
   return (
     <>
-      <Box sx={{ pb: 2.5 }}>
+      <Box sx={{ pb: 2, textAlign: 'right' }}>
         <Button
           onClick={create.onTrue}
           variant="contained"
