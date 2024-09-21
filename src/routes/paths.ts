@@ -16,6 +16,12 @@ export const paths = {
     edit: (id: string) => `/employees/${id}`,
     departments: '/employees/departments',
     positions: '/employees/positions',
+    view: '/employee-details',
+  },
+  leave: {
+    type: '/leave-types',
+    submit: '/submit-leave',
+    timesheet: '/timesheet',
   },
   dashboard: {
     root: '/',

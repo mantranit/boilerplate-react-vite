@@ -48,8 +48,8 @@ export const navData = [
   {
     subheader: 'Employee',
     items: [
-      { title: 'Individual', path: paths.dashboard.two, icon: ICONS.user },
-      { title: 'Leave', path: paths.dashboard.root, icon: ICONS.chat },
+      { title: 'Employee Details', path: paths.employee.view, icon: ICONS.user },
+      { title: 'Leave', path: paths.leave.submit, icon: ICONS.chat },
     ],
   },
   {
@@ -65,10 +65,10 @@ export const navData = [
           { title: 'Positions & Level', path: paths.employee.positions },
         ],
       },
-      { title: 'Leave Types', path: paths.dashboard.three, icon: ICONS.folder },
+      { title: 'Leave Types', path: paths.leave.type, icon: ICONS.folder },
       {
         title: 'Timesheet',
-        path: '/timesheet',
+        path: paths.leave.timesheet,
         icon: ICONS.calendar,
       },
     ],

@@ -3,10 +3,10 @@ import { ContractListView } from '../contract/view';
 
 // ----------------------------------------------------------------------
 
-export function EmployeeTabContract({ currentEmployee }) {
+export function EmployeeTabContract({ currentEmployee, canEdit }: any) {
   return (
     <>
-      <ContractListView />
+      <ContractListView currentEmployee={currentEmployee} canEdit={canEdit} />
     </>
   );
 }

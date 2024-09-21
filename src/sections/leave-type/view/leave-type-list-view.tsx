@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import Card from '@mui/material/Card';
 import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
@@ -13,11 +11,9 @@ import IconButton from '@mui/material/IconButton';
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useSetState } from 'src/hooks/use-set-state';
 
-import { varAlpha } from 'src/theme/styles';
 import { DashboardContent } from 'src/layouts/dashboard';
 import { _roles, _userList, USER_STATUS_OPTIONS } from 'src/_mock';
 
-import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
@@ -35,8 +31,9 @@ import {
   TablePaginationCustom,
 } from 'src/components/table';
 
-import { ContractTableRow } from '../contract-table-row';
-import { ContractCreateEditForm } from '../contract-create-edit-form';
+import { LeaveTypeTableRow } from '../leave-type-table-row';
+import { LeaveTypeTableToolbar } from '../leave-type-table-toolbar';
+import { LeaveTypeCreateEditForm } from '../leave-type-create-edit-form';
 
 // ----------------------------------------------------------------------
 
@@ -49,7 +46,7 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-export function ContractListView({ currentEmployee, canEdit }: any) {
+export function LeaveTypeListView() {
   const table = useTable();
 
   const confirm = useBoolean();
@@ -99,96 +96,115 @@ export function ContractListView({ currentEmployee, canEdit }: any) {
     });
   }, [dataFiltered.length, dataInPage.length, table, tableData]);
 
+  const handleFilterStatus = useCallback(
+    (event: any, newValue: any) => {
+      table.onResetPage();
+      filters.setState({ status: newValue });
+    },
+    [filters, table]
+  );
+
   return (
     <>
-      <Box sx={{ pb: 2.5 }}>
-        <Button
-          onClick={create.onTrue}
-          variant="contained"
-          color="primary"
-          startIcon={<Iconify icon="mingcute:add-line" />}
-        >
-          New contract
-        </Button>
-      </Box>
+      <DashboardContent>
+        <CustomBreadcrumbs
+          heading="Leave Types"
+          action={
+            <Button
+              onClick={create.onTrue}
+              variant="contained"
+              color="primary"
+              startIcon={<Iconify icon="mingcute:add-line" />}
+            >
+              New Leave Type
+            </Button>
+          }
+        />
 
-      <ContractCreateEditForm open={create.value} onClose={create.onFalse} />
+        <LeaveTypeCreateEditForm open={create.value} onClose={create.onFalse} />
 
-      <Card>
-        <Box sx={{ position: 'relative' }}>
-          <TableSelectedAction
-            dense={table.dense}
-            numSelected={table.selected.length}
-            rowCount={dataFiltered.length}
-            onSelectAllRows={(checked: boolean) =>
-              table.onSelectAllRows(
-                checked,
-                dataFiltered.map((row: any) => row.id)
-              )
-            }
-            action={
-              <Tooltip title="Delete">
-                <IconButton color="primary" onClick={confirm.onTrue}>
-                  <Iconify icon="solar:trash-bin-trash-bold" />
-                </IconButton>
-              </Tooltip>
-            }
+        <Card>
+          <LeaveTypeTableToolbar
+            filters={filters}
+            onResetPage={table.onResetPage}
+            options={{ roles: _roles }}
           />
 
-          <Scrollbar>
-            <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 720 }}>
-              <TableHeadCustom
-                order={table.order}
-                orderBy={table.orderBy}
-                headLabel={TABLE_HEAD}
-                rowCount={dataFiltered.length}
-                numSelected={table.selected.length}
-                onSort={table.onSort}
-                onSelectAllRows={(checked: boolean) =>
-                  table.onSelectAllRows(
-                    checked,
-                    dataFiltered.map((row: any) => row.id)
-                  )
-                }
-              />
+          <Box sx={{ position: 'relative' }}>
+            <TableSelectedAction
+              dense={table.dense}
+              numSelected={table.selected.length}
+              rowCount={dataFiltered.length}
+              onSelectAllRows={(checked: boolean) =>
+                table.onSelectAllRows(
+                  checked,
+                  dataFiltered.map((row: any) => row.id)
+                )
+              }
+              action={
+                <Tooltip title="Delete">
+                  <IconButton color="primary" onClick={confirm.onTrue}>
+                    <Iconify icon="solar:trash-bin-trash-bold" />
+                  </IconButton>
+                </Tooltip>
+              }
+            />
 
-              <TableBody>
-                {dataFiltered
-                  .slice(
-                    table.page * table.rowsPerPage,
-                    table.page * table.rowsPerPage + table.rowsPerPage
-                  )
-                  .map((row: any) => (
-                    <ContractTableRow
-                      key={row.id}
-                      row={row}
-                      selected={table.selected.includes(row.id)}
-                      onSelectRow={() => table.onSelectRow(row.id)}
-                      onDeleteRow={() => handleDeleteRow(row.id)}
-                    />
-                  ))}
-
-                <TableEmptyRows
-                  height={table.dense ? 56 : 56 + 20}
-                  emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
+            <Scrollbar>
+              <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 720 }}>
+                <TableHeadCustom
+                  order={table.order}
+                  orderBy={table.orderBy}
+                  headLabel={TABLE_HEAD}
+                  rowCount={dataFiltered.length}
+                  numSelected={table.selected.length}
+                  onSort={table.onSort}
+                  onSelectAllRows={(checked: boolean) =>
+                    table.onSelectAllRows(
+                      checked,
+                      dataFiltered.map((row: any) => row.id)
+                    )
+                  }
                 />
 
-                <TableNoData notFound={notFound} />
-              </TableBody>
-            </Table>
-          </Scrollbar>
-        </Box>
+                <TableBody>
+                  {dataFiltered
+                    .slice(
+                      table.page * table.rowsPerPage,
+                      table.page * table.rowsPerPage + table.rowsPerPage
+                    )
+                    .map((row: any) => (
+                      <LeaveTypeTableRow
+                        key={row.id}
+                        row={row}
+                        selected={table.selected.includes(row.id)}
+                        onSelectRow={() => table.onSelectRow(row.id)}
+                        onDeleteRow={() => handleDeleteRow(row.id)}
+                      />
+                    ))}
 
-        <TablePaginationCustom
-          page={table.page}
-          dense={table.dense}
-          count={dataFiltered.length}
-          rowsPerPage={table.rowsPerPage}
-          onPageChange={table.onChangePage}
-          onChangeDense={table.onChangeDense}
-          onRowsPerPageChange={table.onChangeRowsPerPage}
-        />
-      </Card>
+                  <TableEmptyRows
+                    height={table.dense ? 56 : 56 + 20}
+                    emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
+                  />
+
+                  <TableNoData notFound={notFound} />
+                </TableBody>
+              </Table>
+            </Scrollbar>
+          </Box>
+
+          <TablePaginationCustom
+            page={table.page}
+            dense={table.dense}
+            count={dataFiltered.length}
+            rowsPerPage={table.rowsPerPage}
+            onPageChange={table.onChangePage}
+            onChangeDense={table.onChangeDense}
+            onRowsPerPageChange={table.onChangeRowsPerPage}
+          />
+        </Card>
+      </DashboardContent>
 
       <ConfirmDialog
         open={confirm.value}

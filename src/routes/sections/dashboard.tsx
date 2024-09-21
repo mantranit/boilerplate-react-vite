@@ -26,6 +26,8 @@ const EmployeeNewPage = lazy(() => import('src/pages/employee/new'));
 const EmployeeEditPage = lazy(() => import('src/pages/employee/edit'));
 const DepartmentListPage = lazy(() => import('src/pages/employee/department'));
 const PositionListPage = lazy(() => import('src/pages/employee/position'));
+const LeaveTypeListPage = lazy(() => import('src/pages/leave-type/list'));
+const EmployeeDetailsViewPage = lazy(() => import('src/pages/employee-details/view'));
 
 // ----------------------------------------------------------------------
 
@@ -53,8 +55,9 @@ export const dashboardRoutes = [
           { path: 'six', element: <PageSix /> },
         ],
       },
-      { path: 'users', element: <UserListPage /> },
-      { path: 'roles', element: <RoleListPage /> },
+      { path: 'leave-types', element: <LeaveTypeListPage /> },
+      { path: 'submit-leave', element: <LeaveTypeListPage /> },
+      { path: 'employee-details', element: <EmployeeDetailsViewPage /> },
       {
         path: 'employees',
         children: [
@@ -65,6 +68,8 @@ export const dashboardRoutes = [
           { path: 'positions', element: <PositionListPage /> },
         ],
       },
+      { path: 'users', element: <UserListPage /> },
+      { path: 'roles', element: <RoleListPage /> },
     ],
   },
 ];

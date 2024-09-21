@@ -31,7 +31,7 @@ const TABS_EDIT = [
 
 // ----------------------------------------------------------------------
 
-export function EmployeeFormView({ currentEmployee }: any) {
+export function EmployeeFormView({ currentEmployee, canEdit = true }: any) {
   const tabs = useTabs('general');
 
   return (
@@ -44,11 +44,17 @@ export function EmployeeFormView({ currentEmployee }: any) {
         ))}
       </Tabs>
 
-      {tabs.value === 'general' && <EmployeeTabGeneral currentEmployee={currentEmployee} />}
+      {tabs.value === 'general' && (
+        <EmployeeTabGeneral currentEmployee={currentEmployee} canEdit={canEdit} />
+      )}
 
-      {tabs.value === 'contract' && <EmployeeTabContract currentEmployee={currentEmployee} />}
+      {tabs.value === 'contract' && (
+        <EmployeeTabContract currentEmployee={currentEmployee} canEdit={canEdit} />
+      )}
 
-      {tabs.value === 'salary' && <EmployeeTabSalary currentEmployee={currentEmployee} />}
+      {tabs.value === 'salary' && (
+        <EmployeeTabSalary currentEmployee={currentEmployee} canEdit={canEdit} />
+      )}
     </DashboardContent>
   );
 }
