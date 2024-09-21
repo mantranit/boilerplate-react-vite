@@ -15,7 +15,7 @@ export function RHFUploadAvatar({ rules, name, ...other }: any) {
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => {
-        const onDrop = (acceptedFiles) => {
+        const onDrop = (acceptedFiles: any) => {
           const value = acceptedFiles[0];
 
           setValue(name, value, { shouldValidate: true });
@@ -72,7 +72,7 @@ export function RHFUpload({ rules, name, multiple, helperText, ...other }: any) 
           helperText: error?.message ?? helperText,
         };
 
-        const onDrop = (acceptedFiles) => {
+        const onDrop = (acceptedFiles: any) => {
           const value = multiple ? [...field.value, ...acceptedFiles] : acceptedFiles[0];
 
           setValue(name, value, { shouldValidate: true });

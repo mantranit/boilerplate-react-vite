@@ -19,29 +19,30 @@ import { fData } from 'src/utils/format-number';
 import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
 import { Form, Field } from 'src/components/hook-form';
+import { CardHeader, Divider } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-export function EmployeeNewEditForm({ currentUser }: any) {
+export function EmployeeTabGeneralCommon({ currentEmployee }: any) {
   const router = useRouter();
 
   const defaultValues = useMemo(
     () => ({
-      status: currentUser?.status || '',
-      avatarUrl: currentUser?.avatarUrl || null,
+      status: currentEmployee?.status || '',
+      avatarUrl: currentEmployee?.avatarUrl || null,
       createUser: true,
-      displayName: currentUser?.displayName || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
-      address: currentUser?.address || '',
-      zipCode: currentUser?.zipCode || '',
-      company: currentUser?.company || '',
-      role: currentUser?.role || [],
+      displayName: currentEmployee?.displayName || '',
+      email: currentEmployee?.email || '',
+      phoneNumber: currentEmployee?.phoneNumber || '',
+      country: currentEmployee?.country || '',
+      state: currentEmployee?.state || '',
+      city: currentEmployee?.city || '',
+      address: currentEmployee?.address || '',
+      zipCode: currentEmployee?.zipCode || '',
+      company: currentEmployee?.company || '',
+      role: currentEmployee?.role || [],
     }),
-    [currentUser]
+    [currentEmployee]
   );
 
   const methods = useForm({
@@ -63,7 +64,7 @@ export function EmployeeNewEditForm({ currentUser }: any) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      toast.success(currentUser ? 'Update success!' : 'Create success!');
+      toast.success(currentEmployee ? 'Update success!' : 'Create success!');
       router.push(paths.employee.list);
       console.info('DATA', data);
     } catch (error) {
@@ -76,7 +77,7 @@ export function EmployeeNewEditForm({ currentUser }: any) {
       <Grid container spacing={3}>
         <Grid xs={12} md={4}>
           <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            {currentUser && (
+            {currentEmployee && (
               <Label
                 color={
                   (values.status === 'active' && 'success') ||
@@ -111,7 +112,7 @@ export function EmployeeNewEditForm({ currentUser }: any) {
               />
             </Box>
 
-            {currentUser && (
+            {currentEmployee && (
               <FormControlLabel
                 labelPlacement="start"
                 control={
@@ -148,7 +149,7 @@ export function EmployeeNewEditForm({ currentUser }: any) {
               />
             )}
 
-            {!currentUser && (
+            {!currentEmployee && (
               <Field.Switch
                 name="createUser"
                 labelPlacement="start"
@@ -166,7 +167,7 @@ export function EmployeeNewEditForm({ currentUser }: any) {
               />
             )}
 
-            {currentUser && (
+            {currentEmployee && (
               <Stack justifyContent="center" alignItems="center" sx={{ mt: 3 }}>
                 <Button variant="contained" color="error">
                   Delete employee
@@ -177,31 +178,36 @@ export function EmployeeNewEditForm({ currentUser }: any) {
         </Grid>
 
         <Grid xs={12} md={8}>
-          <Card sx={{ p: 3 }}>
-            <Box
-              rowGap={3}
-              columnGap={2}
-              display="grid"
-              gridTemplateColumns={{
-                xs: 'repeat(1, 1fr)',
-                sm: 'repeat(2, 1fr)',
-              }}
-            >
-              <Field.Text name="displayName" label="Full name" />
-              <Field.Text name="email" label="Email address" />
-              <Field.Text name="phoneNumber" label="Phone number" />
+          <Card>
+            <CardHeader title="Common" />
+            <Stack sx={{ p: 3 }}>
+              <Box
+                rowGap={3}
+                columnGap={2}
+                display="grid"
+                gridTemplateColumns={{
+                  xs: 'repeat(1, 1fr)',
+                  sm: 'repeat(2, 1fr)',
+                }}
+              >
+                <Field.Text name="displayName" label="Full name" />
+                <Field.Text name="email" label="Email address" />
+                <Field.Text name="phoneNumber" label="Phone number" />
 
-              <Field.Text name="state" label="State/region" />
-              <Field.Text name="city" label="City" />
-              <Field.Text name="address" label="Address" />
-              <Field.Text name="zipCode" label="Zip/code" />
-              <Field.Text name="company" label="Company" />
-              <Field.Text name="role" label="Role" />
-            </Box>
+                <Field.Text name="state" label="State/region" />
+                <Field.Text name="city" label="City" />
+                <Field.Text name="address" label="Address" />
+                <Field.Text name="zipCode" label="Zip/code" />
+                <Field.Text name="company" label="Company" />
+                {!currentEmployee && <Field.Text name="role" label="Role" />}
+              </Box>
+            </Stack>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <Divider sx={{ borderStyle: 'dashed' }} />
+
+            <Stack spacing={1.5} direction="row" justifyContent="flex-end" sx={{ p: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!currentUser ? 'Create employee' : 'Save changes'}
+                {!currentEmployee ? 'Create employee' : 'Save changes'}
               </LoadingButton>
             </Stack>
           </Card>

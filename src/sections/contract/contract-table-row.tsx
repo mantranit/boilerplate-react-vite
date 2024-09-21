@@ -15,10 +15,14 @@ import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 
+import { ContractCreateEditForm } from './contract-create-edit-form';
+
 // ----------------------------------------------------------------------
 
-export function EmployeeTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }: any) {
+export function ContractTableRow({ row, selected, onSelectRow, onDeleteRow }: any) {
   const confirm = useBoolean();
+
+  const quickEdit = useBoolean();
 
   return (
     <>
@@ -32,19 +36,13 @@ export function EmployeeTableRow({ row, selected, onEditRow, onSelectRow, onDele
             <Avatar alt={row.name} src={row.avatarUrl} />
 
             <Stack sx={{ typography: 'body2', flex: '1 1 auto', alignItems: 'flex-start' }}>
-              <Link color="inherit" onClick={onEditRow} sx={{ cursor: 'pointer' }}>
-                {row.displayName}
-              </Link>
+              {row.displayName}
               <Box component="span" sx={{ color: 'text.disabled' }}>
                 {row.email}
               </Box>
             </Stack>
           </Stack>
         </TableCell>
-
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.phoneNumber}</TableCell>
-
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.company}</TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.role}</TableCell>
 
@@ -65,7 +63,10 @@ export function EmployeeTableRow({ row, selected, onEditRow, onSelectRow, onDele
         <TableCell>
           <Stack direction="row" alignItems="center">
             <Tooltip title="Edit" placement="top" arrow>
-              <IconButton color="default" onClick={onEditRow}>
+              <IconButton
+                color={quickEdit.value ? 'inherit' : 'default'}
+                onClick={quickEdit.onTrue}
+              >
                 <Iconify icon="solar:pen-bold" />
               </IconButton>
             </Tooltip>
@@ -78,6 +79,12 @@ export function EmployeeTableRow({ row, selected, onEditRow, onSelectRow, onDele
           </Stack>
         </TableCell>
       </TableRow>
+
+      <ContractCreateEditForm
+        currentUser={row}
+        open={quickEdit.value}
+        onClose={quickEdit.onFalse}
+      />
 
       <ConfirmDialog
         open={confirm.value}

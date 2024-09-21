@@ -5,7 +5,7 @@ import { useParams } from 'src/routes/hooks';
 import { CONFIG } from 'src/config-global';
 import { _userList } from 'src/_mock/_user';
 
-import { EmployeeEditView } from 'src/sections/employee/view';
+import { EmployeeFormView } from 'src/sections/employee/view';
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ export default function Page() {
         <title> {metadata.title}</title>
       </Helmet>
 
-      <EmployeeEditView user={currentUser} />
+      <EmployeeFormView currentEmployee={currentUser} />
     </>
   );
 }

@@ -10,10 +10,6 @@ import Tooltip from '@mui/material/Tooltip';
 import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
-
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useSetState } from 'src/hooks/use-set-state';
 
@@ -39,24 +35,24 @@ import {
   TablePaginationCustom,
 } from 'src/components/table';
 
-import { EmployeeTableRow } from '../employee-table-row';
-import { EmployeeTableToolbar } from '../employee-table-toolbar';
-import { EmployeeTableFiltersResult } from '../employee-table-filters-result';
+import { ContractTableRow } from '../contract-table-row';
+import { ContractTableToolbar } from '../contract-table-toolbar';
+import { ContractTableFiltersResult } from '../contract-table-filters-result';
 import { TTheme } from 'src/theme/create-theme';
+import { ContractCreateEditForm } from '../contract-create-edit-form';
 
 // ----------------------------------------------------------------------
 
 const STATUS_OPTIONS = [
   { value: 'all', label: 'All' },
   { value: 'active', label: 'Active' },
-  { value: 'resigned', label: 'Resigned' },
+  { value: 'pending', label: 'Pending' },
+  { value: 'disabled', label: 'Disabled' },
   { value: 'trash', label: 'Trash' },
 ];
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name' },
-  { id: 'phoneNumber', label: 'Phone number', width: 180 },
-  { id: 'company', label: 'Company', width: 220 },
   { id: 'role', label: 'Role', width: 180 },
   { id: 'status', label: 'Status', width: 100 },
   { id: '', width: 88 },
@@ -64,12 +60,12 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-export function EmployeeListView() {
+export function UserListView() {
   const table = useTable();
 
-  const router = useRouter();
-
   const confirm = useBoolean();
+
+  const create = useBoolean();
 
   const [tableData, setTableData] = useState(_userList);
 
@@ -114,13 +110,6 @@ export function EmployeeListView() {
     });
   }, [dataFiltered.length, dataInPage.length, table, tableData]);
 
-  const handleEditRow = useCallback(
-    (id: any) => {
-      router.push(paths.employee.edit(id));
-    },
-    [router]
-  );
-
   const handleFilterStatus = useCallback(
     (event: any, newValue: any) => {
       table.onResetPage();
@@ -133,37 +122,21 @@ export function EmployeeListView() {
     <>
       <DashboardContent>
         <CustomBreadcrumbs
-          heading="Employees"
+          heading="Users"
           action={
-            <Box gap={2} display="flex">
-              <Button
-                component={RouterLink}
-                href={paths.employee.new}
-                to={paths.employee.new}
-                variant="contained"
-                color="primary"
-                startIcon={<Iconify icon="mingcute:add-line" />}
-              >
-                New employee
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<Iconify icon="solar:import-bold" />}
-              >
-                Import
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<Iconify icon="solar:export-bold" />}
-              >
-                Export
-              </Button>
-            </Box>
+            <Button
+              onClick={create.onTrue}
+              variant="contained"
+              color="primary"
+              startIcon={<Iconify icon="mingcute:add-line" />}
+            >
+              New user
+            </Button>
           }
           sx={{ mb: { xs: 3, md: 5 } }}
         />
+
+        <ContractCreateEditForm open={create.value} onClose={create.onFalse} />
 
         <Card>
           <Tabs
@@ -190,11 +163,11 @@ export function EmployeeListView() {
                     color={
                       (tab.value === 'active' && 'success') ||
                       (tab.value === 'pending' && 'warning') ||
-                      (tab.value === 'banned' && 'error') ||
+                      (tab.value === 'disabled' && 'error') ||
                       'default'
                     }
                   >
-                    {['active', 'pending', 'banned', 'rejected'].includes(tab.value)
+                    {['active', 'pending', 'disabled', 'trash'].includes(tab.value)
                       ? tableData.filter((user) => user.status === tab.value).length
                       : tableData.length}
                   </Label>
@@ -203,14 +176,14 @@ export function EmployeeListView() {
             ))}
           </Tabs>
 
-          <EmployeeTableToolbar
+          <ContractTableToolbar
             filters={filters}
             onResetPage={table.onResetPage}
             options={{ roles: _roles }}
           />
 
           {canReset && (
-            <EmployeeTableFiltersResult
+            <ContractTableFiltersResult
               filters={filters}
               totalResults={dataFiltered.length}
               onResetPage={table.onResetPage}
@@ -223,7 +196,7 @@ export function EmployeeListView() {
               dense={table.dense}
               numSelected={table.selected.length}
               rowCount={dataFiltered.length}
-              onSelectAllRows={(checked: any) =>
+              onSelectAllRows={(checked: boolean) =>
                 table.onSelectAllRows(
                   checked,
                   dataFiltered.map((row: any) => row.id)
@@ -239,7 +212,7 @@ export function EmployeeListView() {
             />
 
             <Scrollbar>
-              <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
+              <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 720 }}>
                 <TableHeadCustom
                   order={table.order}
                   orderBy={table.orderBy}
@@ -247,7 +220,7 @@ export function EmployeeListView() {
                   rowCount={dataFiltered.length}
                   numSelected={table.selected.length}
                   onSort={table.onSort}
-                  onSelectAllRows={(checked: any) =>
+                  onSelectAllRows={(checked: boolean) =>
                     table.onSelectAllRows(
                       checked,
                       dataFiltered.map((row: any) => row.id)
@@ -262,13 +235,12 @@ export function EmployeeListView() {
                       table.page * table.rowsPerPage + table.rowsPerPage
                     )
                     .map((row: any) => (
-                      <EmployeeTableRow
+                      <ContractTableRow
                         key={row.id}
                         row={row}
                         selected={table.selected.includes(row.id)}
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onDeleteRow={() => handleDeleteRow(row.id)}
-                        onEditRow={() => handleEditRow(row.id)}
                       />
                     ))}
 

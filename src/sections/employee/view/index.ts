@@ -1,5 +1,3 @@
-export * from './employee-edit-view';
-
 export * from './employee-list-view';
 
-export * from './employee-create-view';
+export * from './employee-form-view';

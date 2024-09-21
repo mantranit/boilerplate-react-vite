@@ -6,10 +6,10 @@ import { FiltersBlock, FiltersResult } from 'src/components/filters-result';
 
 // ----------------------------------------------------------------------
 
-export function EmployeeTableFiltersResult({ filters, onResetPage, totalResults, sx }: any) {
+export function ContractTableFiltersResult({ filters, onResetPage, totalResults, sx }: any) {
   const handleRemoveKeyword = useCallback(() => {
     onResetPage();
-    filters.setState({ displayName: '' });
+    filters.setState({ name: '' });
   }, [filters, onResetPage]);
 
   const handleRemoveStatus = useCallback(() => {

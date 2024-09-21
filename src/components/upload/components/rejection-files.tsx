@@ -33,7 +33,7 @@ export function RejectionFiles({ files, sx, className, ...other }: any) {
       }}
       {...other}
     >
-      {files.map(({ file, errors }) => {
+      {files.map(({ file, errors }: any) => {
         const { path, size } = fileData(file);
 
         return (
@@ -42,7 +42,7 @@ export function RejectionFiles({ files, sx, className, ...other }: any) {
               {path} - {size ? fData(size) : ''}
             </Typography>
 
-            {errors.map((error) => (
+            {errors.map((error: any) => (
               <Box key={error.code} component="span" sx={{ typography: 'caption' }}>
                 - {error.message}
               </Box>

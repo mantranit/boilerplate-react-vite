@@ -66,13 +66,13 @@ export function RHFMultiSwitch({
 }: any) {
   const { control } = useFormContext();
 
-  const getSelected = (selectedItems, item) =>
+  const getSelected = (selectedItems: any, item: any) =>
     selectedItems.includes(item)
-      ? selectedItems.filter((value) => value !== item)
+      ? selectedItems.filter((value: any) => value !== item)
       : [...selectedItems, item];
 
-  const accessibility = (val) => val;
-  const ariaLabel = (val) => `Switch ${val}`;
+  const accessibility = (val: any) => val;
+  const ariaLabel = (val: any) => `Switch ${val}`;
 
   return (
     <Controller
@@ -92,7 +92,7 @@ export function RHFMultiSwitch({
           )}
 
           <FormGroup {...other}>
-            {options.map((option) => (
+            {options.map((option: any) => (
               <FormControlLabel
                 key={option.value}
                 control={

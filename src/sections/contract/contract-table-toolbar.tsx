@@ -14,7 +14,7 @@ import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export function EmployeeTableToolbar({ filters, options, onResetPage }: any) {
+export function ContractTableToolbar({ filters, options, onResetPage }: any) {
   const handleFilterName = useCallback(
     (event: any) => {
       onResetPage();
@@ -43,12 +43,12 @@ export function EmployeeTableToolbar({ filters, options, onResetPage }: any) {
         sx={{ p: 2.5 }}
       >
         <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 260 } }}>
-          <InputLabel htmlFor="user-filter-role-select-label">Department</InputLabel>
+          <InputLabel htmlFor="user-filter-role-select-label">Role</InputLabel>
           <Select
             multiple
             value={filters.state.role}
             onChange={handleFilterRole}
-            input={<OutlinedInput label="Department" />}
+            input={<OutlinedInput label="Role" />}
             renderValue={(selected) => selected.map((value: any) => value).join(', ')}
             inputProps={{ id: 'user-filter-role-select-label' }}
             MenuProps={{ PaperProps: { sx: { maxHeight: 240 } } }}
@@ -66,7 +66,7 @@ export function EmployeeTableToolbar({ filters, options, onResetPage }: any) {
           </Select>
         </FormControl>
 
-        <Stack direction="row" alignItems="center" spacing={2} flexGrow={1} sx={{ width: 1 }}>
+        <Stack direction="row" alignItems="center" spacing={2} sx={{ width: 1 }}>
           <TextField
             fullWidth
             value={filters.state.name}

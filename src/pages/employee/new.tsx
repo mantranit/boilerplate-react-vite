@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { CONFIG } from 'src/config-global';
 
-import { EmployeeCreateView } from 'src/sections/employee/view';
+import { EmployeeFormView } from 'src/sections/employee/view';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ export default function Page() {
         <title> {metadata.title}</title>
       </Helmet>
 
-      <EmployeeCreateView />
+      <EmployeeFormView currentEmployee={undefined} />
     </>
   );
 }
