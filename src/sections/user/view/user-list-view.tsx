@@ -43,7 +43,13 @@ import { UserCreateEditForm } from '../user-create-edit-form';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...USER_STATUS_OPTIONS];
+const STATUS_OPTIONS = [
+  { value: 'all', label: 'All' },
+  { value: 'active', label: 'Active' },
+  { value: 'pending', label: 'Pending' },
+  { value: 'disabled', label: 'Disabled' },
+  { value: 'trash', label: 'Trash' },
+];
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name' },
@@ -121,6 +127,7 @@ export function UserListView() {
             <Button
               onClick={create.onTrue}
               variant="contained"
+              color="primary"
               startIcon={<Iconify icon="mingcute:add-line" />}
             >
               New user

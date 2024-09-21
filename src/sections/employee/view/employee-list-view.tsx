@@ -141,24 +141,19 @@ export function EmployeeListView() {
                 href={paths.employee.new}
                 to={paths.employee.new}
                 variant="contained"
+                color="primary"
                 startIcon={<Iconify icon="mingcute:add-line" />}
               >
                 New employee
               </Button>
               <Button
-                component={RouterLink}
-                href={paths.employee.new}
-                to={paths.employee.new}
                 variant="contained"
-                color="error"
+                color="primary"
                 startIcon={<Iconify icon="solar:import-bold" />}
               >
                 Import
               </Button>
               <Button
-                component={RouterLink}
-                href={paths.employee.new}
-                to={paths.employee.new}
                 variant="contained"
                 color="primary"
                 startIcon={<Iconify icon="solar:export-bold" />}
