@@ -9,6 +9,7 @@ import { LoadingScreen } from 'src/components/loading-screen';
 import { AuthGuard } from 'src/auth/guard';
 
 // ----------------------------------------------------------------------
+const IndexPage = lazy(() => import('src/pages/dashboard'));
 
 const UserListPage = lazy(() => import('src/pages/user/list'));
 const RoleListPage = lazy(() => import('src/pages/role/list'));
@@ -32,12 +33,13 @@ const layoutContent = (
 
 export const dashboardRoutes = [
   {
-    // path: 'dashboard',
+    path: '/',
     element: CONFIG.auth.skip ? <>{layoutContent}</> : <AuthGuard>{layoutContent}</AuthGuard>,
     children: [
+      { element: <IndexPage />, index: true },
+      { path: 'employee-details', element: <EmployeeDetailsViewPage /> },
       { path: 'leave-types', element: <LeaveTypeListPage /> },
       { path: 'submit-leave', element: <LeaveTypeListPage /> },
-      { path: 'employee-details', element: <EmployeeDetailsViewPage /> },
       {
         path: 'employees',
         children: [
