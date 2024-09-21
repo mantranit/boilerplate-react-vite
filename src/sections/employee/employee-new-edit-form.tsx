@@ -158,7 +158,7 @@ export function EmployeeNewEditForm({ currentUser }) {
                       Create a user
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Automatically cretae the user with the email for sign in the system
+                      Automatically create a user for the email address
                     </Typography>
                   </>
                 }
