@@ -39,7 +39,8 @@ export const dashboardRoutes = [
       { element: <IndexPage />, index: true },
       { path: 'employee-details', element: <EmployeeDetailsViewPage /> },
       { path: 'leave-types', element: <LeaveTypeListPage /> },
-      { path: 'submit-leave', element: <LeaveTypeListPage /> },
+      { path: 'submit-leave', element: <></> },
+      { path: 'timesheet', element: <></> },
       {
         path: 'employees',
         children: [
