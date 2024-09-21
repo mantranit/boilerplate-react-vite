@@ -31,12 +31,15 @@ const TABS_EDIT = [
 
 // ----------------------------------------------------------------------
 
-export function EmployeeFormView({ currentEmployee, canEdit = true }: any) {
+export function EmployeeFormView({ currentEmployee, canEdit = true, action }: any) {
   const tabs = useTabs('general');
 
   return (
     <DashboardContent>
-      <CustomBreadcrumbs heading={currentEmployee ? 'Employee Details' : 'Create a new employee'} />
+      <CustomBreadcrumbs
+        heading={currentEmployee ? 'Employee Details' : 'Create a new employee'}
+        action={action}
+      />
 
       <Tabs value={tabs.value} onChange={tabs.onChange} sx={{ mb: { xs: 3, md: 5 } }}>
         {(currentEmployee ? TABS_EDIT : TABS_CREATE).map((tab) => (

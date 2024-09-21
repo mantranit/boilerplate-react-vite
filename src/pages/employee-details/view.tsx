@@ -1,5 +1,7 @@
+import Button from '@mui/material/Button';
 import { Helmet } from 'react-helmet-async';
 import { _userList } from 'src/_mock';
+import { Iconify } from 'src/components/iconify';
 
 import { CONFIG } from 'src/config-global';
 
@@ -16,7 +18,15 @@ export default function Page() {
         <title> {metadata.title}</title>
       </Helmet>
 
-      <EmployeeFormView currentEmployee={_userList[0]} canEdit={false} />
+      <EmployeeFormView
+        currentEmployee={_userList[0]}
+        canEdit={false}
+        action={
+          <Button variant="contained" color="primary" startIcon={<Iconify icon="solar:pen-bold" />}>
+            Request change
+          </Button>
+        }
+      />
     </>
   );
 }
