@@ -8,10 +8,11 @@ import { varAlpha } from 'src/theme/styles';
 
 import { uploadClasses } from '../classes';
 import { fileData } from '../../file-thumbnail';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-export function RejectionFiles({ files, sx, className, ...other }) {
+export function RejectionFiles({ files, sx, className, ...other }: any) {
   if (!files.length) {
     return null;
   }
@@ -27,7 +28,7 @@ export function RejectionFiles({ files, sx, className, ...other }) {
         textAlign: 'left',
         borderStyle: 'dashed',
         borderColor: 'error.main',
-        bgcolor: (theme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
+        bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
         ...sx,
       }}
       {...other}

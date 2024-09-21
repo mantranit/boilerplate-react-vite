@@ -40,7 +40,7 @@ export function useNavItem({
   /**
    * Render @info
    */
-  let renderInfo = null;
+  let renderInfo: any = null;
 
   if (info && render?.navInfo && Array.isArray(info)) {
     const [key, value] = info;

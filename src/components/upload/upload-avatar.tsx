@@ -10,10 +10,11 @@ import { Image } from '../image';
 import { Iconify } from '../iconify';
 import { uploadClasses } from './classes';
 import { RejectionFiles } from './components/rejection-files';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-export function UploadAvatar({ sx, error, value, disabled, helperText, className, ...other }) {
+export function UploadAvatar({ sx, error, value, disabled, helperText, className, ...other }: any) {
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     multiple: false,
     disabled,
@@ -56,7 +57,7 @@ export function UploadAvatar({ sx, error, value, disabled, helperText, className
         color: 'text.disabled',
         flexDirection: 'column',
         justifyContent: 'center',
-        bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+        bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
         transition: (theme) =>
           theme.transitions.create(['opacity'], {
             duration: theme.transitions.duration.shorter,
@@ -64,13 +65,13 @@ export function UploadAvatar({ sx, error, value, disabled, helperText, className
         '&:hover': { opacity: 0.72 },
         ...(hasError && {
           color: 'error.main',
-          bgcolor: (theme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
         }),
         ...(hasFile && {
           zIndex: 9,
           opacity: 0,
           color: 'common.white',
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.64),
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.64),
         }),
       }}
     >
@@ -108,13 +109,14 @@ export function UploadAvatar({ sx, error, value, disabled, helperText, className
           cursor: 'pointer',
           overflow: 'hidden',
           borderRadius: '50%',
-          border: (theme) => `1px dashed ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
+          border: (theme: TTheme) =>
+            `1px dashed ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
           ...(isDragActive && { opacity: 0.72 }),
           ...(disabled && { opacity: 0.48, pointerEvents: 'none' }),
           ...(hasError && { borderColor: 'error.main' }),
           ...(hasFile && {
             ...(hasError && {
-              bgcolor: (theme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
+              bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
             }),
             '&:hover .upload-placeholder': { opacity: 1 },
           }),

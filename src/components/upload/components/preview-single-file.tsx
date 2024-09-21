@@ -5,6 +5,7 @@ import { varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../../iconify';
 import { uploadClasses } from '../classes';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -53,10 +54,10 @@ export function DeleteButton({ sx, ...other }) {
         right: 16,
         zIndex: 9,
         position: 'absolute',
-        color: (theme) => varAlpha(theme.vars.palette.common.whiteChannel, 0.8),
-        bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.72),
+        color: (theme: TTheme) => varAlpha(theme.vars.palette.common.whiteChannel, 0.8),
+        bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.72),
         '&:hover': {
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
         },
         ...sx,
       }}

@@ -9,6 +9,7 @@ import { varAlpha } from 'src/theme/styles';
 import { Iconify } from '../../iconify';
 import { uploadClasses } from '../classes';
 import { fileData, FileThumbnail } from '../../file-thumbnail';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -80,7 +81,7 @@ export function MultiFilePreview({
                 sx={{
                   width: 80,
                   height: 80,
-                  border: (theme) =>
+                  border: (theme: TTheme) =>
                     `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
                 }}
                 slotProps={{ icon: { width: 36, height: 36 } }}
@@ -102,7 +103,7 @@ export function MultiFilePreview({
               display: 'flex',
               borderRadius: 1,
               alignItems: 'center',
-              border: (theme) =>
+              border: (theme: TTheme) =>
                 `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
             }}
           >

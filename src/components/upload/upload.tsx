@@ -29,7 +29,7 @@ export function Upload({
   className,
   multiple = false,
   ...other
-}) {
+}: any) {
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     multiple,
     disabled,

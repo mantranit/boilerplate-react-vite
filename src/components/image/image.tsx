@@ -57,7 +57,7 @@ export const Image = forwardRef(
       slotProps,
       className,
       ...other
-    },
+    }: any,
     ref
   ) => {
     const content = (

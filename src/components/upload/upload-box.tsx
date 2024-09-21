@@ -9,7 +9,7 @@ import { uploadClasses } from './classes';
 
 // ----------------------------------------------------------------------
 
-export function UploadBox({ placeholder, error, disabled, className, sx, ...other }) {
+export function UploadBox({ placeholder, error, disabled, className, sx, ...other }: any) {
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
     disabled,
     ...other,
