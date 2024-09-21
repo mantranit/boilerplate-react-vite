@@ -2,24 +2,19 @@ import { useCallback } from 'react';
 
 import Stack from '@mui/material/Stack';
 import Select from '@mui/material/Select';
-import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
-import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import { Iconify } from 'src/components/iconify';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
 
 // ----------------------------------------------------------------------
 
 export function EmployeeTableToolbar({ filters, options, onResetPage }) {
-  const popover = usePopover();
-
   const handleFilterName = useCallback(
     (event) => {
       onResetPage();
@@ -45,15 +40,15 @@ export function EmployeeTableToolbar({ filters, options, onResetPage }) {
         spacing={2}
         alignItems={{ xs: 'flex-end', md: 'center' }}
         direction={{ xs: 'column', md: 'row' }}
-        sx={{ p: 2.5, pr: { xs: 2.5, md: 1 } }}
+        sx={{ p: 2.5 }}
       >
-        <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 200 } }}>
-          <InputLabel htmlFor="user-filter-role-select-label">Role</InputLabel>
+        <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 260 } }}>
+          <InputLabel htmlFor="user-filter-role-select-label">Department</InputLabel>
           <Select
             multiple
             value={filters.state.role}
             onChange={handleFilterRole}
-            input={<OutlinedInput label="Role" />}
+            input={<OutlinedInput label="Department" />}
             renderValue={(selected) => selected.map((value) => value).join(', ')}
             inputProps={{ id: 'user-filter-role-select-label' }}
             MenuProps={{ PaperProps: { sx: { maxHeight: 240 } } }}
@@ -85,48 +80,8 @@ export function EmployeeTableToolbar({ filters, options, onResetPage }) {
               ),
             }}
           />
-
-          <IconButton onClick={popover.onOpen}>
-            <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
         </Stack>
       </Stack>
-
-      <CustomPopover
-        open={popover.open}
-        anchorEl={popover.anchorEl}
-        onClose={popover.onClose}
-        slotProps={{ arrow: { placement: 'right-top' } }}
-      >
-        <MenuList>
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="solar:printer-minimalistic-bold" />
-            Print
-          </MenuItem>
-
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="solar:import-bold" />
-            Import
-          </MenuItem>
-
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="solar:export-bold" />
-            Export
-          </MenuItem>
-        </MenuList>
-      </CustomPopover>
     </>
   );
 }

@@ -46,7 +46,12 @@ import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...USER_STATUS_OPTIONS];
+const STATUS_OPTIONS = [
+  { value: 'all', label: 'All' },
+  { value: 'active', label: 'Active' },
+  { value: 'resigned', label: 'Resigned' },
+  { value: 'trash', label: 'Trash' },
+];
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name' },
@@ -130,15 +135,37 @@ export function EmployeeListView() {
         <CustomBreadcrumbs
           heading="Employees"
           action={
-            <Button
-              component={RouterLink}
-              href={paths.employee.new}
-              to={paths.employee.new}
-              variant="contained"
-              startIcon={<Iconify icon="mingcute:add-line" />}
-            >
-              New employee
-            </Button>
+            <Box gap={2} display="flex">
+              <Button
+                component={RouterLink}
+                href={paths.employee.new}
+                to={paths.employee.new}
+                variant="contained"
+                startIcon={<Iconify icon="mingcute:add-line" />}
+              >
+                New employee
+              </Button>
+              <Button
+                component={RouterLink}
+                href={paths.employee.new}
+                to={paths.employee.new}
+                variant="contained"
+                color="error"
+                startIcon={<Iconify icon="solar:import-bold" />}
+              >
+                Import
+              </Button>
+              <Button
+                component={RouterLink}
+                href={paths.employee.new}
+                to={paths.employee.new}
+                variant="contained"
+                color="primary"
+                startIcon={<Iconify icon="solar:export-bold" />}
+              >
+                Export
+              </Button>
+            </Box>
           }
           sx={{ mb: { xs: 3, md: 5 } }}
         />

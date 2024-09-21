@@ -9,7 +9,7 @@ import { FiltersBlock, FiltersResult } from 'src/components/filters-result';
 export function EmployeeTableFiltersResult({ filters, onResetPage, totalResults, sx }) {
   const handleRemoveKeyword = useCallback(() => {
     onResetPage();
-    filters.setState({ name: '' });
+    filters.setState({ displayName: '' });
   }, [filters, onResetPage]);
 
   const handleRemoveStatus = useCallback(() => {
