@@ -7,10 +7,15 @@ export const paths = {
     newPassword: '/auth/new-password',
   },
   user: {
-    root: '/users',
+    list: '/users',
+    role: '/roles',
   },
-  role: {
-    root: '/roles',
+  employee: {
+    list: '/employees',
+    new: '/employees/create',
+    edit: (id: string) => `/employees/${id}`,
+    departments: '/departments',
+    positions: '/positions',
   },
   dashboard: {
     root: '/',

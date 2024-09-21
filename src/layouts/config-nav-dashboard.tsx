@@ -60,7 +60,7 @@ export const navData = [
         path: paths.dashboard.group.root,
         icon: ICONS.user,
         children: [
-          { title: 'List', path: paths.dashboard.group.root },
+          { title: 'List', path: paths.employee.list },
           { title: 'Departments', path: paths.dashboard.group.six },
           { title: 'Positions & Level', path: paths.dashboard.group.five },
         ],
@@ -76,8 +76,8 @@ export const navData = [
   {
     subheader: 'Administrator',
     items: [
-      { title: 'Users', path: paths.user.root, icon: ICONS.user },
-      { title: 'Roles & Permission', path: paths.role.root, icon: ICONS.lock },
+      { title: 'Users', path: paths.user.list, icon: ICONS.user },
+      { title: 'Roles & Permission', path: paths.user.role, icon: ICONS.lock },
     ],
   },
 ];

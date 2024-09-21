@@ -20,6 +20,9 @@ const PageSix = lazy(() => import('src/pages/dashboard/six'));
 // ----------------------------------------------------------------------
 
 const UserListPage = lazy(() => import('src/pages/user/list'));
+const EmployeeListPage = lazy(() => import('src/pages/employee/list'));
+const EmployeeNewPage = lazy(() => import('src/pages/employee/new'));
+const EmployeeEditPage = lazy(() => import('src/pages/employee/edit'));
 
 // ----------------------------------------------------------------------
 
@@ -48,6 +51,9 @@ export const dashboardRoutes = [
         ],
       },
       { path: 'users', element: <UserListPage /> },
+      { path: 'employees', element: <EmployeeListPage /> },
+      { path: 'employees/create', element: <EmployeeNewPage /> },
+      { path: 'employees/:id', element: <EmployeeEditPage /> },
     ],
   },
 ];
