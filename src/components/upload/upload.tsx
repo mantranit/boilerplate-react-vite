@@ -12,6 +12,7 @@ import { UploadPlaceholder } from './components/placeholder';
 import { RejectionFiles } from './components/rejection-files';
 import { MultiFilePreview } from './components/preview-multi-file';
 import { DeleteButton, SingleFilePreview } from './components/preview-single-file';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -85,8 +86,9 @@ export function Upload({
           cursor: 'pointer',
           overflow: 'hidden',
           position: 'relative',
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
-          border: (theme) => `1px dashed ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+          border: (theme: TTheme) =>
+            `1px dashed ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
           transition: (theme) => theme.transitions.create(['opacity', 'padding']),
           '&:hover': { opacity: 0.72 },
           ...(isDragActive && { opacity: 0.72 }),
@@ -94,7 +96,7 @@ export function Upload({
           ...(hasError && {
             color: 'error.main',
             borderColor: 'error.main',
-            bgcolor: (theme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
+            bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
           }),
           ...(hasFile && { padding: '28% 0' }),
         }}

@@ -5,7 +5,7 @@ import { UploadIllustration } from 'src/assets/illustrations';
 
 // ----------------------------------------------------------------------
 
-export function UploadPlaceholder({ sx, ...other }) {
+export function UploadPlaceholder({ sx, ...other }: any) {
   return (
     <Box
       display="flex"

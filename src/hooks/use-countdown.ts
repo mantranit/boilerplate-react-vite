@@ -64,7 +64,7 @@ export function useCountdownSeconds(initialSeconds: number) {
   }, [initialSeconds]);
 
   useEffect(() => {
-    let interval = null;
+    let interval: any = null;
 
     if (isCounting && value > 0) {
       interval = setInterval(() => {

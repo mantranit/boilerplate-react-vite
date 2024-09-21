@@ -9,7 +9,7 @@ import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
-export function SingleFilePreview({ file, sx, className, ...other }) {
+export function SingleFilePreview({ file, sx, className, ...other }: any) {
   const fileName = typeof file === 'string' ? file : file.name;
 
   const previewUrl = typeof file === 'string' ? file : URL.createObjectURL(file);
@@ -45,7 +45,7 @@ export function SingleFilePreview({ file, sx, className, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function DeleteButton({ sx, ...other }) {
+export function DeleteButton({ sx, ...other }: any) {
   return (
     <IconButton
       size="small"

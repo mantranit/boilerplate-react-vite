@@ -6,6 +6,7 @@ import { varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../iconify';
 import { uploadClasses } from './classes';
+import { TTheme } from 'src/theme/create-theme';
 
 // ----------------------------------------------------------------------
 
@@ -31,14 +32,15 @@ export function UploadBox({ placeholder, error, disabled, className, sx, ...othe
         alignItems: 'center',
         color: 'text.disabled',
         justifyContent: 'center',
-        bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
-        border: (theme) => `dashed 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
+        bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+        border: (theme: TTheme) =>
+          `dashed 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
         ...(isDragActive && { opacity: 0.72 }),
         ...(disabled && { opacity: 0.48, pointerEvents: 'none' }),
         ...(hasError && {
           color: 'error.main',
           borderColor: 'error.main',
-          bgcolor: (theme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
+          bgcolor: (theme: TTheme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
         }),
         '&:hover': { opacity: 0.72 },
         ...sx,

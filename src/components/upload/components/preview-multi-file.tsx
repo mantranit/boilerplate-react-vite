@@ -23,7 +23,7 @@ export function MultiFilePreview({
   files = [],
   className,
   ...other
-}) {
+}: any) {
   const renderFirstNode = firstNode && (
     <Box
       component="li"

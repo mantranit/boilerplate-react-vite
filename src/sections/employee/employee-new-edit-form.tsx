@@ -22,7 +22,7 @@ import { Form, Field } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export function EmployeeNewEditForm({ currentUser }) {
+export function EmployeeNewEditForm({ currentUser }: any) {
   const router = useRouter();
 
   const defaultValues = useMemo(
