@@ -16,7 +16,7 @@ import { CardHeader, Divider } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-export function EmployeeTabGeneralBank({ currentEmployee }: any) {
+export function EmployeeTabGeneralBank({ currentEmployee, canEdit }: any) {
   const router = useRouter();
 
   const defaultValues = useMemo(

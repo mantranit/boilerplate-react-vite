@@ -5,16 +5,16 @@ import { EmployeeTabGeneralBank } from './employee-tab-general-bank';
 
 // ----------------------------------------------------------------------
 
-export function EmployeeTabGeneral({ currentEmployee }: any) {
+export function EmployeeTabGeneral({ currentEmployee, canEdit }: any) {
   return (
     <Box display="flex" gap={5} flexDirection="column">
-      <EmployeeTabGeneralCommon currentEmployee={currentEmployee} />
+      <EmployeeTabGeneralCommon currentEmployee={currentEmployee} canEdit={canEdit} />
 
       {currentEmployee && (
         <>
-          <EmployeeTabGeneralGoverment currentEmployee={currentEmployee} />
+          <EmployeeTabGeneralGoverment currentEmployee={currentEmployee} canEdit={canEdit} />
 
-          <EmployeeTabGeneralBank currentEmployee={currentEmployee} />
+          <EmployeeTabGeneralBank currentEmployee={currentEmployee} canEdit={canEdit} />
         </>
       )}
     </Box>
