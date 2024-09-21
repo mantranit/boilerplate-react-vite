@@ -6,11 +6,12 @@ import { Upload, UploadBox, UploadAvatar } from '../upload';
 
 // ----------------------------------------------------------------------
 
-export function RHFUploadAvatar({ name, ...other }) {
+export function RHFUploadAvatar({ rules, name, ...other }: any) {
   const { control, setValue } = useFormContext();
 
   return (
     <Controller
+      rules={rules}
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => {
@@ -38,11 +39,12 @@ export function RHFUploadAvatar({ name, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function RHFUploadBox({ name, ...other }) {
+export function RHFUploadBox({ rules, name, ...other }: any) {
   const { control } = useFormContext();
 
   return (
     <Controller
+      rules={rules}
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
@@ -54,11 +56,12 @@ export function RHFUploadBox({ name, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function RHFUpload({ name, multiple, helperText, ...other }) {
+export function RHFUpload({ rules, name, multiple, helperText, ...other }: any) {
   const { control, setValue } = useFormContext();
 
   return (
     <Controller
+      rules={rules}
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => {

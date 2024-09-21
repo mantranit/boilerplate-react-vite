@@ -2,7 +2,7 @@ import { RHFPasswordField } from './rhf-password-field';
 import { RHFMultiSelect, RHFSelect } from './rhf-select';
 import { RHFMultiSwitch, RHFSwitch } from './rhf-switch';
 import { RHFTextField } from './rhf-text-field';
-import { RHFUpload, RHFUploadAvatar } from './rhf-upload';
+import { RHFUpload, RHFUploadAvatar, RHFUploadBox } from './rhf-upload';
 
 // ----------------------------------------------------------------------
 
@@ -13,6 +13,7 @@ export const Field = {
   MultiSelect: RHFMultiSelect,
   UploadAvatar: RHFUploadAvatar,
   Upload: RHFUpload,
+  UploadBox: RHFUploadBox,
   Switch: RHFSwitch,
   MultiSwitch: RHFMultiSwitch,
 };
