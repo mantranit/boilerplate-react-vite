@@ -31,7 +31,7 @@ const TABS_EDIT = [
 
 // ----------------------------------------------------------------------
 
-export function EmployeeFormView({ currentEmployee }) {
+export function EmployeeFormView({ currentEmployee }: any) {
   const tabs = useTabs('general');
 
   return (
