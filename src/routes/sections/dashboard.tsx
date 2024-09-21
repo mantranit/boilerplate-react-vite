@@ -51,9 +51,16 @@ export const dashboardRoutes = [
         ],
       },
       { path: 'users', element: <UserListPage /> },
-      { path: 'employees', element: <EmployeeListPage /> },
-      { path: 'employees/create', element: <EmployeeNewPage /> },
-      { path: 'employees/:id', element: <EmployeeEditPage /> },
+      {
+        path: 'employees',
+        children: [
+          { element: <EmployeeListPage />, index: true },
+          { path: 'create', element: <EmployeeNewPage /> },
+          { path: ':id', element: <EmployeeEditPage /> },
+          { path: 'departments', element: <PageFive /> },
+          { path: 'positions', element: <PageSix /> },
+        ],
+      },
     ],
   },
 ];

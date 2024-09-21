@@ -14,8 +14,8 @@ export const paths = {
     list: '/employees',
     new: '/employees/create',
     edit: (id: string) => `/employees/${id}`,
-    departments: '/departments',
-    positions: '/positions',
+    departments: '/employees/departments',
+    positions: '/employees/positions',
   },
   dashboard: {
     root: '/',

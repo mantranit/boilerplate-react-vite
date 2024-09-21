@@ -57,12 +57,12 @@ export const navData = [
     items: [
       {
         title: 'Employees',
-        path: paths.dashboard.group.root,
+        path: paths.employee.list,
         icon: ICONS.user,
         children: [
           { title: 'List', path: paths.employee.list },
-          { title: 'Departments', path: paths.dashboard.group.six },
-          { title: 'Positions & Level', path: paths.dashboard.group.five },
+          { title: 'Departments', path: paths.employee.departments },
+          { title: 'Positions & Level', path: paths.employee.positions },
         ],
       },
       { title: 'Leave Types', path: paths.dashboard.three, icon: ICONS.folder },
