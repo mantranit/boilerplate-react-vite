@@ -179,7 +179,7 @@ export function EmployeeTabGeneralCommon({ currentEmployee }: any) {
 
         <Grid xs={12} md={8}>
           <Card>
-            <CardHeader title="Common" />
+            {currentEmployee && <CardHeader title="Common" />}
             <Stack sx={{ p: 3 }}>
               <Box
                 rowGap={3}
@@ -203,9 +203,14 @@ export function EmployeeTabGeneralCommon({ currentEmployee }: any) {
               </Box>
             </Stack>
 
-            <Divider sx={{ borderStyle: 'dashed' }} />
+            {currentEmployee && <Divider sx={{ borderStyle: 'dashed' }} />}
 
-            <Stack spacing={1.5} direction="row" justifyContent="flex-end" sx={{ p: 3 }}>
+            <Stack
+              spacing={1.5}
+              direction="row"
+              justifyContent="flex-end"
+              sx={{ p: 3, pt: currentEmployee ? 3 : 0 }}
+            >
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!currentEmployee ? 'Create employee' : 'Save changes'}
               </LoadingButton>

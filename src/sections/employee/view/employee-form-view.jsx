@@ -15,7 +15,11 @@ import { EmployeeTabSalary } from '../employee-tab-salary';
 
 // ----------------------------------------------------------------------
 
-const TABS = [
+const TABS_CREATE = [
+  { value: 'general', label: 'General', icon: <Iconify icon="solar:user-id-bold" width={24} /> },
+];
+
+const TABS_EDIT = [
   { value: 'general', label: 'General', icon: <Iconify icon="solar:user-id-bold" width={24} /> },
   {
     value: 'contract',
@@ -32,10 +36,10 @@ export function EmployeeFormView({ currentEmployee }) {
 
   return (
     <DashboardContent>
-      <CustomBreadcrumbs heading="Employee Details" sx={{ mb: { xs: 3, md: 5 } }} />
+      <CustomBreadcrumbs heading={currentEmployee ? 'Employee Details' : 'Create a new employee'} />
 
       <Tabs value={tabs.value} onChange={tabs.onChange} sx={{ mb: { xs: 3, md: 5 } }}>
-        {TABS.map((tab) => (
+        {(currentEmployee ? TABS_EDIT : TABS_CREATE).map((tab) => (
           <Tab key={tab.value} label={tab.label} icon={tab.icon} value={tab.value} />
         ))}
       </Tabs>

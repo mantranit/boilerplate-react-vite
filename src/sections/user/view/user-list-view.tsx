@@ -133,7 +133,6 @@ export function UserListView() {
               New user
             </Button>
           }
-          sx={{ mb: { xs: 3, md: 5 } }}
         />
 
         <UserCreateEditForm open={create.value} onClose={create.onFalse} />

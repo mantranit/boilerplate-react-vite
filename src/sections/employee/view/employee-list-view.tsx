@@ -162,7 +162,6 @@ export function EmployeeListView() {
               </Button>
             </Box>
           }
-          sx={{ mb: { xs: 3, md: 5 } }}
         />
 
         <Card>

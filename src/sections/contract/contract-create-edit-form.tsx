@@ -79,7 +79,7 @@ export function ContractCreateEditForm({
       PaperProps={{ sx: { maxWidth: 720 } }}
     >
       <Form methods={methods} onSubmit={onSubmit}>
-        <DialogTitle>{currentUser ? 'Update User' : 'Create User'}</DialogTitle>
+        <DialogTitle>{currentUser ? 'Update Contract' : 'Create Contract'}</DialogTitle>
 
         <DialogContent>
           <Box
