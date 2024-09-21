@@ -11,3 +11,5 @@ export * from './rhf-select';
 export * from './rhf-upload';
 
 export * from './rhf-switch';
+
+export * from './rhf-date-picker';

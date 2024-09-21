@@ -1,3 +1,4 @@
+import { RHFDatePicker, RHFMobileDateTimePicker } from './rhf-date-picker';
 import { RHFPasswordField } from './rhf-password-field';
 import { RHFMultiSelect, RHFSelect } from './rhf-select';
 import { RHFMultiSwitch, RHFSwitch } from './rhf-switch';
@@ -16,4 +17,6 @@ export const Field = {
   UploadBox: RHFUploadBox,
   Switch: RHFSwitch,
   MultiSwitch: RHFMultiSwitch,
+  DatePicker: RHFDatePicker,
+  MobileDateTimePicker: RHFMobileDateTimePicker,
 };
