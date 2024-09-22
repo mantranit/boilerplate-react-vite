@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -37,23 +37,28 @@ import {
 
 import { UserTableRow } from '../user-table-row';
 import { UserTableToolbar } from '../user-table-toolbar';
-import { UserTableFiltersResult } from '../user-table-filters-result';
 import { TTheme } from 'src/theme/create-theme';
 import { UserCreateEditForm } from '../user-create-edit-form';
+import { useAppDispatch, useAppSelector } from 'src/redux/store';
+import { selectUsers, setUserTableFilter } from 'src/redux/auth/users.slice';
+import { countAllStatusAsync, getUsersAsync } from 'src/services/Auth/user.service';
+import { getAllRolesAsync } from 'src/services/selection.service';
+import { selectSelections } from 'src/redux/selections/selections.slice';
+import { UserStatus } from 'src/data/auth/user.model';
 
 // ----------------------------------------------------------------------
 
 const STATUS_OPTIONS = [
-  { value: 'all', label: 'All' },
-  { value: 'active', label: 'Active' },
-  { value: 'pending', label: 'Pending' },
-  { value: 'disabled', label: 'Disabled' },
-  { value: 'trash', label: 'Trash' },
+  { value: 'ALL', label: 'All' },
+  { value: UserStatus.ACTIVE, label: 'Active' },
+  { value: UserStatus.PENDING, label: 'Pending' },
+  { value: UserStatus.DISABLED, label: 'Disabled' },
+  { value: 'TRASH', label: 'Trash' },
 ];
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name' },
-  { id: 'role', label: 'Role', width: 180 },
+  { id: 'roles', label: 'Roles', width: 180 },
   { id: 'status', label: 'Status', width: 100 },
   { id: '', width: 88 },
 ];
@@ -69,7 +74,7 @@ export function UserListView() {
 
   const [tableData, setTableData] = useState(_userList);
 
-  const filters = useSetState({ name: '', role: [], status: 'all' });
+  const filters = useSetState({ name: '', role: '', status: 'ALL' });
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -79,10 +84,7 @@ export function UserListView() {
 
   const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
 
-  const canReset =
-    !!filters.state.name || filters.state.role.length > 0 || filters.state.status !== 'all';
-
-  const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
+  const notFound = !dataFiltered.length;
 
   const handleDeleteRow = useCallback(
     (id: any) => {
@@ -117,6 +119,30 @@ export function UserListView() {
     },
     [filters, table]
   );
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const { selectedUserId, filter, userList, count, countAllStatus } = useAppSelector(selectUsers);
+  const { roles } = useAppSelector(selectSelections);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(getUsersAsync(filters.state));
+    };
+    fetchData();
+  }, [filters.state]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(countAllStatusAsync());
+      await dispatch(getAllRolesAsync());
+    };
+    fetchData();
+  }, []);
+
+  const handlePageChange = (page: number) => {
+    dispatch(setUserTableFilter({ ...filter, pageIndex: page }));
+  };
 
   return (
     <>
@@ -160,35 +186,25 @@ export function UserListView() {
                       'soft'
                     }
                     color={
-                      (tab.value === 'active' && 'success') ||
-                      (tab.value === 'pending' && 'warning') ||
-                      (tab.value === 'disabled' && 'error') ||
+                      (tab.value === 'ALL' && 'primary') ||
+                      (tab.value === UserStatus.ACTIVE && 'success') ||
+                      (tab.value === UserStatus.PENDING && 'warning') ||
+                      (tab.value === UserStatus.DISABLED && 'error') ||
                       'default'
                     }
                   >
-                    {['active', 'pending', 'disabled', 'trash'].includes(tab.value)
-                      ? tableData.filter((user) => user.status === tab.value).length
-                      : tableData.length}
+                    {tab.value === 'ALL' && countAllStatus.total}
+                    {tab.value === UserStatus.ACTIVE && countAllStatus.totalActive}
+                    {tab.value === UserStatus.PENDING && countAllStatus.totalPending}
+                    {tab.value === UserStatus.DISABLED && countAllStatus.totalDisabled}
+                    {tab.value === 'TRASH' && countAllStatus.totalDeleted}
                   </Label>
                 }
               />
             ))}
           </Tabs>
 
-          <UserTableToolbar
-            filters={filters}
-            onResetPage={table.onResetPage}
-            options={{ roles: _roles }}
-          />
-
-          {canReset && (
-            <UserTableFiltersResult
-              filters={filters}
-              totalResults={dataFiltered.length}
-              onResetPage={table.onResetPage}
-              sx={{ p: 2.5, pt: 0 }}
-            />
-          )}
+          <UserTableToolbar filters={filters} onResetPage={table.onResetPage} options={{ roles }} />
 
           <Box sx={{ position: 'relative' }}>
             <TableSelectedAction
@@ -228,20 +244,16 @@ export function UserListView() {
                 />
 
                 <TableBody>
-                  {dataFiltered
-                    .slice(
-                      table.page * table.rowsPerPage,
-                      table.page * table.rowsPerPage + table.rowsPerPage
-                    )
-                    .map((row: any) => (
-                      <UserTableRow
-                        key={row.id}
-                        row={row}
-                        selected={table.selected.includes(row.id)}
-                        onSelectRow={() => table.onSelectRow(row.id)}
-                        onDeleteRow={() => handleDeleteRow(row.id)}
-                      />
-                    ))}
+                  {userList.map((row: any) => (
+                    <UserTableRow
+                      key={row.id}
+                      row={row}
+                      selected={table.selected.includes(row.id)}
+                      onSelectRow={() => table.onSelectRow(row.id)}
+                      onDeleteRow={() => handleDeleteRow(row.id)}
+                      roles={roles}
+                    />
+                  ))}
 
                   <TableEmptyRows
                     height={table.dense ? 56 : 56 + 20}

@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   addUserAsync,
+  countAllStatusAsync,
   deleteUserAsync,
   getUserByIdAsync,
   getUsersAsync,
   updateUserAsync,
-} from "../../services/Auth/user.service";
-import { ModalState, RootState, TableFilterState } from "../store";
-import { User, UserStatus } from "../../data/auth/user.model";
+} from '../../services/Auth/user.service';
+import { ModalState, RootState, TableFilterState } from '../store';
+import { User, UserStatus } from '../../data/auth/user.model';
 
 type UserTableFilter = TableFilterState & {
   status: string | null;
@@ -22,25 +23,32 @@ export type UserState = {
   error: string | null;
   modal: ModalState;
   filter: UserTableFilter;
+  countAllStatus: {
+    total: number;
+    totalActive: number;
+    totalPending: number;
+    totalDisabled: number;
+    totalDeleted: number;
+  };
 };
 
 export const initUserFilterState: UserTableFilter = {
   pageIndex: 1,
-  pageSize: 10,
-  sortField: "id",
-  sortOrder: "asc",
-  searchName: "",
-  status: "",
+  pageSize: 20,
+  sortField: 'displayName',
+  sortOrder: 'asc',
+  searchName: '',
+  status: '',
 };
 
 export const initUser: User = {
-  id: "",
-  resetToken: "",
-  username: "",
-  email: "",
-  displayName: "",
-  avatar: "",
-  createdAt: "",
+  id: '',
+  resetToken: '',
+  username: '',
+  email: '',
+  displayName: '',
+  avatar: '',
+  createdAt: '',
   status: UserStatus.PENDING,
   roles: [],
 };
@@ -50,13 +58,20 @@ export const initUserState: UserState = {
   count: 0,
   detailUser: initUser,
   selectedUserId: [],
-  error: "",
-  modal: { open: false, mode: "add" },
+  error: '',
+  modal: { open: false, mode: 'add' },
   filter: initUserFilterState,
+  countAllStatus: {
+    total: 0,
+    totalActive: 0,
+    totalPending: 0,
+    totalDisabled: 0,
+    totalDeleted: 0,
+  },
 };
 
 export const usersSlice = createSlice({
-  name: "users",
+  name: 'users',
   initialState: initUserState,
   reducers: {
     saveUser: (state, action: PayloadAction<UserState>) => {
@@ -97,14 +112,15 @@ export const usersSlice = createSlice({
         state.userList = [...state.userList, action.payload];
       })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
-        const index = state.userList.findIndex(
-          (u) => u.id === action.payload.id
-        );
+        const index = state.userList.findIndex((u) => u.id === action.payload.id);
         if (index !== -1) state.userList[index] = action.payload;
         state.detailUser = action.payload;
       })
       .addCase(deleteUserAsync.fulfilled, (state, action) => {
         state.userList = state.userList.filter((u) => u.id !== action.payload);
+      })
+      .addCase(countAllStatusAsync.fulfilled, (state, action) => {
+        state.countAllStatus = action.payload as any;
       });
   },
 });

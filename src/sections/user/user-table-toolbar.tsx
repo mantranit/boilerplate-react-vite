@@ -11,6 +11,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import { Iconify } from 'src/components/iconify';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 // ----------------------------------------------------------------------
 
@@ -25,11 +27,7 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
 
   const handleFilterRole = useCallback(
     (event: any) => {
-      const newValue =
-        typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value;
-
-      onResetPage();
-      filters.setState({ role: newValue });
+      filters.setState({ role: event.target.value });
     },
     [filters, onResetPage]
   );
@@ -43,24 +41,21 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
         sx={{ p: 2.5 }}
       >
         <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 260 } }}>
-          <InputLabel htmlFor="user-filter-role-select-label">Role</InputLabel>
+          <InputLabel id="user-filter-role-select-label" shrink={true}>
+            Role
+          </InputLabel>
           <Select
-            multiple
+            MenuProps={{ PaperProps: { sx: { maxHeight: 260 } } }}
+            labelId="user-filter-role-select-label"
             value={filters.state.role}
             onChange={handleFilterRole}
-            input={<OutlinedInput label="Role" />}
-            renderValue={(selected) => selected.map((value: any) => value).join(', ')}
-            inputProps={{ id: 'user-filter-role-select-label' }}
-            MenuProps={{ PaperProps: { sx: { maxHeight: 240 } } }}
+            displayEmpty
+            label="Role"
           >
+            <MenuItem value="">All</MenuItem>
             {options.roles.map((option: any) => (
-              <MenuItem key={option} value={option}>
-                <Checkbox
-                  disableRipple
-                  size="small"
-                  checked={filters.state.role.includes(option)}
-                />
-                {option}
+              <MenuItem key={option.id} value={option.id}>
+                {option.name}
               </MenuItem>
             ))}
           </Select>
@@ -80,6 +75,18 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
               ),
             }}
           />
+
+          {(filters.state.name || filters.state.role) && (
+            <Box flexGrow={1} gap={1} display="flex" flexWrap="wrap" alignItems="center">
+              <Button
+                color="error"
+                onClick={filters.onResetState}
+                startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
+              >
+                Clear
+              </Button>
+            </Box>
+          )}
         </Stack>
       </Stack>
     </>

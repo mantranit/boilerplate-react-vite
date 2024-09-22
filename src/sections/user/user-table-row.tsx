@@ -16,13 +16,31 @@ import { Iconify } from 'src/components/iconify';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 
 import { UserCreateEditForm } from './user-create-edit-form';
+import { Role } from 'src/data/auth/role.model';
 
 // ----------------------------------------------------------------------
+export type TUserTableRowProps = {
+  row?: any;
+  selected?: any;
+  onSelectRow?: any;
+  onDeleteRow?: any;
+  roles?: any;
+};
 
-export function UserTableRow({ row, selected, onSelectRow, onDeleteRow }: any) {
+export function UserTableRow({
+  row,
+  selected,
+  onSelectRow,
+  onDeleteRow,
+  roles,
+}: TUserTableRowProps) {
   const confirm = useBoolean();
 
   const quickEdit = useBoolean();
+
+  const getRoleName = (roles: Role[]) => {
+    return roles.map((role: Role) => role.name);
+  };
 
   return (
     <>
@@ -44,7 +62,7 @@ export function UserTableRow({ row, selected, onSelectRow, onDeleteRow }: any) {
           </Stack>
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.role}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{getRoleName(row.roles)}</TableCell>
 
         <TableCell>
           <Label

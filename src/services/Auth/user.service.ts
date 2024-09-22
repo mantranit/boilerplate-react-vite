@@ -22,6 +22,11 @@ export const getUserByIdAsync = createAsyncThunk(
   }
 );
 
+export const countAllStatusAsync = createAsyncThunk('users/countAllStatusAsync', async () => {
+  const response: AxiosResponse<BaseResponse<UsersResponse>> = await GET('/users/count-all-status');
+  return response.data.data;
+});
+
 export const getUsersAsync = createAsyncThunk(
   "users/getUsersAsync",
   async (params: TableFilterState) => {
