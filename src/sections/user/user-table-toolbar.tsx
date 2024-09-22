@@ -3,11 +3,9 @@ import { useCallback } from 'react';
 import Stack from '@mui/material/Stack';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import { Iconify } from 'src/components/iconify';
@@ -61,7 +59,7 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
           </Select>
         </FormControl>
 
-        <Stack direction="row" alignItems="center" spacing={2} sx={{ width: 1 }}>
+        <Stack direction="row" alignItems="center" spacing={2} sx={{ width: { xs: 1, md: 260 } }}>
           <TextField
             fullWidth
             value={filters.state.name}
@@ -75,19 +73,19 @@ export function UserTableToolbar({ filters, options, onResetPage }: any) {
               ),
             }}
           />
-
-          {(filters.state.name || filters.state.role) && (
-            <Box flexGrow={1} gap={1} display="flex" flexWrap="wrap" alignItems="center">
-              <Button
-                color="error"
-                onClick={filters.onResetState}
-                startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
-              >
-                Clear
-              </Button>
-            </Box>
-          )}
         </Stack>
+
+        {(filters.state.name || filters.state.role) && (
+          <Box flexGrow={1} gap={1} display="flex" flexWrap="wrap" alignItems="center">
+            <Button
+              color="error"
+              onClick={filters.onResetState}
+              startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
+            >
+              Clear
+            </Button>
+          </Box>
+        )}
       </Stack>
     </>
   );

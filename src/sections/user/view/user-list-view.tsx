@@ -15,7 +15,7 @@ import { useSetState } from 'src/hooks/use-set-state';
 
 import { varAlpha } from 'src/theme/styles';
 import { DashboardContent } from 'src/layouts/dashboard';
-import { _roles, _userList, USER_STATUS_OPTIONS } from 'src/_mock';
+import { _roles, _userList } from 'src/_mock';
 
 import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
@@ -59,7 +59,7 @@ const STATUS_OPTIONS = [
 const TABLE_HEAD = [
   { id: 'displayName', label: 'Name', sortable: true },
   { id: 'roles', label: 'Roles', width: 180 },
-  { id: 'status', label: 'Status', width: 100, sortable: true },
+  { id: 'status', label: 'Status', width: 100 },
   { id: '', width: 88 },
 ];
 
@@ -75,45 +75,7 @@ export function UserListView() {
 
   const create = useBoolean();
 
-  const [tableData, setTableData] = useState(_userList);
-
   const filters = useSetState({ name: '', role: '', status: 'ALL' });
-
-  const dataFiltered = applyFilter({
-    inputData: tableData,
-    comparator: getComparator(table.order, table.orderBy),
-    filters: filters.state,
-  });
-
-  const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
-
-  const notFound = !dataFiltered.length;
-
-  const handleDeleteRow = useCallback(
-    (id: any) => {
-      const deleteRow = tableData.filter((row) => row.id !== id);
-
-      toast.success('Delete success!');
-
-      setTableData(deleteRow);
-
-      table.onUpdatePageDeleteRow(dataInPage.length);
-    },
-    [dataInPage.length, table, tableData]
-  );
-
-  const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row) => !table.selected.includes(row.id));
-
-    toast.success('Delete success!');
-
-    setTableData(deleteRows);
-
-    table.onUpdatePageDeleteRows({
-      totalRowsInPage: dataInPage.length,
-      totalRowsFiltered: dataFiltered.length,
-    });
-  }, [dataFiltered.length, dataInPage.length, table, tableData]);
 
   const handleFilterStatus = useCallback(
     (event: any, newValue: any) => {
@@ -123,9 +85,20 @@ export function UserListView() {
     [filters, table]
   );
 
-  const { selectedUserId, filter, userList, count, countAllStatus } = useAppSelector(selectUsers);
+  const { userList, count, countAllStatus } = useAppSelector(selectUsers);
   const { roles } = useAppSelector(selectSelections);
   const dispatch = useAppDispatch();
+
+  const handleDeleteRow = useCallback(
+    (id: any) => {
+      console.log(id);
+    },
+    [userList]
+  );
+
+  const handleDeleteRows = useCallback(() => {
+    console.log(table.selected);
+  }, [table.selected, userList]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -149,10 +122,6 @@ export function UserListView() {
     };
     fetchData();
   }, []);
-
-  const handlePageChange = (page: number) => {
-    dispatch(setUserTableFilter({ ...filter, pageIndex: page }));
-  };
 
   return (
     <>
@@ -220,11 +189,11 @@ export function UserListView() {
             <TableSelectedAction
               dense={table.dense}
               numSelected={table.selected.length}
-              rowCount={dataFiltered.length}
+              rowCount={count}
               onSelectAllRows={(checked: boolean) =>
                 table.onSelectAllRows(
                   checked,
-                  dataFiltered.map((row: any) => row.id)
+                  userList.map((row: any) => row.id)
                 )
               }
               action={
@@ -242,13 +211,13 @@ export function UserListView() {
                   order={table.order}
                   orderBy={table.orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={dataFiltered.length}
+                  rowCount={count}
                   numSelected={table.selected.length}
                   onSort={table.onSort}
                   onSelectAllRows={(checked: boolean) =>
                     table.onSelectAllRows(
                       checked,
-                      dataFiltered.map((row: any) => row.id)
+                      userList.map((row: any) => row.id)
                     )
                   }
                 />
@@ -269,10 +238,10 @@ export function UserListView() {
                     <>
                       <TableEmptyRows
                         height={table.dense ? 56 : 56 + 20}
-                        emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
+                        emptyRows={emptyRows(table.page, table.rowsPerPage, userList.length)}
                       />
 
-                      <TableNoData notFound={notFound} />
+                      <TableNoData notFound={!userList.length} />
                     </>
                   )}
                 </TableBody>
