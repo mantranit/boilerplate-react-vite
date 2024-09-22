@@ -3,9 +3,10 @@ import TokenService from './token.service';
 import { toast } from 'react-toastify';
 import { BaseResponse } from '../data/base-response.model';
 import { doLogout } from './Auth/auth.service';
+import { CONFIG } from 'src/config-global';
 
 const AxiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_HOST}/api/v1`,
+  baseURL: `${CONFIG.serverUrl}/api/v1`,
   withCredentials: true,
 });
 
@@ -39,7 +40,7 @@ AxiosInstance.interceptors.response.use(
         }
 
         const response = await axios.post<BaseResponse<string | null>>(
-          `${import.meta.env.VITE_HOST}/api/v1/refresh`,
+          `${CONFIG.serverUrl}/api/v1/refresh`,
           {},
           { withCredentials: true }
         );
