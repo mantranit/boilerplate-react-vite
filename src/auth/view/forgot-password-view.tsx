@@ -10,7 +10,6 @@ import { useRouter } from 'src/routes/hooks';
 
 import { Form, Field } from 'src/components/hook-form';
 
-import { signUp } from '../context';
 import { useAuthContext } from '../hooks';
 import { FormHead } from '../components/form-head';
 import { emailRegExp } from 'src/utils';
@@ -38,12 +37,7 @@ export function ForgotPasswordView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await signUp({
-        email: data.email,
-      });
-      await checkUserSession?.();
-
-      router.refresh();
+      // TODO; forgot password
     } catch (error: any) {
       console.error(error);
       setErrorMsg(typeof error === 'string' ? error : error.message);

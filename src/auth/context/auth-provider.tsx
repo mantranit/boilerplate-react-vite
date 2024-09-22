@@ -2,11 +2,11 @@ import { useMemo, useEffect, useCallback, ReactNode } from 'react';
 
 import { useSetState } from 'src/hooks/use-set-state';
 
-import axios, { endpoints } from 'src/utils/axios';
-
 import { AuthContext } from './auth-context';
-import { STORAGE_KEY } from './constant';
-import { isValidToken, setSession } from './utils';
+import { isValidToken } from './utils';
+import TokenService from 'src/services/token.service';
+import { useAppDispatch } from 'src/redux/store';
+import { getCurrentUserAsync } from 'src/services/Auth/auth.service';
 
 // ----------------------------------------------------------------------
 export type TAuthProviderProps = {
@@ -14,29 +14,26 @@ export type TAuthProviderProps = {
 };
 
 export function AuthProvider({ children }: TAuthProviderProps) {
+  const dispatch = useAppDispatch();
+
   const { state, setState } = useSetState({
-    user: null,
+    session: null,
     loading: true,
   });
 
   const checkUserSession = useCallback(async () => {
     try {
-      const accessToken = sessionStorage.getItem(STORAGE_KEY);
+      const accessToken = TokenService.getToken();
 
       if (accessToken && isValidToken(accessToken)) {
-        setSession(accessToken);
+        await dispatch(getCurrentUserAsync());
 
-        const res = await axios.get(endpoints.auth.me);
-
-        const { user } = res.data;
-
-        setState({ user: { ...user, accessToken }, loading: false });
+        setState({ session: TokenService.getSession(), loading: false });
       } else {
-        setState({ user: null, loading: false });
+        setState({ session: null, loading: false });
       }
     } catch (error) {
-      console.error(error);
-      setState({ user: null, loading: false });
+      setState({ session: null, loading: false });
     }
   }, [setState]);
 
@@ -47,24 +44,19 @@ export function AuthProvider({ children }: TAuthProviderProps) {
 
   // ----------------------------------------------------------------------
 
-  const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
+  const checkAuthenticated = state.session ? 'authenticated' : 'unauthenticated';
 
   const status = state.loading ? 'loading' : checkAuthenticated;
 
   const memoizedValue = useMemo(
     () => ({
-      user: state.user
-        ? {
-            ...state.user,
-            role: state.user?.role ?? 'admin',
-          }
-        : null,
+      session: state.session,
       checkUserSession,
       loading: status === 'loading',
       authenticated: status === 'authenticated',
       unauthenticated: status === 'unauthenticated',
     }),
-    [checkUserSession, state.user, status]
+    [checkUserSession, state.session, status]
   );
 
   return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;

@@ -10,7 +10,6 @@ import { useRouter } from 'src/routes/hooks';
 
 import { Form, Field } from 'src/components/hook-form';
 
-import { signUp } from '../context';
 import { useAuthContext } from '../hooks';
 import { FormHead } from '../components/form-head';
 import { passwordRegExp } from 'src/utils';
@@ -39,12 +38,7 @@ export function SetPasswordView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await signUp({
-        newPassword: data.newPassword,
-      });
-      await checkUserSession?.();
-
-      router.refresh();
+      // TODO: set password
     } catch (error: any) {
       console.error(error);
       setErrorMsg(typeof error === 'string' ? error : error.message);

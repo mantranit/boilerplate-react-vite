@@ -2,32 +2,34 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
 
 import { Form, Field } from 'src/components/hook-form';
 
 import { useAuthContext } from '../hooks';
 import { FormHead } from '../components/form-head';
-import { signInWithPassword } from '../context';
 import { emailRegExp } from 'src/utils';
 import { FormReturnLink } from '../components/form-return-link';
+import { SignInRequest } from 'src/data/auth/auth.model';
+import { useAppDispatch } from 'src/redux/store';
+import { loginAsync } from 'src/services/Auth/auth.service';
+import { toast } from 'react-toastify';
 
 // ----------------------------------------------------------------------
 
 export function SignInView() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const { checkUserSession }: any = useAuthContext();
 
   const [errorMsg, setErrorMsg] = useState('');
 
-  const methods = useForm({
+  const methods = useForm<SignInRequest>({
     defaultValues: {
       email: '',
       password: '',
@@ -39,9 +41,12 @@ export function SignInView() {
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data: SignInRequest) => {
     try {
-      await signInWithPassword({ email: data.email, password: data.password });
+      const response = await dispatch(loginAsync(data));
+      if (response.meta.requestStatus === 'fulfilled') {
+        toast.success('Login successfully!');
+      }
       await checkUserSession?.();
 
       router.refresh();

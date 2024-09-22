@@ -5,7 +5,7 @@ import Button, { ButtonProps } from '@mui/material/Button';
 import { useRouter } from 'src/routes/hooks';
 
 import { useAuthContext } from 'src/auth/hooks';
-import { signOut } from 'src/auth/context/action';
+import { doLogout } from 'src/services/Auth/auth.service';
 
 // ----------------------------------------------------------------------
 export type TSignOutButtonProps = ButtonProps & {
@@ -19,7 +19,7 @@ export function SignOutButton({ onClose, ...other }: TSignOutButtonProps) {
 
   const handleLogout = useCallback(async () => {
     try {
-      await signOut();
+      doLogout();
       await checkUserSession?.();
 
       onClose?.();
