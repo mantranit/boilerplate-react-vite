@@ -46,8 +46,8 @@ export function SignInView() {
   const onSubmit = handleSubmit(async (data: SignInRequest) => {
     try {
       const response = await dispatch(loginAsync(data));
-      if (response.meta.requestStatus === 'fulfilled') {
-        toast.success('Login successfully!');
+      if (response.meta.requestStatus === 'rejected') {
+        return;
       }
       await checkUserSession?.();
 

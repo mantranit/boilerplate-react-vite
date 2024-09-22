@@ -1,4 +1,5 @@
 import 'src/global.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // ----------------------------------------------------------------------
 
@@ -14,6 +15,8 @@ import { defaultSettings, SettingsProvider } from 'src/components/settings';
 
 import { AuthProvider } from 'src/auth/context';
 
+import { ToastContainer } from 'react-toastify';
+
 // ----------------------------------------------------------------------
 
 export default function App() {
@@ -27,6 +30,7 @@ export default function App() {
             <ProgressBar />
             <Router />
           </MotionLazy>
+          <ToastContainer />
         </ThemeProvider>
       </SettingsProvider>
     </AuthProvider>
