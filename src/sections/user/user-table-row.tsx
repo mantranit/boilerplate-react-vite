@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -17,6 +16,8 @@ import { ConfirmDialog } from 'src/components/custom-dialog';
 
 import { UserCreateEditForm } from './user-create-edit-form';
 import { Role } from 'src/data/auth/role.model';
+import { UserStatus } from 'src/data/auth/user.model';
+import Chip from '@mui/material/Chip';
 
 // ----------------------------------------------------------------------
 export type TUserTableRowProps = {
@@ -38,8 +39,10 @@ export function UserTableRow({
 
   const quickEdit = useBoolean();
 
-  const getRoleName = (roles: Role[]) => {
-    return roles.map((role: Role) => role.name);
+  const renderRoleNames = (roles: Role[]) => {
+    return roles.map((role: Role) => (
+      <Chip key={role.id} variant="filled" color="success" label={role.name} />
+    ));
   };
 
   return (
@@ -62,19 +65,19 @@ export function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{getRoleName(row.roles)}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{renderRoleNames(row.roles)}</TableCell>
 
         <TableCell>
           <Label
             variant="soft"
             color={
-              (row.status === 'active' && 'success') ||
-              (row.status === 'pending' && 'warning') ||
-              (row.status === 'banned' && 'error') ||
+              (row.status === UserStatus.ACTIVE && 'success') ||
+              (row.status === UserStatus.PENDING && 'warning') ||
+              (row.status === UserStatus.DISABLED && 'error') ||
               'default'
             }
           >
-            {row.status}
+            {row.status.toLowerCase()}
           </Label>
         </TableCell>
 
