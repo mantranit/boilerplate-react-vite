@@ -25,7 +25,8 @@ export type TUserTableRowProps = {
   selected?: any;
   onSelectRow?: any;
   onDeleteRow?: any;
-  roles?: any;
+  onRestoreRow?: any;
+  onPermanentlyDeleteRow?: any;
 };
 
 export function UserTableRow({
@@ -33,9 +34,12 @@ export function UserTableRow({
   selected,
   onSelectRow,
   onDeleteRow,
-  roles,
+  onRestoreRow,
+  onPermanentlyDeleteRow,
 }: TUserTableRowProps) {
   const confirm = useBoolean();
+  const confirmRestore = useBoolean();
+  const confirmPermanence = useBoolean();
 
   const quickEdit = useBoolean();
 
@@ -82,22 +86,41 @@ export function UserTableRow({
         </TableCell>
 
         <TableCell>
-          <Stack direction="row" alignItems="center">
-            <Tooltip title="Edit" placement="top" arrow>
-              <IconButton
-                color={quickEdit.value ? 'inherit' : 'default'}
-                onClick={quickEdit.onTrue}
-              >
-                <Iconify icon="solar:pen-bold" />
-              </IconButton>
-            </Tooltip>
+          {!!row.deletedAt ? (
+            <Stack direction="row" alignItems="center">
+              <Tooltip title="Restore" placement="top" arrow>
+                <IconButton
+                  color={confirmRestore.value ? 'inherit' : 'default'}
+                  onClick={confirmRestore.onTrue}
+                >
+                  <Iconify icon="solar:multiple-forward-left-bold" />
+                </IconButton>
+              </Tooltip>
 
-            <Tooltip title="Delete" placement="top" arrow>
-              <IconButton color="error" onClick={confirm.onTrue}>
-                <Iconify icon="solar:trash-bin-trash-bold" />
-              </IconButton>
-            </Tooltip>
-          </Stack>
+              <Tooltip title="Permanently Delete" placement="top" arrow>
+                <IconButton color="error" onClick={confirmPermanence.onTrue}>
+                  <Iconify icon="solar:trash-bin-trash-bold" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          ) : (
+            <Stack direction="row" alignItems="center">
+              <Tooltip title="Edit" placement="top" arrow>
+                <IconButton
+                  color={quickEdit.value ? 'inherit' : 'default'}
+                  onClick={quickEdit.onTrue}
+                >
+                  <Iconify icon="solar:pen-bold" />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="Delete" placement="top" arrow>
+                <IconButton color="error" onClick={confirm.onTrue}>
+                  <Iconify icon="solar:trash-bin-trash-bold" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          )}
         </TableCell>
       </TableRow>
 
@@ -111,6 +134,30 @@ export function UserTableRow({
         action={
           <Button variant="contained" color="error" onClick={onDeleteRow}>
             Delete
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={confirmRestore.value}
+        onClose={confirmRestore.onFalse}
+        title="Restore"
+        content="Are you sure want to restore?"
+        action={
+          <Button variant="contained" color="error" onClick={onRestoreRow}>
+            Restore
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={confirmPermanence.value}
+        onClose={confirmPermanence.onFalse}
+        title="Permanently Delete"
+        content="Are you sure want to permanently delete?"
+        action={
+          <Button variant="contained" color="error" onClick={onPermanentlyDeleteRow}>
+            Permanently Delete
           </Button>
         }
       />

@@ -75,6 +75,29 @@ export const deleteUserAsync = createAsyncThunk(
   }
 );
 
+export const restoreUserAsync = createAsyncThunk(
+  'users/restoreUserAsync',
+  async (userId: string) => {
+    const response: AxiosResponse<BaseResponse<string | null>> = await PUT(
+      `/users/${userId}/restore`,
+      {}
+    );
+
+    return response.data.data ?? userId;
+  }
+);
+
+export const permanentlyDeleteUserAsync = createAsyncThunk(
+  'users/permanentlyDeleteUserAsync',
+  async (userId: string) => {
+    const response: AxiosResponse<BaseResponse<string | null>> = await DELETE(
+      `/users/${userId}/permanently`
+    );
+
+    return response.data.data ?? userId;
+  }
+);
+
 export const resendEmailSetPasswordAsync = async (userId: string) => {
   const response: AxiosResponse<BaseResponse<string | null>> = await GET(
     `/users/resend-email/${userId}`

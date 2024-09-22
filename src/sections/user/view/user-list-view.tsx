@@ -6,9 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import Card from '@mui/material/Card';
 import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import TableBody from '@mui/material/TableBody';
-import IconButton from '@mui/material/IconButton';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useSetState } from 'src/hooks/use-set-state';
@@ -20,7 +18,6 @@ import { _roles, _userList } from 'src/_mock';
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
-import { ConfirmDialog } from 'src/components/custom-dialog';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import {
   useTable,
@@ -38,7 +35,13 @@ import { TTheme } from 'src/theme/create-theme';
 import { UserCreateEditForm } from '../user-create-edit-form';
 import { useAppDispatch, useAppSelector } from 'src/redux/store';
 import { selectUsers } from 'src/redux/auth/users.slice';
-import { countAllStatusAsync, getUsersAsync } from 'src/services/Auth/user.service';
+import {
+  countAllStatusAsync,
+  deleteUserAsync,
+  getUsersAsync,
+  permanentlyDeleteUserAsync,
+  restoreUserAsync,
+} from 'src/services/Auth/user.service';
 import { getAllRolesAsync } from 'src/services/selection.service';
 import { selectSelections } from 'src/redux/selections/selections.slice';
 import { UserStatus } from 'src/data/auth/user.model';
@@ -87,29 +90,46 @@ export function UserListView() {
   const dispatch = useAppDispatch();
 
   const handleDeleteRow = useCallback(
-    (id: any) => {
-      console.log(id);
+    async (id: string) => {
+      await dispatch(deleteUserAsync(id));
+      await dispatch(countAllStatusAsync());
+      await fetchUserList();
     },
     [userList]
   );
 
-  const handleDeleteRows = useCallback(() => {
-    console.log(table.selected);
-  }, [table.selected, userList]);
+  const handleRestoreRow = useCallback(
+    async (id: string) => {
+      await dispatch(restoreUserAsync(id));
+      await dispatch(countAllStatusAsync());
+      await fetchUserList();
+    },
+    [userList]
+  );
+
+  const handlePermanentlyDeleteRow = useCallback(
+    async (id: string) => {
+      await dispatch(permanentlyDeleteUserAsync(id));
+      await dispatch(countAllStatusAsync());
+      await fetchUserList();
+    },
+    [userList]
+  );
+
+  const fetchUserList = async () => {
+    await dispatch(
+      getUsersAsync({
+        ...filters.state,
+        pageIndex: table.page + 1,
+        pageSize: table.rowsPerPage,
+        sortField: table.orderBy,
+        sortOrder: table.order,
+      })
+    );
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(
-        getUsersAsync({
-          ...filters.state,
-          pageIndex: table.page + 1,
-          pageSize: table.rowsPerPage,
-          sortField: table.orderBy,
-          sortOrder: table.order,
-        })
-      );
-    };
-    fetchData();
+    fetchUserList();
   }, [filters.state, table.page, table.rowsPerPage, table.orderBy, table.order]);
 
   useEffect(() => {
@@ -193,13 +213,7 @@ export function UserListView() {
                   userList.map((row: any) => row.id)
                 )
               }
-              action={
-                <Tooltip title="Delete">
-                  <IconButton color="primary" onClick={confirm.onTrue}>
-                    <Iconify icon="solar:trash-bin-trash-bold" />
-                  </IconButton>
-                </Tooltip>
-              }
+              action={<></>}
             />
 
             <Scrollbar>
@@ -227,7 +241,8 @@ export function UserListView() {
                       selected={table.selected.includes(row.id)}
                       onSelectRow={() => table.onSelectRow(row.id)}
                       onDeleteRow={() => handleDeleteRow(row.id)}
-                      roles={roles}
+                      onRestoreRow={() => handleRestoreRow(row.id)}
+                      onPermanentlyDeleteRow={() => handlePermanentlyDeleteRow(row.id)}
                     />
                   ))}
 
@@ -257,29 +272,6 @@ export function UserListView() {
           />
         </Card>
       </DashboardContent>
-
-      <ConfirmDialog
-        open={confirm.value}
-        onClose={confirm.onFalse}
-        title="Delete"
-        content={
-          <>
-            Are you sure want to delete <strong> {table.selected.length} </strong> items?
-          </>
-        }
-        action={
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => {
-              handleDeleteRows();
-              confirm.onFalse();
-            }}
-          >
-            Delete
-          </Button>
-        }
-      />
     </>
   );
 }
