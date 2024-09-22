@@ -50,7 +50,7 @@ export const authRoutes = [
         ),
       },
       {
-        path: 'set-password/:token',
+        path: 'new-password/:token',
         element: (
           <GuestGuard>
             <AuthSplitLayout>
