@@ -10,13 +10,25 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 
-import { USER_STATUS_OPTIONS, _roles } from 'src/_mock';
-
-import { toast } from 'src/components/snackbar';
 import { Form, Field } from 'src/components/hook-form';
 import { emailRegExp } from 'src/utils';
+import { Role } from 'src/data/auth/role.model';
+import { UserRequest, UserStatus } from 'src/data/auth/user.model';
+import { useAppDispatch, useAppSelector } from 'src/redux/store';
+import { selectSelections } from 'src/redux/selections/selections.slice';
+import { addUserAsync, updateUserAsync } from 'src/services/Auth/user.service';
+import { toast } from 'react-toastify';
 
 // ----------------------------------------------------------------------
+
+export const USER_STATUS_OPTIONS = [
+  { value: UserStatus.ACTIVE, label: 'Active' },
+  { value: UserStatus.PENDING, label: 'Pending' },
+  { value: UserStatus.DISABLED, label: 'Disabled' },
+];
+
+// ----------------------------------------------------------------------
+
 export type TUserCreateEditFormProps = {
   currentUser?: any;
   open: boolean;
@@ -24,17 +36,21 @@ export type TUserCreateEditFormProps = {
 };
 
 export function UserCreateEditForm({ currentUser, open, onClose }: TUserCreateEditFormProps) {
+  const dispatch = useAppDispatch();
+  const { roles } = useAppSelector(selectSelections);
+
   const defaultValues = useMemo(
     () => ({
+      id: currentUser?.id || '',
       displayName: currentUser?.displayName || '',
       email: currentUser?.email || '',
-      status: currentUser?.status,
-      roles: currentUser?.roles || [],
+      status: currentUser?.status || UserStatus.PENDING,
+      roles: (currentUser?.roles || []).map((role: Role) => role.id),
     }),
-    [currentUser]
+    [currentUser, currentUser?.roles, roles]
   );
 
-  const methods = useForm({
+  const methods = useForm<any>({
     mode: 'all',
     defaultValues,
   });
@@ -45,22 +61,29 @@ export function UserCreateEditForm({ currentUser, open, onClose }: TUserCreateEd
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = handleSubmit(async (data) => {
-    const promise = new Promise((resolve) => setTimeout(resolve, 1000));
-
+  const onSubmit = handleSubmit(async (data: any) => {
     try {
-      reset();
-      onClose();
-
-      toast.promise(promise, {
-        loading: 'Loading...',
-        success: 'Update success!',
-        error: 'Update error!',
-      });
-
-      await promise;
-
-      console.info('DATA', data);
+      const payload: UserRequest = {
+        ...data,
+        roles: data.roles.map((id: string) => {
+          return roles.find((item: Role) => item.id === id);
+        }) as Role[],
+      };
+      if (!currentUser) {
+        const response = await dispatch(addUserAsync(payload));
+        if (response.meta.requestStatus === 'fulfilled') {
+          toast.success('Add user successfully!');
+          reset();
+          onClose();
+        }
+      } else {
+        const response = await dispatch(updateUserAsync(payload));
+        if (response.meta.requestStatus === 'fulfilled') {
+          toast.success('Update user successfully!');
+          reset();
+          onClose();
+        }
+      }
     } catch (error) {
       console.error(error);
     }
@@ -85,26 +108,6 @@ export function UserCreateEditForm({ currentUser, open, onClose }: TUserCreateEd
             gridTemplateColumns={{ xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }}
             sx={{ mt: 1 }}
           >
-            <Field.Select
-              rules={{
-                required: 'Status is required.',
-              }}
-              name="status"
-              label="Status"
-            >
-              {USER_STATUS_OPTIONS.map((status) => (
-                <MenuItem key={status.value} value={status.value}>
-                  {status.label}
-                </MenuItem>
-              ))}
-            </Field.Select>
-            <Field.Text
-              rules={{
-                required: 'Full name is required.',
-              }}
-              name="displayName"
-              label="Full name"
-            />
             <Field.Text
               rules={{
                 required: {
@@ -119,6 +122,27 @@ export function UserCreateEditForm({ currentUser, open, onClose }: TUserCreateEd
               name="email"
               label="Email address"
             />
+            <Field.Select
+              rules={{
+                required: 'Status is required.',
+              }}
+              name="status"
+              label="Status"
+              disabled={!currentUser}
+            >
+              {USER_STATUS_OPTIONS.map((status) => (
+                <MenuItem key={status.value} value={status.value}>
+                  {status.label}
+                </MenuItem>
+              ))}
+            </Field.Select>
+            <Field.Text
+              rules={{
+                required: 'Full name is required.',
+              }}
+              name="displayName"
+              label="Full name"
+            />
             <Field.MultiSelect
               rules={{
                 required: 'Roles are required.',
@@ -126,7 +150,7 @@ export function UserCreateEditForm({ currentUser, open, onClose }: TUserCreateEd
               checkbox
               name="roles"
               label="Roles"
-              options={_roles.map((item: string) => ({ key: item, value: item }))}
+              options={roles?.map((item: Role) => ({ value: item.id, label: item.name }))}
             />
           </Box>
         </DialogContent>

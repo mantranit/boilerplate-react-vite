@@ -70,9 +70,6 @@ export function UserListView() {
     defaultOrderBy: 'displayName',
     defaultRowsPerPage: 10,
   });
-
-  const confirm = useBoolean();
-
   const create = useBoolean();
 
   const filters = useSetState({ name: '', role: '', status: 'ALL' });
