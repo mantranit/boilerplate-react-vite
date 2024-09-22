@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -18,7 +18,6 @@ import { DashboardContent } from 'src/layouts/dashboard';
 import { _roles, _userList } from 'src/_mock';
 
 import { Label } from 'src/components/label';
-import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import { ConfirmDialog } from 'src/components/custom-dialog';
@@ -26,9 +25,7 @@ import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import {
   useTable,
   emptyRows,
-  rowInPage,
   TableNoData,
-  getComparator,
   TableEmptyRows,
   TableHeadCustom,
   TableSelectedAction,
@@ -40,7 +37,7 @@ import { UserTableToolbar } from '../user-table-toolbar';
 import { TTheme } from 'src/theme/create-theme';
 import { UserCreateEditForm } from '../user-create-edit-form';
 import { useAppDispatch, useAppSelector } from 'src/redux/store';
-import { selectUsers, setUserTableFilter } from 'src/redux/auth/users.slice';
+import { selectUsers } from 'src/redux/auth/users.slice';
 import { countAllStatusAsync, getUsersAsync } from 'src/services/Auth/user.service';
 import { getAllRolesAsync } from 'src/services/selection.service';
 import { selectSelections } from 'src/redux/selections/selections.slice';
