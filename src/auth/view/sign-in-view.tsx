@@ -18,6 +18,7 @@ import { SignInRequest } from 'src/data/auth/auth.model';
 import { useAppDispatch } from 'src/redux/store';
 import { loginAsync } from 'src/services/Auth/auth.service';
 import { toast } from 'react-toastify';
+import Typography from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,7 @@ export function SignInView() {
     defaultValues: {
       email: '',
       password: '',
+      rememberMe: true,
     },
   });
 
@@ -97,6 +99,19 @@ export function SignInView() {
       >
         Sign in
       </LoadingButton>
+
+      <Field.Switch
+        name="rememberMe"
+        labelPlacement="start"
+        label={
+          <>
+            <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+              Remember me
+            </Typography>
+          </>
+        }
+        sx={{ mx: 0, mt: -3 }}
+      />
     </Box>
   );
 
