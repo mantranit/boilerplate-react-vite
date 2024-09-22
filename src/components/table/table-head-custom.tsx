@@ -7,6 +7,17 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 
 // ----------------------------------------------------------------------
 
+export type TheaderCell = {
+  id: string;
+  label: string;
+  align?: 'center' | 'left' | 'right' | 'justify' | 'inherit';
+  width?: any;
+  minWidth?: any;
+  sortable?: boolean;
+};
+
+// ----------------------------------------------------------------------
+
 const visuallyHidden = {
   border: 0,
   margin: -1,
@@ -48,14 +59,14 @@ export function TableHeadCustom({
           </TableCell>
         )}
 
-        {headLabel.map((headCell: any) => (
+        {headLabel.map((headCell: TheaderCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.align || 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
             sx={{ width: headCell.width, minWidth: headCell.minWidth }}
           >
-            {onSort ? (
+            {headCell.sortable && onSort ? (
               <TableSortLabel
                 hideSortIcon
                 active={orderBy === headCell.id}

@@ -57,16 +57,19 @@ const STATUS_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name' },
+  { id: 'displayName', label: 'Name', sortable: true },
   { id: 'roles', label: 'Roles', width: 180 },
-  { id: 'status', label: 'Status', width: 100 },
+  { id: 'status', label: 'Status', width: 100, sortable: true },
   { id: '', width: 88 },
 ];
 
 // ----------------------------------------------------------------------
 
 export function UserListView() {
-  const table = useTable();
+  const table = useTable({
+    defaultOrderBy: 'displayName',
+    defaultRowsPerPage: 10,
+  });
 
   const confirm = useBoolean();
 
@@ -120,17 +123,24 @@ export function UserListView() {
     [filters, table]
   );
 
-  const [loading, setLoading] = useState<boolean>(true);
   const { selectedUserId, filter, userList, count, countAllStatus } = useAppSelector(selectUsers);
   const { roles } = useAppSelector(selectSelections);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(getUsersAsync(filters.state));
+      await dispatch(
+        getUsersAsync({
+          ...filters.state,
+          pageIndex: table.page + 1,
+          pageSize: table.rowsPerPage,
+          sortField: table.orderBy,
+          sortOrder: table.order,
+        })
+      );
     };
     fetchData();
-  }, [filters.state]);
+  }, [filters.state, table.page, table.rowsPerPage, table.orderBy, table.order]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -273,7 +283,7 @@ export function UserListView() {
           <TablePaginationCustom
             page={table.page}
             dense={table.dense}
-            count={dataFiltered.length}
+            count={count}
             rowsPerPage={table.rowsPerPage}
             onPageChange={table.onChangePage}
             onChangeDense={table.onChangeDense}
@@ -323,7 +333,7 @@ function applyFilter({ inputData, comparator, filters }: any) {
 
   if (name) {
     inputData = inputData.filter(
-      (user: any) => user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1
+      (user: any) => user.displayName.toLowerCase().indexOf(name.toLowerCase()) !== -1
     );
   }
 
