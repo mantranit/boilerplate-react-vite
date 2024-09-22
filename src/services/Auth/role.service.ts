@@ -1,13 +1,9 @@
 import { AxiosResponse } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { DELETE, GET, POST, PUT } from "../axios.ts";
-import { BaseResponse } from "../../data/base-response.model.ts";
-import {
-  RoleRequest,
-  RoleResponse,
-  RolesResponse,
-} from "../../data/auth/role.model.ts";
-import { TableFilterState } from "../../redux/store.ts";
+import { DELETE, GET, POST, PUT } from '../axios';
+import { BaseResponse } from '../../data/base-response.model';
+import { RoleRequest, RoleResponse, RolesResponse } from '../../data/auth/role.model';
+import { TableFilterState } from '../../redux/store';
 
 export const getRoleByIdAsync = createAsyncThunk(
   "roles/getRoleByIdAsync",

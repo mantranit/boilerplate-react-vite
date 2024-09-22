@@ -31,13 +31,14 @@ export const initDepartmentFilterState: DepartmentTableFilter = {
 };
 
 export const initDepartment: Department = {
-  id: "",
-  name: "",
-  manager:initEmployee,
+  id: '',
+  name: '',
+  manager: initEmployee,
   orderNumber: 0,
   isChild: false,
-  parentId: "",
+  parentId: '',
   childrenDepartment: [],
+  employeeQuantity: 0,
 };
 
 export const initDepartmentState: DepartmentState = {
