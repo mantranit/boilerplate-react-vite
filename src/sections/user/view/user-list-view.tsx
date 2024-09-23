@@ -57,7 +57,7 @@ const STATUS_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-  { id: 'displayName', label: 'Name', sortable: true },
+  { id: 'displayName', label: 'Name', minWidth: 300, sortable: true },
   { id: 'roles', label: 'Roles', width: 180 },
   { id: 'status', label: 'Status', width: 100 },
   { id: '', width: 132 },
