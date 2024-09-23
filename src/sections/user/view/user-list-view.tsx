@@ -13,7 +13,6 @@ import { useSetState } from 'src/hooks/use-set-state';
 
 import { varAlpha } from 'src/theme/styles';
 import { DashboardContent } from 'src/layouts/dashboard';
-import { _roles, _userList } from 'src/_mock';
 
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
@@ -45,6 +44,7 @@ import {
 import { getAllRolesAsync } from 'src/services/selection.service';
 import { selectSelections } from 'src/redux/selections/selections.slice';
 import { UserStatus } from 'src/data/auth/user.model';
+import { ConfirmDialog } from 'src/components/custom-dialog';
 
 // ----------------------------------------------------------------------
 
@@ -70,7 +70,11 @@ export function UserListView() {
     defaultOrderBy: 'displayName',
     defaultRowsPerPage: 10,
   });
-  const create = useBoolean();
+  const createEdit = useBoolean();
+  const confirmDelete = useBoolean();
+  const confirmRestore = useBoolean();
+  const confirmPermanentlyDelete = useBoolean();
+  const selectedUser = useSetState(null);
 
   const filters = useSetState({ name: '', role: '', status: 'ALL' });
 
@@ -86,32 +90,23 @@ export function UserListView() {
   const { roles } = useAppSelector(selectSelections);
   const dispatch = useAppDispatch();
 
-  const handleDeleteRow = useCallback(
-    async (id: string) => {
-      await dispatch(deleteUserAsync(id));
-      await dispatch(countAllStatusAsync());
-      await fetchUserList();
-    },
-    [userList]
-  );
+  const handleDeleteRow = useCallback(async () => {
+    await dispatch(deleteUserAsync(selectedUser.state.id));
+    await dispatch(countAllStatusAsync());
+    await fetchUserList();
+  }, [userList]);
 
-  const handleRestoreRow = useCallback(
-    async (id: string) => {
-      await dispatch(restoreUserAsync(id));
-      await dispatch(countAllStatusAsync());
-      await fetchUserList();
-    },
-    [userList]
-  );
+  const handleRestoreRow = useCallback(async () => {
+    await dispatch(restoreUserAsync(selectedUser.state.id));
+    await dispatch(countAllStatusAsync());
+    await fetchUserList();
+  }, [userList]);
 
-  const handlePermanentlyDeleteRow = useCallback(
-    async (id: string) => {
-      await dispatch(permanentlyDeleteUserAsync(id));
-      await dispatch(countAllStatusAsync());
-      await fetchUserList();
-    },
-    [userList]
-  );
+  const handlePermanentlyDeleteRow = useCallback(async () => {
+    await dispatch(permanentlyDeleteUserAsync(selectedUser.state.id));
+    await dispatch(countAllStatusAsync());
+    await fetchUserList();
+  }, [userList]);
 
   const fetchUserList = async () => {
     await dispatch(
@@ -144,7 +139,7 @@ export function UserListView() {
           heading="Users"
           action={
             <Button
-              onClick={create.onTrue}
+              onClick={createEdit.onTrue}
               variant="contained"
               color="primary"
               startIcon={<Iconify icon="mingcute:add-line" />}
@@ -154,7 +149,14 @@ export function UserListView() {
           }
         />
 
-        <UserCreateEditForm open={create.value} onClose={create.onFalse} />
+        <UserCreateEditForm
+          currentUser={selectedUser.state}
+          open={createEdit.value}
+          onClose={() => {
+            createEdit.onFalse();
+            selectedUser.onResetState();
+          }}
+        />
 
         <Card>
           <Tabs
@@ -237,9 +239,22 @@ export function UserListView() {
                       row={row}
                       selected={table.selected.includes(row.id)}
                       onSelectRow={() => table.onSelectRow(row.id)}
-                      onDeleteRow={() => handleDeleteRow(row.id)}
-                      onRestoreRow={() => handleRestoreRow(row.id)}
-                      onPermanentlyDeleteRow={() => handlePermanentlyDeleteRow(row.id)}
+                      onEditRow={() => {
+                        createEdit.onTrue();
+                        selectedUser.setState(row);
+                      }}
+                      onDeleteRow={() => {
+                        confirmDelete.onTrue();
+                        selectedUser.setState(row);
+                      }}
+                      onRestoreRow={() => {
+                        confirmRestore.onTrue();
+                        selectedUser.setState(row);
+                      }}
+                      onPermanentlyDeleteRow={() => {
+                        confirmPermanentlyDelete.onTrue();
+                        selectedUser.setState(row);
+                      }}
                     />
                   ))}
 
@@ -269,36 +284,51 @@ export function UserListView() {
           />
         </Card>
       </DashboardContent>
+
+      <ConfirmDialog
+        open={confirmDelete.value}
+        onClose={() => {
+          confirmDelete.onFalse();
+          selectedUser.onResetState();
+        }}
+        title="Delete"
+        content="Are you sure want to delete?"
+        action={
+          <Button variant="contained" color="error" onClick={handleDeleteRow}>
+            Delete
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={confirmRestore.value}
+        onClose={() => {
+          confirmRestore.onFalse();
+          selectedUser.onResetState();
+        }}
+        title="Restore"
+        content="Are you sure want to restore?"
+        action={
+          <Button variant="contained" color="error" onClick={handleRestoreRow}>
+            Restore
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={confirmPermanentlyDelete.value}
+        onClose={() => {
+          confirmPermanentlyDelete.onFalse();
+          selectedUser.onResetState();
+        }}
+        title="Permanently Delete"
+        content="Are you sure want to permanently delete?"
+        action={
+          <Button variant="contained" color="error" onClick={handlePermanentlyDeleteRow}>
+            Permanently Delete
+          </Button>
+        }
+      />
     </>
   );
-}
-
-function applyFilter({ inputData, comparator, filters }: any) {
-  const { name, status, role } = filters;
-
-  const stabilizedThis = inputData.map((el: any, index: any) => [el, index]);
-
-  stabilizedThis.sort((a: any, b: any) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-
-  inputData = stabilizedThis.map((el: any) => el[0]);
-
-  if (name) {
-    inputData = inputData.filter(
-      (user: any) => user.displayName.toLowerCase().indexOf(name.toLowerCase()) !== -1
-    );
-  }
-
-  if (status !== 'all') {
-    inputData = inputData.filter((user: any) => user.status === status);
-  }
-
-  if (role.length) {
-    inputData = inputData.filter((user: any) => role.includes(user.role));
-  }
-
-  return inputData;
 }

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
@@ -39,20 +39,8 @@ export function UserCreateEditForm({ currentUser, open, onClose }: TUserCreateEd
   const dispatch = useAppDispatch();
   const { roles } = useAppSelector(selectSelections);
 
-  const defaultValues = useMemo(
-    () => ({
-      id: currentUser?.id || '',
-      displayName: currentUser?.displayName || '',
-      email: currentUser?.email || '',
-      status: currentUser?.status || UserStatus.PENDING,
-      roles: (currentUser?.roles || []).map((role: Role) => role.id),
-    }),
-    [currentUser, currentUser?.roles, roles]
-  );
-
   const methods = useForm<any>({
     mode: 'all',
-    defaultValues,
   });
 
   const {
@@ -60,6 +48,16 @@ export function UserCreateEditForm({ currentUser, open, onClose }: TUserCreateEd
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+
+  useEffect(() => {
+    reset({
+      id: currentUser?.id || '',
+      displayName: currentUser?.displayName || '',
+      email: currentUser?.email || '',
+      status: currentUser?.status || UserStatus.PENDING,
+      roles: (currentUser?.roles || []).map((role: Role) => role.id),
+    });
+  }, [currentUser]);
 
   const onSubmit = handleSubmit(async (data: any) => {
     try {

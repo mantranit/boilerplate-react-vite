@@ -18,12 +18,14 @@ import { UserCreateEditForm } from './user-create-edit-form';
 import { Role } from 'src/data/auth/role.model';
 import { UserStatus } from 'src/data/auth/user.model';
 import Chip from '@mui/material/Chip';
+import { useCallback } from 'react';
 
 // ----------------------------------------------------------------------
 export type TUserTableRowProps = {
   row?: any;
   selected?: any;
   onSelectRow?: any;
+  onEditRow?: any;
   onDeleteRow?: any;
   onRestoreRow?: any;
   onPermanentlyDeleteRow?: any;
@@ -35,26 +37,24 @@ export function UserTableRow({
   row,
   selected,
   onSelectRow,
+  onEditRow,
   onDeleteRow,
   onRestoreRow,
   onPermanentlyDeleteRow,
 }: TUserTableRowProps) {
-  const confirm = useBoolean();
-  const confirmRestore = useBoolean();
-  const confirmPermanence = useBoolean();
-
-  const quickEdit = useBoolean();
-
-  const renderRoleNames = (roles: Role[]) => {
-    return (
-      <Box display="flex" gap={1}>
-        {roles.map((role: Role) => {
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          return <Chip key={role.id} variant="filled" color={color as any} label={role.name} />;
-        })}
-      </Box>
-    );
-  };
+  const renderRoleNames = useCallback(
+    (roles: Role[]) => {
+      return (
+        <Box display="flex" gap={1}>
+          {roles.map((role: Role) => {
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            return <Chip key={role.id} variant="filled" color={color as any} label={role.name} />;
+          })}
+        </Box>
+      );
+    },
+    [row.id]
+  );
 
   return (
     <>
@@ -96,16 +96,13 @@ export function UserTableRow({
           {!!row.deletedAt ? (
             <Stack direction="row" alignItems="center">
               <Tooltip title="Restore" placement="top" arrow>
-                <IconButton
-                  color={confirmRestore.value ? 'inherit' : 'default'}
-                  onClick={confirmRestore.onTrue}
-                >
+                <IconButton color="default" onClick={onRestoreRow}>
                   <Iconify icon="solar:multiple-forward-left-bold" />
                 </IconButton>
               </Tooltip>
 
               <Tooltip title="Permanently Delete" placement="top" arrow>
-                <IconButton color="error" onClick={confirmPermanence.onTrue}>
+                <IconButton color="error" onClick={onPermanentlyDeleteRow}>
                   <Iconify icon="solar:trash-bin-trash-bold" />
                 </IconButton>
               </Tooltip>
@@ -113,16 +110,13 @@ export function UserTableRow({
           ) : (
             <Stack direction="row" alignItems="center">
               <Tooltip title="Edit" placement="top" arrow>
-                <IconButton
-                  color={quickEdit.value ? 'inherit' : 'default'}
-                  onClick={quickEdit.onTrue}
-                >
+                <IconButton color="default" onClick={onEditRow}>
                   <Iconify icon="solar:pen-bold" />
                 </IconButton>
               </Tooltip>
 
               <Tooltip title="Delete" placement="top" arrow>
-                <IconButton color="error" onClick={confirm.onTrue}>
+                <IconButton color="error" onClick={onDeleteRow}>
                   <Iconify icon="solar:trash-bin-trash-bold" />
                 </IconButton>
               </Tooltip>
@@ -130,44 +124,6 @@ export function UserTableRow({
           )}
         </TableCell>
       </TableRow>
-
-      <UserCreateEditForm currentUser={row} open={quickEdit.value} onClose={quickEdit.onFalse} />
-
-      <ConfirmDialog
-        open={confirm.value}
-        onClose={confirm.onFalse}
-        title="Delete"
-        content="Are you sure want to delete?"
-        action={
-          <Button variant="contained" color="error" onClick={onDeleteRow}>
-            Delete
-          </Button>
-        }
-      />
-
-      <ConfirmDialog
-        open={confirmRestore.value}
-        onClose={confirmRestore.onFalse}
-        title="Restore"
-        content="Are you sure want to restore?"
-        action={
-          <Button variant="contained" color="error" onClick={onRestoreRow}>
-            Restore
-          </Button>
-        }
-      />
-
-      <ConfirmDialog
-        open={confirmPermanence.value}
-        onClose={confirmPermanence.onFalse}
-        title="Permanently Delete"
-        content="Are you sure want to permanently delete?"
-        action={
-          <Button variant="contained" color="error" onClick={onPermanentlyDeleteRow}>
-            Permanently Delete
-          </Button>
-        }
-      />
     </>
   );
 }
