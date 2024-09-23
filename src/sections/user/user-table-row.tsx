@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import TableRow from '@mui/material/TableRow';
@@ -8,13 +7,9 @@ import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
-import { ConfirmDialog } from 'src/components/custom-dialog';
 
-import { UserCreateEditForm } from './user-create-edit-form';
 import { Role } from 'src/data/auth/role.model';
 import { UserStatus } from 'src/data/auth/user.model';
 import Chip from '@mui/material/Chip';
@@ -31,8 +26,6 @@ export type TUserTableRowProps = {
   onPermanentlyDeleteRow?: any;
 };
 
-const colors = ['primary', 'secondary', 'success', 'info', 'error', 'warning'];
-
 export function UserTableRow({
   row,
   selected,
@@ -47,8 +40,7 @@ export function UserTableRow({
       return (
         <Box display="flex" gap={1}>
           {roles.map((role: Role) => {
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            return <Chip key={role.id} variant="filled" color={color as any} label={role.name} />;
+            return <Chip key={role.id} variant="filled" color={'info'} label={role.name} />;
           })}
         </Box>
       );
