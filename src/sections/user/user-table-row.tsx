@@ -29,6 +29,8 @@ export type TUserTableRowProps = {
   onPermanentlyDeleteRow?: any;
 };
 
+const colors = ['primary', 'secondary', 'success', 'info', 'error', 'warning'];
+
 export function UserTableRow({
   row,
   selected,
@@ -44,9 +46,14 @@ export function UserTableRow({
   const quickEdit = useBoolean();
 
   const renderRoleNames = (roles: Role[]) => {
-    return roles.map((role: Role) => (
-      <Chip key={role.id} variant="filled" color="success" label={role.name} />
-    ));
+    return (
+      <Box display="flex" gap={1}>
+        {roles.map((role: Role) => {
+          const color = colors[Math.floor(Math.random() * colors.length - 1)];
+          return <Chip key={role.id} variant="filled" color={color as any} label={role.name} />;
+        })}
+      </Box>
+    );
   };
 
   return (
