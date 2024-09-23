@@ -86,7 +86,7 @@ export function UserTableRow({
 
         <TableCell>
           {!!row.deletedAt ? (
-            <Stack direction="row" alignItems="center">
+            <Stack direction="row" alignItems="center" justifyContent="flex-end">
               <Tooltip title="Restore" placement="top" arrow>
                 <IconButton color="default" onClick={onRestoreRow}>
                   <Iconify icon="solar:multiple-forward-left-bold" />
@@ -100,7 +100,7 @@ export function UserTableRow({
               </Tooltip>
             </Stack>
           ) : (
-            <Stack direction="row" alignItems="center">
+            <Stack direction="row" alignItems="center" justifyContent="flex-end">
               <Tooltip title="Edit" placement="top" arrow>
                 <IconButton color="default" onClick={onEditRow}>
                   <Iconify icon="solar:pen-bold" />

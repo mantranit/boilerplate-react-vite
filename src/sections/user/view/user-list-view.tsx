@@ -60,7 +60,7 @@ const TABLE_HEAD = [
   { id: 'displayName', label: 'Name', sortable: true },
   { id: 'roles', label: 'Roles', width: 180 },
   { id: 'status', label: 'Status', width: 100 },
-  { id: '', width: 88 },
+  { id: '', width: 132 },
 ];
 
 // ----------------------------------------------------------------------
