@@ -49,7 +49,7 @@ export function UserTableRow({
     return (
       <Box display="flex" gap={1}>
         {roles.map((role: Role) => {
-          const color = colors[Math.floor(Math.random() * colors.length - 1)];
+          const color = colors[Math.floor(Math.random() * colors.length)];
           return <Chip key={role.id} variant="filled" color={color as any} label={role.name} />;
         })}
       </Box>
