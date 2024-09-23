@@ -1,15 +1,16 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ModalState, RootState, StateStatus, TableFilterState } from "../store";
-import { Role } from "../../data/auth/role.model";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ModalState, RootState, StateStatus, TableFilterState } from '../store';
+import { Role } from '../../data/auth/role.model';
 import {
   addRoleAsync,
+  countRoleSeparatedStatusAsync,
   deleteRoleAsync,
   deleteRolesAsync,
   getRoleByIdAsync,
   getRolesAsync,
   getSystemPermissionsAsync,
   updateRoleAsync,
-} from "../../services/Auth/role.service";
+} from '../../services/Auth/role.service';
 
 type RoleTableFilter = TableFilterState & {
   searchName: string;
@@ -25,39 +26,49 @@ export type RoleState = {
   error: string | null;
   modal: ModalState;
   filter: RoleTableFilter;
+  countAllStatus: {
+    total: number;
+    totalActive: number;
+    totalDeleted: number;
+  };
 };
 
 export const initRoleFilterState: RoleTableFilter = {
   pageIndex: 1,
   pageSize: 5,
-  sortField: "id",
-  sortOrder: "asc",
-  searchName: "",
+  sortField: 'id',
+  sortOrder: 'asc',
+  searchName: '',
 };
 
 export const initRole: Role = {
-  id: "",
-  name: "",
-  description: "",
-  createdBy: "",
-  createdAt: "",
+  id: '',
+  name: '',
+  description: '',
+  createdBy: '',
+  createdAt: '',
   permissions: [],
 };
 
 export const initRoleState: RoleState = {
   roleList: [],
   count: 0,
-  getSystemPermissionsStatus: "idle",
+  getSystemPermissionsStatus: 'idle',
   systemPermissions: null,
   selectedRoleId: [],
   detailRole: initRole,
-  error: "",
-  modal: { open: false, mode: "add" },
+  error: '',
+  modal: { open: false, mode: 'add' },
   filter: initRoleFilterState,
+  countAllStatus: {
+    total: 0,
+    totalActive: 0,
+    totalDeleted: 0,
+  },
 };
 
 export const rolesSlice = createSlice({
-  name: "roles",
+  name: 'roles',
   initialState: initRoleState,
   reducers: {
     saveRole: (state, action: PayloadAction<RoleState>) => {
@@ -98,9 +109,7 @@ export const rolesSlice = createSlice({
         state.roleList = [...state.roleList, action.payload];
       })
       .addCase(updateRoleAsync.fulfilled, (state, action) => {
-        const index = state.roleList.findIndex(
-          (r) => r.id === action.payload.id
-        );
+        const index = state.roleList.findIndex((r) => r.id === action.payload.id);
         if (index !== -1) state.roleList[index] = action.payload;
         state.detailRole = action.payload;
       })
@@ -108,12 +117,13 @@ export const rolesSlice = createSlice({
         state.roleList = state.roleList.filter((u) => u.id !== action.payload);
       })
       .addCase(deleteRolesAsync.fulfilled, (state, action) => {
-        state.roleList = state.roleList.filter(
-          (u) => action.payload.indexOf(u.id) === -1
-        );
+        state.roleList = state.roleList.filter((u) => action.payload.indexOf(u.id) === -1);
       })
       .addCase(getSystemPermissionsAsync.fulfilled, (state, action) => {
         state.systemPermissions = action.payload;
+      })
+      .addCase(countRoleSeparatedStatusAsync.fulfilled, (state, action) => {
+        state.countAllStatus = action.payload as any;
       });
   },
 });

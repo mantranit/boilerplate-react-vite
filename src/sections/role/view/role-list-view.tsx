@@ -32,19 +32,15 @@ import { RoleTableRow } from '../role-table-row';
 import { TTheme } from 'src/theme/create-theme';
 import { RoleCreateEditForm } from '../role-create-edit-form';
 import { useAppDispatch, useAppSelector } from 'src/redux/store';
-import { selectUsers } from 'src/redux/auth/users.slice';
-import {
-  countUserSeparatedStatusAsync,
-  deleteUserAsync,
-  getUsersAsync,
-  permanentlyDeleteUserAsync,
-  restoreUserAsync,
-} from 'src/services/Auth/user.service';
-import { getAllRolesAsync } from 'src/services/selection.service';
-import { selectSelections } from 'src/redux/selections/selections.slice';
-import { UserStatus } from 'src/data/auth/user.model';
 import { ConfirmDialog } from 'src/components/custom-dialog';
-import { getRolesAsync } from 'src/services/Auth/role.service';
+import {
+  countRoleSeparatedStatusAsync,
+  deleteRoleAsync,
+  getRolesAsync,
+  permanentlyDeleteRoleAsync,
+  restoreRoleAsync,
+} from 'src/services/Auth/role.service';
+import { selectRoles } from 'src/redux/auth/roles.slice';
 
 // ----------------------------------------------------------------------
 
@@ -54,8 +50,8 @@ const STATUS_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Role', width: 180 },
-  { id: 'description', label: 'Description', width: 100 },
+  { id: 'name', label: 'Role', width: 100, sortable: true },
+  { id: 'description', label: 'Description', width: 200 },
   { id: '', width: 88 },
 ];
 
@@ -72,7 +68,7 @@ export function RoleListView() {
   const confirmPermanentlyDelete = useBoolean();
   const selectedRole = useSetState(null);
 
-  const filters = useSetState({ name: '', role: '', status: 'ALL' });
+  const filters = useSetState({ status: 'ALL' });
 
   const handleFilterStatus = useCallback(
     (event: any, newValue: any) => {
@@ -82,27 +78,29 @@ export function RoleListView() {
     [filters, table]
   );
 
-  const { userList, count, countAllStatus } = useAppSelector(selectUsers);
-  const { roles: roleList } = useAppSelector(selectSelections);
+  const { roleList, count, countAllStatus } = useAppSelector(selectRoles);
   const dispatch = useAppDispatch();
 
-  const handleDeleteRow = useCallback(async () => {
-    await dispatch(deleteUserAsync(selectedRole.state.id));
-    await dispatch(countUserSeparatedStatusAsync());
+  const handleDeleteRow = async () => {
+    await dispatch(deleteRoleAsync(selectedRole.state.id));
+    await dispatch(countRoleSeparatedStatusAsync());
     await fetchDataList();
-  }, [roleList]);
+    confirmDelete.onFalse();
+  };
 
-  const handleRestoreRow = useCallback(async () => {
-    await dispatch(restoreUserAsync(selectedRole.state.id));
-    await dispatch(countUserSeparatedStatusAsync());
+  const handleRestoreRow = async () => {
+    await dispatch(restoreRoleAsync(selectedRole.state.id));
+    await dispatch(countRoleSeparatedStatusAsync());
     await fetchDataList();
-  }, [roleList]);
+    confirmRestore.onFalse();
+  };
 
-  const handlePermanentlyDeleteRow = useCallback(async () => {
-    await dispatch(permanentlyDeleteUserAsync(selectedRole.state.id));
-    await dispatch(countUserSeparatedStatusAsync());
+  const handlePermanentlyDeleteRow = async () => {
+    await dispatch(permanentlyDeleteRoleAsync(selectedRole.state.id));
+    await dispatch(countRoleSeparatedStatusAsync());
     await fetchDataList();
-  }, [roleList]);
+    confirmPermanentlyDelete.onFalse();
+  };
 
   const fetchDataList = async () => {
     await dispatch(
@@ -122,8 +120,7 @@ export function RoleListView() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(countUserSeparatedStatusAsync());
-      await dispatch(getAllRolesAsync());
+      await dispatch(countRoleSeparatedStatusAsync());
     };
     fetchData();
   }, []);
@@ -201,7 +198,7 @@ export function RoleListView() {
             />
 
             <Scrollbar>
-              <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 720 }}>
+              <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 600 }}>
                 <TableHeadCustom
                   order={table.order}
                   orderBy={table.orderBy}
@@ -231,6 +228,7 @@ export function RoleListView() {
                       onDeleteRow={() => {
                         confirmDelete.onTrue();
                         selectedRole.setState(row);
+                        console.log(row);
                       }}
                       onRestoreRow={() => {
                         confirmRestore.onTrue();

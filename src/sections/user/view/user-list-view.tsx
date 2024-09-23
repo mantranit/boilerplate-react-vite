@@ -90,23 +90,26 @@ export function UserListView() {
   const { roles } = useAppSelector(selectSelections);
   const dispatch = useAppDispatch();
 
-  const handleDeleteRow = useCallback(async () => {
+  const handleDeleteRow = async () => {
     await dispatch(deleteUserAsync(selectedUser.state.id));
     await dispatch(countUserSeparatedStatusAsync());
     await fetchDataList();
-  }, [userList]);
+    confirmDelete.onFalse();
+  };
 
-  const handleRestoreRow = useCallback(async () => {
+  const handleRestoreRow = async () => {
     await dispatch(restoreUserAsync(selectedUser.state.id));
     await dispatch(countUserSeparatedStatusAsync());
     await fetchDataList();
-  }, [userList]);
+    confirmRestore.onFalse();
+  };
 
-  const handlePermanentlyDeleteRow = useCallback(async () => {
+  const handlePermanentlyDeleteRow = async () => {
     await dispatch(permanentlyDeleteUserAsync(selectedUser.state.id));
     await dispatch(countUserSeparatedStatusAsync());
     await fetchDataList();
-  }, [userList]);
+    confirmPermanentlyDelete.onFalse();
+  };
 
   const fetchDataList = async () => {
     await dispatch(
