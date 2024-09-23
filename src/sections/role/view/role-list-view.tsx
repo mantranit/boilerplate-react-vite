@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -6,29 +6,22 @@ import Tabs from '@mui/material/Tabs';
 import Card from '@mui/material/Card';
 import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import TableBody from '@mui/material/TableBody';
-import IconButton from '@mui/material/IconButton';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useSetState } from 'src/hooks/use-set-state';
 
 import { varAlpha } from 'src/theme/styles';
 import { DashboardContent } from 'src/layouts/dashboard';
-import { _roles, _userList, USER_STATUS_OPTIONS } from 'src/_mock';
 
 import { Label } from 'src/components/label';
-import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
-import { ConfirmDialog } from 'src/components/custom-dialog';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import {
   useTable,
   emptyRows,
-  rowInPage,
   TableNoData,
-  getComparator,
   TableEmptyRows,
   TableHeadCustom,
   TableSelectedAction,
@@ -36,68 +29,104 @@ import {
 } from 'src/components/table';
 
 import { RoleTableRow } from '../role-table-row';
+import { TTheme } from 'src/theme/create-theme';
 import { RoleCreateEditForm } from '../role-create-edit-form';
+import { useAppDispatch, useAppSelector } from 'src/redux/store';
+import { selectUsers } from 'src/redux/auth/users.slice';
+import {
+  countUserSeparatedStatusAsync,
+  deleteUserAsync,
+  getUsersAsync,
+  permanentlyDeleteUserAsync,
+  restoreUserAsync,
+} from 'src/services/Auth/user.service';
+import { getAllRolesAsync } from 'src/services/selection.service';
+import { selectSelections } from 'src/redux/selections/selections.slice';
+import { UserStatus } from 'src/data/auth/user.model';
+import { ConfirmDialog } from 'src/components/custom-dialog';
+import { getRolesAsync } from 'src/services/Auth/role.service';
 
 // ----------------------------------------------------------------------
 
+const STATUS_OPTIONS = [
+  { value: 'ALL', label: 'All' },
+  { value: 'TRASH', label: 'Trash' },
+];
+
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name' },
-  { id: 'role', label: 'Role', width: 180 },
-  { id: 'status', label: 'Status', width: 100 },
+  { id: 'name', label: 'Role', width: 180 },
+  { id: 'description', label: 'Description', width: 100 },
   { id: '', width: 88 },
 ];
 
 // ----------------------------------------------------------------------
 
 export function RoleListView() {
-  const table = useTable();
-
-  const confirm = useBoolean();
-
-  const create = useBoolean();
-
-  const [tableData, setTableData] = useState(_userList);
-
-  const filters = useSetState({ name: '', role: [], status: 'all' });
-
-  const dataFiltered = applyFilter({
-    inputData: tableData,
-    comparator: getComparator(table.order, table.orderBy),
-    filters: filters.state,
+  const table = useTable({
+    defaultOrderBy: 'name',
+    defaultRowsPerPage: 10,
   });
+  const createEdit = useBoolean();
+  const confirmDelete = useBoolean();
+  const confirmRestore = useBoolean();
+  const confirmPermanentlyDelete = useBoolean();
+  const selectedRole = useSetState(null);
 
-  const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
+  const filters = useSetState({ name: '', role: '', status: 'ALL' });
 
-  const canReset =
-    !!filters.state.name || filters.state.role.length > 0 || filters.state.status !== 'all';
-
-  const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
-
-  const handleDeleteRow = useCallback(
-    (id: any) => {
-      const deleteRow = tableData.filter((row) => row.id !== id);
-
-      toast.success('Delete success!');
-
-      setTableData(deleteRow);
-
-      table.onUpdatePageDeleteRow(dataInPage.length);
+  const handleFilterStatus = useCallback(
+    (event: any, newValue: any) => {
+      table.onResetPage();
+      filters.setState({ status: newValue });
     },
-    [dataInPage.length, table, tableData]
+    [filters, table]
   );
 
-  const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row) => !table.selected.includes(row.id));
+  const { userList, count, countAllStatus } = useAppSelector(selectUsers);
+  const { roles: roleList } = useAppSelector(selectSelections);
+  const dispatch = useAppDispatch();
 
-    toast.success('Delete success!');
+  const handleDeleteRow = useCallback(async () => {
+    await dispatch(deleteUserAsync(selectedRole.state.id));
+    await dispatch(countUserSeparatedStatusAsync());
+    await fetchDataList();
+  }, [roleList]);
 
-    setTableData(deleteRows);
+  const handleRestoreRow = useCallback(async () => {
+    await dispatch(restoreUserAsync(selectedRole.state.id));
+    await dispatch(countUserSeparatedStatusAsync());
+    await fetchDataList();
+  }, [roleList]);
 
-    table.onUpdatePageDeleteRows({
-      totalRowsInPage: dataInPage.length,
-      totalRowsFiltered: dataFiltered.length,
-    });
-  }, [dataFiltered.length, dataInPage.length, table, tableData]);
+  const handlePermanentlyDeleteRow = useCallback(async () => {
+    await dispatch(permanentlyDeleteUserAsync(selectedRole.state.id));
+    await dispatch(countUserSeparatedStatusAsync());
+    await fetchDataList();
+  }, [roleList]);
+
+  const fetchDataList = async () => {
+    await dispatch(
+      getRolesAsync({
+        ...filters.state,
+        pageIndex: table.page + 1,
+        pageSize: table.rowsPerPage,
+        sortField: table.orderBy,
+        sortOrder: table.order,
+      })
+    );
+  };
+
+  useEffect(() => {
+    fetchDataList();
+  }, [filters.state, table.page, table.rowsPerPage, table.orderBy, table.order]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(countUserSeparatedStatusAsync());
+      await dispatch(getAllRolesAsync());
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -106,7 +135,7 @@ export function RoleListView() {
           heading="Roles"
           action={
             <Button
-              onClick={create.onTrue}
+              onClick={createEdit.onTrue}
               variant="contained"
               color="primary"
               startIcon={<Iconify icon="mingcute:add-line" />}
@@ -116,27 +145,59 @@ export function RoleListView() {
           }
         />
 
-        <RoleCreateEditForm open={create.value} onClose={create.onFalse} />
+        <RoleCreateEditForm
+          currentRole={selectedRole.state}
+          open={createEdit.value}
+          onClose={() => {
+            createEdit.onFalse();
+            selectedRole.onResetState();
+          }}
+        />
 
         <Card>
+          <Tabs
+            value={filters.state.status}
+            onChange={handleFilterStatus}
+            sx={{
+              px: 2.5,
+              boxShadow: (theme: TTheme) =>
+                `inset 0 -2px 0 0 ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)}`,
+            }}
+          >
+            {STATUS_OPTIONS.map((tab) => (
+              <Tab
+                key={tab.value}
+                iconPosition="end"
+                value={tab.value}
+                label={tab.label}
+                icon={
+                  <Label
+                    variant={
+                      ((tab.value === 'all' || tab.value === filters.state.status) && 'filled') ||
+                      'soft'
+                    }
+                    color={(tab.value === 'ALL' && 'primary') || 'default'}
+                  >
+                    {tab.value === 'ALL' && countAllStatus.total}
+                    {tab.value === 'TRASH' && countAllStatus.totalDeleted}
+                  </Label>
+                }
+              />
+            ))}
+          </Tabs>
+
           <Box sx={{ position: 'relative' }}>
             <TableSelectedAction
               dense={table.dense}
               numSelected={table.selected.length}
-              rowCount={dataFiltered.length}
+              rowCount={count}
               onSelectAllRows={(checked: boolean) =>
                 table.onSelectAllRows(
                   checked,
-                  dataFiltered.map((row: any) => row.id)
+                  roleList.map((row: any) => row.id)
                 )
               }
-              action={
-                <Tooltip title="Delete">
-                  <IconButton color="primary" onClick={confirm.onTrue}>
-                    <Iconify icon="solar:trash-bin-trash-bold" />
-                  </IconButton>
-                </Tooltip>
-              }
+              action={<></>}
             />
 
             <Scrollbar>
@@ -145,39 +206,53 @@ export function RoleListView() {
                   order={table.order}
                   orderBy={table.orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={dataFiltered.length}
+                  rowCount={count}
                   numSelected={table.selected.length}
                   onSort={table.onSort}
                   onSelectAllRows={(checked: boolean) =>
                     table.onSelectAllRows(
                       checked,
-                      dataFiltered.map((row: any) => row.id)
+                      roleList.map((row: any) => row.id)
                     )
                   }
                 />
 
                 <TableBody>
-                  {dataFiltered
-                    .slice(
-                      table.page * table.rowsPerPage,
-                      table.page * table.rowsPerPage + table.rowsPerPage
-                    )
-                    .map((row: any) => (
-                      <RoleTableRow
-                        key={row.id}
-                        row={row}
-                        selected={table.selected.includes(row.id)}
-                        onSelectRow={() => table.onSelectRow(row.id)}
-                        onDeleteRow={() => handleDeleteRow(row.id)}
+                  {roleList.map((row: any) => (
+                    <RoleTableRow
+                      key={row.id}
+                      row={row}
+                      selected={table.selected.includes(row.id)}
+                      onSelectRow={() => table.onSelectRow(row.id)}
+                      onEditRow={() => {
+                        createEdit.onTrue();
+                        selectedRole.setState(row);
+                      }}
+                      onDeleteRow={() => {
+                        confirmDelete.onTrue();
+                        selectedRole.setState(row);
+                      }}
+                      onRestoreRow={() => {
+                        confirmRestore.onTrue();
+                        selectedRole.setState(row);
+                      }}
+                      onPermanentlyDeleteRow={() => {
+                        confirmPermanentlyDelete.onTrue();
+                        selectedRole.setState(row);
+                      }}
+                    />
+                  ))}
+
+                  {roleList.length === 0 && (
+                    <>
+                      <TableEmptyRows
+                        height={table.dense ? 56 : 56 + 20}
+                        emptyRows={emptyRows(table.page, table.rowsPerPage, roleList.length)}
                       />
-                    ))}
 
-                  <TableEmptyRows
-                    height={table.dense ? 56 : 56 + 20}
-                    emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
-                  />
-
-                  <TableNoData notFound={notFound} />
+                      <TableNoData notFound={!roleList.length} />
+                    </>
+                  )}
                 </TableBody>
               </Table>
             </Scrollbar>
@@ -186,7 +261,7 @@ export function RoleListView() {
           <TablePaginationCustom
             page={table.page}
             dense={table.dense}
-            count={dataFiltered.length}
+            count={count}
             rowsPerPage={table.rowsPerPage}
             onPageChange={table.onChangePage}
             onChangeDense={table.onChangeDense}
@@ -196,57 +271,49 @@ export function RoleListView() {
       </DashboardContent>
 
       <ConfirmDialog
-        open={confirm.value}
-        onClose={confirm.onFalse}
+        open={confirmDelete.value}
+        onClose={() => {
+          confirmDelete.onFalse();
+          selectedRole.onResetState();
+        }}
         title="Delete"
-        content={
-          <>
-            Are you sure want to delete <strong> {table.selected.length} </strong> items?
-          </>
-        }
+        content="Are you sure want to delete?"
         action={
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => {
-              handleDeleteRows();
-              confirm.onFalse();
-            }}
-          >
+          <Button variant="contained" color="error" onClick={handleDeleteRow}>
             Delete
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={confirmRestore.value}
+        onClose={() => {
+          confirmRestore.onFalse();
+          selectedRole.onResetState();
+        }}
+        title="Restore"
+        content="Are you sure want to restore?"
+        action={
+          <Button variant="contained" color="error" onClick={handleRestoreRow}>
+            Restore
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={confirmPermanentlyDelete.value}
+        onClose={() => {
+          confirmPermanentlyDelete.onFalse();
+          selectedRole.onResetState();
+        }}
+        title="Permanently Delete"
+        content="Are you sure want to permanently delete?"
+        action={
+          <Button variant="contained" color="error" onClick={handlePermanentlyDeleteRow}>
+            Permanently Delete
           </Button>
         }
       />
     </>
   );
-}
-
-function applyFilter({ inputData, comparator, filters }: any) {
-  const { name, status, role } = filters;
-
-  const stabilizedThis = inputData.map((el: any, index: any) => [el, index]);
-
-  stabilizedThis.sort((a: any, b: any) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-
-  inputData = stabilizedThis.map((el: any) => el[0]);
-
-  if (name) {
-    inputData = inputData.filter(
-      (user: any) => user.name.toLowerCase().indexOf(name.toLowerCase()) !== -1
-    );
-  }
-
-  if (status !== 'all') {
-    inputData = inputData.filter((user: any) => user.status === status);
-  }
-
-  if (role.length) {
-    inputData = inputData.filter((user: any) => role.includes(user.role));
-  }
-
-  return inputData;
 }

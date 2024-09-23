@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   addUserAsync,
-  countAllStatusAsync,
+  countUserSeparatedStatusAsync,
   deleteUserAsync,
   getUserByIdAsync,
   getUsersAsync,
@@ -119,7 +119,7 @@ export const usersSlice = createSlice({
       .addCase(deleteUserAsync.fulfilled, (state, action) => {
         state.userList = state.userList.filter((u) => u.id !== action.payload);
       })
-      .addCase(countAllStatusAsync.fulfilled, (state, action) => {
+      .addCase(countUserSeparatedStatusAsync.fulfilled, (state, action) => {
         state.countAllStatus = action.payload as any;
       });
   },

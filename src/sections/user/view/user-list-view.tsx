@@ -35,7 +35,7 @@ import { UserCreateEditForm } from '../user-create-edit-form';
 import { useAppDispatch, useAppSelector } from 'src/redux/store';
 import { selectUsers } from 'src/redux/auth/users.slice';
 import {
-  countAllStatusAsync,
+  countUserSeparatedStatusAsync,
   deleteUserAsync,
   getUsersAsync,
   permanentlyDeleteUserAsync,
@@ -92,23 +92,23 @@ export function UserListView() {
 
   const handleDeleteRow = useCallback(async () => {
     await dispatch(deleteUserAsync(selectedUser.state.id));
-    await dispatch(countAllStatusAsync());
-    await fetchUserList();
+    await dispatch(countUserSeparatedStatusAsync());
+    await fetchDataList();
   }, [userList]);
 
   const handleRestoreRow = useCallback(async () => {
     await dispatch(restoreUserAsync(selectedUser.state.id));
-    await dispatch(countAllStatusAsync());
-    await fetchUserList();
+    await dispatch(countUserSeparatedStatusAsync());
+    await fetchDataList();
   }, [userList]);
 
   const handlePermanentlyDeleteRow = useCallback(async () => {
     await dispatch(permanentlyDeleteUserAsync(selectedUser.state.id));
-    await dispatch(countAllStatusAsync());
-    await fetchUserList();
+    await dispatch(countUserSeparatedStatusAsync());
+    await fetchDataList();
   }, [userList]);
 
-  const fetchUserList = async () => {
+  const fetchDataList = async () => {
     await dispatch(
       getUsersAsync({
         ...filters.state,
@@ -121,12 +121,12 @@ export function UserListView() {
   };
 
   useEffect(() => {
-    fetchUserList();
+    fetchDataList();
   }, [filters.state, table.page, table.rowsPerPage, table.orderBy, table.order]);
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(countAllStatusAsync());
+      await dispatch(countUserSeparatedStatusAsync());
       await dispatch(getAllRolesAsync());
     };
     fetchData();
