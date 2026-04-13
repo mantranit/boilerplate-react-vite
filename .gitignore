@@ -30,3 +30,8 @@ dist-ssr
 coverage
 
 .early.coverage
+
+# Playwright
+playwright-report
+test-results
+.playwright-browsers
