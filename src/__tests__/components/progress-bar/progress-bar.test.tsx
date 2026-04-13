@@ -53,14 +53,14 @@ describe('ProgressBar Component', () => {
         <ProgressBar />
       </BrowserRouter>
     );
-    
+
     // Force rerender to simulate pathname change
     rerender(
       <BrowserRouter>
         <ProgressBar />
       </BrowserRouter>
     );
-    
+
     expect(true).toBe(true);
   });
 

@@ -27,7 +27,7 @@ describe('RHFPasswordField Component', () => {
 
   it('toggles password visibility when icon is clicked', async () => {
     const user = userEvent.setup();
-    
+
     renderWithProviders(
       <TestWrapper>
         <RHFPasswordField name="password" label="Password" />
@@ -55,7 +55,7 @@ describe('RHFPasswordField Component', () => {
 
   it('accepts text input', async () => {
     const user = userEvent.setup();
-    
+
     renderWithProviders(
       <TestWrapper>
         <RHFPasswordField name="password" label="Password" />

@@ -9,7 +9,7 @@ describe('Scrollbar Component', () => {
         <div data-testid="scrollbar-content">Test Content</div>
       </Scrollbar>
     );
-    
+
     expect(screen.getByTestId('scrollbar-content')).toBeInTheDocument();
     expect(screen.getByText('Test Content')).toBeInTheDocument();
   });
@@ -20,7 +20,7 @@ describe('Scrollbar Component', () => {
         <div>Content</div>
       </Scrollbar>
     );
-    
+
     const scrollbarElement = container.querySelector('.custom-scrollbar');
     expect(scrollbarElement).toBeInTheDocument();
   });
@@ -31,7 +31,7 @@ describe('Scrollbar Component', () => {
         <div>Content</div>
       </Scrollbar>
     );
-    
+
     // Component should render without errors
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
@@ -42,7 +42,7 @@ describe('Scrollbar Component', () => {
         <div>Content</div>
       </Scrollbar>
     );
-    
+
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
 
@@ -52,7 +52,7 @@ describe('Scrollbar Component', () => {
         <div>Content</div>
       </Scrollbar>
     );
-    
+
     const scrollbar = screen.getByTestId('custom-scrollbar');
     expect(scrollbar).toHaveAttribute('aria-label', 'Custom scrollbar');
   });
@@ -68,7 +68,7 @@ describe('Scrollbar Component', () => {
         <div>Content</div>
       </Scrollbar>
     );
-    
+
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
 

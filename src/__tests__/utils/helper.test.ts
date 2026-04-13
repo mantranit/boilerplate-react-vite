@@ -8,7 +8,7 @@ describe('Helper Utilities', () => {
         { id: 1, name: 'Item 1', children: [{ id: 2, name: 'Item 2' }] },
         { id: 3, name: 'Item 3' },
       ];
-      
+
       const result = flattenArray(data);
       expect(result).toHaveLength(3);
       expect(result.map((item: any) => item.id)).toEqual([1, 3, 2]);
@@ -23,7 +23,7 @@ describe('Helper Utilities', () => {
           ],
         },
       ];
-      
+
       const result = flattenArray(data);
       expect(result).toHaveLength(3);
     });
@@ -43,7 +43,7 @@ describe('Helper Utilities', () => {
       const data = [
         { id: 1, items: [{ id: 2 }] },
       ];
-      
+
       const result = flattenArray(data, 'items');
       expect(result).toHaveLength(2);
     });
@@ -106,7 +106,7 @@ describe('Helper Utilities', () => {
         { category: 'B', value: 1 },
         { category: 'A', value: 1 },
       ];
-      
+
       const result = orderBy(multiData, ['category', 'value'], ['asc', 'asc']);
       expect(result[0]).toEqual({ category: 'A', value: 1 });
       expect(result[1]).toEqual({ category: 'A', value: 2 });

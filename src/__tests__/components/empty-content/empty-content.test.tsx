@@ -15,12 +15,7 @@ describe('EmptyContent Component', () => {
   });
 
   it('renders with description', () => {
-    render(
-      <EmptyContent 
-        title="No data" 
-        description="Try adjusting your filters" 
-      />
-    );
+    render(<EmptyContent title="No data" description="Try adjusting your filters" />);
     expect(screen.getByText('No data')).toBeInTheDocument();
     expect(screen.getByText('Try adjusting your filters')).toBeInTheDocument();
   });

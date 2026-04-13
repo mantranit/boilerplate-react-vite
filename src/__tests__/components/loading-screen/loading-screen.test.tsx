@@ -25,23 +25,13 @@ describe('LoadingScreen Component', () => {
   });
 
   it('applies custom sx styles', () => {
-    render(
-      <LoadingScreen 
-        sx={{ backgroundColor: 'red' }} 
-        data-testid="loading-screen"
-      />
-    );
+    render(<LoadingScreen sx={{ backgroundColor: 'red' }} data-testid="loading-screen" />);
     const screen_element = screen.getByTestId('loading-screen');
     expect(screen_element).toBeInTheDocument();
   });
 
   it('spreads additional props', () => {
-    render(
-      <LoadingScreen 
-        data-testid="loading-screen"
-        aria-label="Loading content"
-      />
-    );
+    render(<LoadingScreen data-testid="loading-screen" aria-label="Loading content" />);
     const screen_element = screen.getByTestId('loading-screen');
     expect(screen_element).toHaveAttribute('aria-label', 'Loading content');
   });

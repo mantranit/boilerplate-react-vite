@@ -23,12 +23,12 @@ describe('FiltersResult Component', () => {
   it('calls onReset when Clear button is clicked', async () => {
     const user = userEvent.setup();
     const onReset = vi.fn();
-    
+
     render(<FiltersResult totalResults={5} onReset={onReset} />);
-    
+
     const clearButton = screen.getByRole('button', { name: /clear/i });
     await user.click(clearButton);
-    
+
     expect(onReset).toHaveBeenCalledOnce();
   });
 
@@ -39,7 +39,7 @@ describe('FiltersResult Component', () => {
         <div>Filter Chip 2</div>
       </FiltersResult>
     );
-    
+
     expect(screen.getByText('Filter Chip 1')).toBeInTheDocument();
     expect(screen.getByText('Filter Chip 2')).toBeInTheDocument();
   });

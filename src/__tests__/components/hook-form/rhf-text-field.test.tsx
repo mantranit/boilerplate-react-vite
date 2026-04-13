@@ -3,10 +3,10 @@ import { render, screen, userEvent } from '@/test/test-utils';
 import { RHFTextField } from 'src/components/hook-form/rhf-text-field';
 import { useForm, FormProvider } from 'react-hook-form';
 
-const TestWrapper = ({ 
-  children, 
-  defaultValues = {} 
-}: { 
+const TestWrapper = ({
+  children,
+  defaultValues = {},
+}: {
   children: React.ReactNode;
   defaultValues?: any;
 }) => {
@@ -41,21 +41,17 @@ describe('RHFTextField Component', () => {
         <RHFTextField name="testField" label="Test Field" />
       </TestWrapper>
     );
-    
+
     const input = screen.getByLabelText('Test Field') as HTMLInputElement;
     await user.type(input, 'New text');
-    
+
     expect(input.value).toBe('New text');
   });
 
   it('displays helper text', () => {
     render(
       <TestWrapper defaultValues={{ testField: '' }}>
-        <RHFTextField 
-          name="testField" 
-          label="Test Field" 
-          helperText="This is helper text" 
-        />
+        <RHFTextField name="testField" label="Test Field" helperText="This is helper text" />
       </TestWrapper>
     );
     expect(screen.getByText('This is helper text')).toBeInTheDocument();
@@ -68,11 +64,11 @@ describe('RHFTextField Component', () => {
         <RHFTextField name="numberField" label="Number Field" type="number" />
       </TestWrapper>
     );
-    
+
     const input = screen.getByLabelText('Number Field') as HTMLInputElement;
     await user.clear(input);
     await user.type(input, '42');
-    
+
     expect(input.value).toBe('42');
   });
 

@@ -8,7 +8,7 @@ import { configureStore } from '@reduxjs/toolkit';
 export const createMockStore = (initialState = {}, reducers = {}) => {
   // Provide a default empty reducer if none provided
   const defaultReducer = (state = {}) => state;
-  
+
   return configureStore({
     reducer: Object.keys(reducers).length > 0 ? reducers : { app: defaultReducer },
     preloadedState: initialState,

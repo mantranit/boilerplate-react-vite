@@ -16,7 +16,7 @@ describe('CustomBreadcrumbs Component', () => {
   it('renders action element', () => {
     const action = <button>Create New</button>;
     render(<CustomBreadcrumbs heading="Users" action={action} />);
-    
+
     expect(screen.getByText('Users')).toBeInTheDocument();
     expect(screen.getByText('Create New')).toBeInTheDocument();
   });
@@ -26,9 +26,9 @@ describe('CustomBreadcrumbs Component', () => {
       'https://example.com/doc1',
       'https://example.com/doc2',
     ];
-    
+
     render(<CustomBreadcrumbs heading="Docs" moreLink={moreLinks} />);
-    
+
     const links = screen.getAllByRole('link');
     expect(links).toHaveLength(2);
     expect(links[0]).toHaveAttribute('href', 'https://example.com/doc1');
@@ -37,9 +37,9 @@ describe('CustomBreadcrumbs Component', () => {
 
   it('opens more links in new tab', () => {
     const moreLinks = ['https://example.com'];
-    
+
     render(<CustomBreadcrumbs moreLink={moreLinks} />);
-    
+
     const link = screen.getByRole('link');
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener');
@@ -47,13 +47,9 @@ describe('CustomBreadcrumbs Component', () => {
 
   it('applies custom sx styles', () => {
     render(
-      <CustomBreadcrumbs 
-        heading="Test" 
-        sx={{ backgroundColor: 'red' }}
-        data-testid="breadcrumbs"
-      />
+      <CustomBreadcrumbs heading="Test" sx={{ backgroundColor: 'red' }} data-testid="breadcrumbs" />
     );
-    
+
     const breadcrumbs = screen.getByTestId('breadcrumbs');
     expect(breadcrumbs).toBeInTheDocument();
   });
@@ -68,22 +64,22 @@ describe('CustomBreadcrumbs Component', () => {
         }}
       />
     );
-    
+
     expect(screen.getByText('Test')).toBeInTheDocument();
   });
 
   it('renders heading and action together', () => {
     const action = <button>Action</button>;
-    
+
     render(<CustomBreadcrumbs heading="Page Title" action={action} />);
-    
+
     expect(screen.getByText('Page Title')).toBeInTheDocument();
     expect(screen.getByText('Action')).toBeInTheDocument();
   });
 
   it('does not render more links section when not provided', () => {
     render(<CustomBreadcrumbs heading="Test" />);
-    
+
     const lists = screen.queryByRole('list');
     expect(lists).not.toBeInTheDocument();
   });

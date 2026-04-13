@@ -37,10 +37,10 @@ describe('BackToTop Component', () => {
   it('scrolls to top when clicked', async () => {
     const user = userEvent.setup();
     render(<BackToTop />);
-    
+
     const button = screen.getByLabelText('Back to top');
     await user.click(button);
-    
+
     expect(scrollToMock).toHaveBeenCalledWith({
       top: 0,
       behavior: 'smooth',

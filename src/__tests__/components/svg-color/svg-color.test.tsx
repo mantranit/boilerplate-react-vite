@@ -50,7 +50,7 @@ describe('SvgColor Component', () => {
   it('sets mask with src URL', () => {
     const { container } = render(<SvgColor src="/test-icon.svg" />);
     const element = container.querySelector('span');
-    
+
     const style = window.getComputedStyle(element!);
     // The mask style should contain the src URL
     expect(element).toBeInTheDocument();

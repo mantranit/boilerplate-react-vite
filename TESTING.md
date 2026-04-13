@@ -146,10 +146,10 @@ import { render, screen, userEvent } from '@/test/test-utils';
 it('handles click', async () => {
   const user = userEvent.setup();
   const handleClick = vi.fn();
-  
+
   render(<Button onClick={handleClick}>Click</Button>);
   await user.click(screen.getByRole('button'));
-  
+
   expect(handleClick).toHaveBeenCalled();
 });
 ```

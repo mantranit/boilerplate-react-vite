@@ -29,27 +29,13 @@ describe('Image Component', () => {
   });
 
   it('renders with ratio prop', () => {
-    render(
-      <Image 
-        src="/test-image.jpg" 
-        alt="Test"
-        ratio="16/9"
-        visibleByDefault
-      />
-    );
+    render(<Image src="/test-image.jpg" alt="Test" ratio="16/9" visibleByDefault />);
     const img = screen.getByAltText('Test');
     expect(img).toBeInTheDocument();
   });
 
   it('handles effect prop', () => {
-    render(
-      <Image 
-        src="/test-image.jpg" 
-        alt="Test"
-        effect="opacity"
-        visibleByDefault
-      />
-    );
+    render(<Image src="/test-image.jpg" alt="Test" effect="opacity" visibleByDefault />);
     const img = screen.getByAltText('Test');
     expect(img).toBeInTheDocument();
   });
