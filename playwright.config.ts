@@ -1,9 +1,20 @@
+/// <reference types="node" />
+
 import { defineConfig, devices } from '@playwright/test';
 
 // ----------------------------------------------------------------------
 
 export default defineConfig({
   testDir: './e2e',
+  testMatch: ['**/*.spec.ts'],
+  testIgnore: [
+    '**/fixtures/**',
+    '**/utils/**',
+    '**/src/**',
+    '**/coverage/**',
+    '**/playwright-report/**',
+    '**/test-results/**',
+  ],
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code */
@@ -13,10 +24,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use */
-  reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    ['list'],
-  ],
+  reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }], ['list']],
   /* Shared settings for all the projects below */
   use: {
     /* Base URL to use in actions such as `await page.goto('/')` */

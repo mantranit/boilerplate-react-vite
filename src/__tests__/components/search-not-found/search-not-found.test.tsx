@@ -1,8 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { shallow, mount } from 'enzyme';
 import { SearchNotFound } from 'src/components/search-not-found/search-not-found';
 
-describe('SearchNotFound Component', () => {
+// ----------------------------------------------------------------------
+// React Testing Library tests
+// ----------------------------------------------------------------------
+
+describe('SearchNotFound Component (RTL)', () => {
   it('displays "Please enter keywords" when query is empty', () => {
     render(<SearchNotFound />);
     expect(screen.getByText('Please enter keywords')).toBeInTheDocument();
@@ -55,3 +60,51 @@ describe('SearchNotFound Component', () => {
     expect(strong).toHaveTextContent('"my query"');
   });
 });
+
+// ----------------------------------------------------------------------
+// Enzyme tests
+// ----------------------------------------------------------------------
+
+describe('SearchNotFound Component (Enzyme)', () => {
+  it('shallow renders without crashing', () => {
+    const wrapper = shallow(<SearchNotFound />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  it('shallow renders the "Please enter keywords" fallback when no query', () => {
+    const wrapper = shallow(<SearchNotFound />);
+    expect(wrapper.text()).toContain('Please enter keywords');
+  });
+
+  it('shallow renders the "Please enter keywords" fallback when query is null', () => {
+    const wrapper = shallow(<SearchNotFound query={null} />);
+    expect(wrapper.text()).toContain('Please enter keywords');
+  });
+
+  it('shallow renders the not-found box when query is provided', () => {
+    const wrapper = shallow(<SearchNotFound query="react" />);
+    expect(wrapper.find('strong').text()).toBe('"react"');
+  });
+
+  it('mount renders the full component tree without errors', () => {
+    const wrapper = mount(<SearchNotFound query="enzyme" />);
+    expect(wrapper.text()).toContain('"enzyme"');
+    wrapper.unmount();
+  });
+
+  it('mount updates output when query prop changes', () => {
+    const wrapper = mount(<SearchNotFound query="first" />);
+    expect(wrapper.text()).toContain('"first"');
+
+    wrapper.setProps({ query: 'second' });
+    expect(wrapper.text()).toContain('"second"');
+    wrapper.unmount();
+  });
+
+  it('passes className through to the root element', () => {
+    const wrapper = mount(<SearchNotFound query="test" className="custom-class" />);
+    expect(wrapper.find('.custom-class').exists()).toBe(true);
+    wrapper.unmount();
+  });
+});
+
